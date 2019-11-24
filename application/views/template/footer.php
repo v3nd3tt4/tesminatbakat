@@ -16,6 +16,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="<?=base_url()?>/assets_stisla/js/stisla.js"></script>
+  
 
   <!-- JS Libraies -->
 
@@ -24,5 +25,10 @@
   <script src="<?=base_url()?>/assets_stisla/js/custom.js"></script>
 
   <!-- Page Specific JS File -->
+  <?php 
+  if(!empty($script)){
+      $this->load->view($script);
+  }
+  ?>
 </body>
 </html>
