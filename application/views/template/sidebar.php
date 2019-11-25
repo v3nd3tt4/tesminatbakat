@@ -30,16 +30,15 @@
             <li class="<?=$link=='sekolah'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>sekolah">Sekolah</a></li>
           </ul>
         </li>
-        <li class="menu-header">Starter</li>
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
+        <li class="menu-header">Peserta</li>
+        <li class="nav-item dropdown <?=$link=='siswa' || $link=='siswa_import'? 'active':''?>">
+          <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Data</span></a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-            <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-            <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
+            <li class="<?=$link=='siswa'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>siswa">Tambah Siswa</a></li>
+            <li class="<?=$link=='siswa_import'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>siswa_import">Import Siswa</a></li>
           </ul>
         </li>
-        <li class="active"><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
+        <!-- <li class="active"><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li> -->
       </ul>
 
       <div class="mt-4 mb-4 p-3 hide-sidebar-mini">

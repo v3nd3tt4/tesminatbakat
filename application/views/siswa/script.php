@@ -10,12 +10,12 @@
 	    	$('#modal-tambah').modal();
 	    });
 
-	    $(document).on('submit', '#form-tambah-jk', function(e){
+	    $(document).on('submit', '#form-tambah-siswa', function(e){
 	    	e.preventDefault();
-	    	var data = $('#form-tambah-jk').serialize();
+	    	var data = $('#form-tambah-siswa').serialize();
 	    	$('.notif').html('Loading...');
 	    	$.ajax({
-	    		url: '<?=base_url()?>jk/store',
+	    		url: '<?=base_url()?>siswa/store',
 	    		data: data,
 	    		type: 'POST',
 	    		dataType: 'JSON',
@@ -30,12 +30,12 @@
 	    	});
 	    });
 
-	    $(document).on('submit', '#form-update-kategori', function(e){
+	    $(document).on('submit', '#form-update-siswa', function(e){
 	    	e.preventDefault();
-	    	var data = $('#form-update-kategori').serialize();
+	    	var data = $('#form-update-siswa').serialize();
 	    	$('.notif').html('Loading...');
 	    	$.ajax({
-	    		url: '<?=base_url()?>jk/update',
+	    		url: '<?=base_url()?>siswa/update',
 	    		data: data,
 	    		type: 'POST',
 	    		dataType: 'JSON',
@@ -58,7 +58,7 @@
 	    		e.preventDefault();
 	    		$('.notif').html('Loading...');
 	    		$.ajax({
-		    		url: '<?=base_url()?>jk/remove',
+		    		url: '<?=base_url()?>siswa/remove',
 		    		data: 'id='+id,
 		    		type: 'POST',
 		    		dataType: 'JSON',
@@ -79,13 +79,25 @@
 	    	var id = $(this).attr('id');
 	    	$('#modal-edit').modal();
 	    	$.ajax({
-	    		url: '<?=base_url()?>jk/get_data',
+	    		url: '<?=base_url()?>siswa/get_data',
 	    		data: 'id='+id,
 	    		type: 'POST',
 	    		dataType: 'JSON',
 	    		success: function(msg){
-	    			$('#id_jk_edit').val(msg.id_jk);
-	    			$('#nama_jk_edit').val(msg.nama_jk);
+	    			$('#id_siswa').val(msg.id_siswa);
+	    			$('#nisn').val(msg.nisn);
+	    			$('#tempat_lahir').val(msg.tempat_lahir);
+	    			$('#tgl_lahir').val(msg.tgl_lahir);
+	    			$('#no_hp').val(msg.no_hp);
+	    			$('#email').val(msg.email);
+	    			$('#alamat').val(msg.alamat);
+	    			$('#nama_siswa').val(msg.nama_siswa);
+	    			$('#alamat').val(msg.alamat);
+	    			$('#id_kategori_sma').val(msg.id_kategori_sma);
+	    			$('#id_kategori_utbk').val(msg.id_kategori_utbk);
+	    			$('#id_jk').val(msg.id_jk);
+	    			$('#id_agama').val(msg.id_agama);
+	    			$('#id_sekolah').val(msg.id_sekolah);
 	    		}
 	    	});
 	    });
