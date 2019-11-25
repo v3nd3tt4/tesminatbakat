@@ -29,6 +29,17 @@ class Siswa_import extends CI_Controller {
 		$this->load->view('template/wrapper', $data);
 	}
 
+	public function preview()
+	{
+		$data = array(
+			'page' => 'siswa_import/preview',
+			'link' => 'siswa_import',
+			'script' => 'siswa_import/script',
+			
+		);
+		$this->load->view('template/wrapper', $data);
+	}
+
 	public function store(){
 		$data = array(
 			'nama_siswa' 		=> $this->input->post('nama_siswa', true),

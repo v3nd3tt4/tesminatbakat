@@ -12,12 +12,12 @@
 	          </div>
 	          <div class="card-body">
 	            <p>silahkan download template <a href="" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> di sini</a>, untuk mengimport siswa</p>
-	            <form>
+	            <form method="POST" action="<?=base_url()?>siswa_import/preview">
 	            	<div class="form-group">
 	            		<label>File</label>
 	            		<input type="file" name="file" class="form-control">
 	            	</div>
-	            	<button class="btn btn-info"><i class="fas fa-sync"></i> Proses</button>
+	            	<button type="submit" class="btn btn-info"><i class="fas fa-sync"></i> Proses</button>
 	            </form>
 	          </div>
 	        </div>
