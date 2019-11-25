@@ -9,17 +9,25 @@
     <ul class="sidebar-menu">
         <li class="menu-header">Pengaturan</li>
         <li class="nav-item dropdown <?=$link=='kategori_sekolah' || $link == 'mapel_rapor'? 'active':''?>">
-          <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Setting Nilai Rapor</span></a>
+          <a href="#" class="nav-link has-dropdown"><i class="fas fa-cog"></i><span>Setting Nilai Rapor</span></a>
           <ul class="dropdown-menu">
             <li class="<?=$link=='kategori_sekolah'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>kategori_sekolah">Kategori Sekolah</a></li>
             <li class="<?=$link=='mapel_rapor'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>mapel_rapor">MAPEL Rapor</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown <?=$link=='kategori_utbk' || $link == 'mapel_utbk'? 'active':''?>">
-          <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Setting Nilai UTBK</span></a>
+          <a href="#" class="nav-link has-dropdown"><i class="fas fa-cog"></i><span>Setting Nilai UTBK</span></a>
           <ul class="dropdown-menu">
             <li class="<?=$link=='kategori_utbk'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>kategori_utbk">Kategori UTBK</a></li>
             <li class="<?=$link=='mapel_utbk'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>mapel_utbk">MAPEL UTBK</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown <?=$link=='jk' || $link == 'agama' || $link == 'sekolah'? 'active':''?>">
+          <a href="#" class="nav-link has-dropdown"><i class="fas fa-cog"></i><span>Setting Master Data</span></a>
+          <ul class="dropdown-menu">
+            <li class="<?=$link=='jk'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>jk">Jenis Kelamin</a></li>
+            <li class="<?=$link=='agama'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>agama">Agama</a></li>
+            <li class="<?=$link=='sekolah'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>sekolah">Sekolah</a></li>
           </ul>
         </li>
         <li class="menu-header">Starter</li>
