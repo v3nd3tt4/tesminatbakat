@@ -29,17 +29,6 @@ class Siswa_import extends CI_Controller {
 		$this->load->view('template/wrapper', $data);
 	}
 
-	public function preview()
-	{
-		$data = array(
-			'page' => 'siswa_import/preview',
-			'link' => 'siswa_import',
-			'script' => 'siswa_import/script',
-			
-		);
-		$this->load->view('template/wrapper', $data);
-	}
-
 	public function store(){
 		$data = array(
 			'nama_siswa' 		=> $this->input->post('nama_siswa', true),
@@ -132,4 +121,74 @@ class Siswa_import extends CI_Controller {
 		$get_data = $this->db->get_where('tb_siswa', $param);
 		echo json_encode($get_data->row());
 	}
+
+	// public function preview()
+	// {
+	// 	$data = array(
+	// 		'page' => 'siswa_import/preview',
+	// 		'link' => 'siswa_import',
+	// 		'script' => 'siswa_import/script',
+			
+	// 	);
+	// 	$this->load->view('template/wrapper', $data);
+	// }
+
+	public function preview(){
+		$csvFile = $_FILES['filenya']['tmp_name'];
+        $csv = $this->readCSV($csvFile);
+        // var_dump($csv);exit();
+        $isi=array();
+        for($i=0;$i<count($csv);$i++){
+        	if($i!=0){
+        		$isi[] = $csv[$i];
+        	}
+        }
+        $data = array(
+			'page' => 'siswa_import/preview',
+			'link' => 'siswa_import',
+			'script' => 'siswa_import/script',
+			'data' => $isi
+		);
+		$this->load->view('template/wrapper', $data);
+	}
+
+	public function readCSV($csvFile){
+        $delimiter = $this->getFileDelimiter($csvFile); 
+        $file_handle = fopen($csvFile, 'r');
+        while (!feof($file_handle) ) {
+            $line_of_text[] = fgetcsv($file_handle, 1024, $delimiter);
+        }
+        fclose($file_handle);
+        return $line_of_text;
+    } 
+
+    public function getFileDelimiter($file, $checkLines = 2){
+        $file = new SplFileObject($file);
+        $delimiters = array(
+          ',',
+          '\t',
+          ';',
+          '|',
+          ':'
+        );
+        $results = array();
+        $i = 0;
+         while($file->valid() && $i <= $checkLines){
+            $line = $file->fgets();
+            foreach ($delimiters as $delimiter){
+                $regExp = '/['.$delimiter.']/';
+                $fields = preg_split($regExp, $line);
+                if(count($fields) > 1){
+                    if(!empty($results[$delimiter])){
+                        $results[$delimiter]++;
+                    } else {
+                        $results[$delimiter] = 1;
+                    }   
+                }
+            }
+           $i++;
+        }
+        $results = array_keys($results, max($results));
+        return $results[0];
+    }
 }
