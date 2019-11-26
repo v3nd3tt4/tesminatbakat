@@ -15,7 +15,7 @@
 	            <form method="POST" action="<?=base_url()?>siswa_import/preview" enctype="multipart/form-data">
 	            	<div class="form-group">
 	            		<label>File</label>
-	            		<input type="file" name="filenya" class="form-control">
+	            		<input type="file" name="filenya" required class="form-control">
 	            	</div>
 	            	<button type="submit" class="btn btn-info"><i class="fas fa-sync"></i> Proses</button>
 	            </form>

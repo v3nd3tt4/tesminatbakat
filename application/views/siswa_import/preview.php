@@ -5,13 +5,13 @@
 	  	<div class="card">
 	        <div class="card-wrap">
 	          <div class="card-header">
-	            <h4>Siswa</h4>
+	            <h4>Preview Import</h4>
 	            <div class="card-header-action">
 	            	<button class="btn btn-primary" onclick="goBack()" ><i class="fas fa-chevron-left"></i> Kembali</button>
 	            </div>
 	          </div>
 	          <div class="card-body">
-	            <h3>Dalam Proses pengembangan</h3>
+	          	<div class="alert alert-warning"><marquee>Fitur ini dalam proses pengembangan</marquee></div>
 	            <div class="table-responsive">
 		            <table class="table table-striped">
 		            	<thead>
@@ -58,7 +58,7 @@
 		            				<?php echo @$this->db->get_where('tb_kategori_sma', array('id_kategori_sma' => $data[$i][9]))->row()->nama_kategori?>
 		            			</td>	
 		            			<td>
-		            				<?php echo @$this->db->get_where('tb_kategori_utbk', array('id_kategori_utbk' => $data[$i][10]))->row()->nama_kategori_sma?>
+		            				<?php echo @$this->db->get_where('tb_kategori_utbk', array('id_kategori_utbk' => $data[$i][10]))->row()->nama_kategori_utbk?>
 		            			</td>	
 		            			<td><?=$data[$i][11]?></td>	
 		            		</tr>	
@@ -69,6 +69,7 @@
 		            		
 		            	</tbody>
 		            </table>
+		            <button class="btn btn-danger" style="float: right"><i class="fas fa-save"></i> Simpan</button>
 		        </div>
 	            
 	          </div>
