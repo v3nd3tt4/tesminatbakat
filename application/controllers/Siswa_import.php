@@ -35,14 +35,14 @@ class Siswa_import extends CI_Controller {
 			'tempat_lahir'		=> $this->input->post('tempat_lahir', true),
 			'tgl_lahir'			=> $this->input->post('tgl_lahir', true),
 			'id_jk'				=> $this->input->post('id_jk', true),
-			'id_agama'			=>  $this->input->post('id_agama', true),
-			'id_sekolah'		=>  $this->input->post('id_sekolah', true),
-			'alamat'			=>  $this->input->post('alamat', true),
-			'nisn'				=>  $this->input->post('nisn', true),
-			'email'				=>  $this->input->post('email', true),
+			'id_agama'			=> $this->input->post('id_agama', true),
+			'id_sekolah'		=> $this->input->post('id_sekolah', true),
+			'alamat'			=> $this->input->post('alamat', true),
+			'nisn'				=> $this->input->post('nisn', true),
+			'email'				=> $this->input->post('email', true),
 			'no_hp'				=> $this->input->post('no_hp', true),
-			'id_kategori_sma'	=>  $this->input->post('id_kategori_sma', true),
-			'id_kategori_utbk'	=>  $this->input->post('id_kategori_utbk', true),
+			'id_kategori_sma'	=> $this->input->post('id_kategori_sma', true),
+			'id_kategori_utbk'	=> $this->input->post('id_kategori_utbk', true),
 		);
 
 		$simpan = $this->db->insert('tb_siswa', $data);
