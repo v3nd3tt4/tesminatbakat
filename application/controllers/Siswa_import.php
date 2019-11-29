@@ -42,7 +42,7 @@ class Siswa_import extends CI_Controller {
 		$data = array(
 			'nama_siswa' 		=> $this->input->post('nama_siswa', true),
 			'tempat_lahir'		=> $this->input->post('tempat_lahir', true),
-			'tgl_lahir'			=> $this->input->post('tgl_lahir', true),
+			'tgl_lahir'			=> date("Y-m-d", strtotime($this->input->post('tgl_lahir', true))),
 			'id_jk'				=> $this->input->post('id_jk', true),
 			'id_agama'			=> $this->input->post('id_agama', true),
 			'id_sekolah'		=> $this->input->post('id_sekolah', true),
@@ -74,7 +74,7 @@ class Siswa_import extends CI_Controller {
 		$data = array(
 			'nama_siswa' 		=> $this->input->post('nama_siswa', true),
 			'tempat_lahir'		=> $this->input->post('tempat_lahir', true),
-			'tgl_lahir'			=> $this->input->post('tgl_lahir', true),
+			'tgl_lahir'			=> date("Y-m-d", strtotime($this->input->post('tgl_lahir', true))),
 			'id_jk'				=> $this->input->post('id_jk', true),
 			'id_agama'			=>  $this->input->post('id_agama', true),
 			'id_sekolah'		=>  $this->input->post('id_sekolah', true),
@@ -184,7 +184,7 @@ class Siswa_import extends CI_Controller {
     			$isi[] = array(
     				'nama_siswa' 		=> $data[$i]['1'],
 					'tempat_lahir'		=> $data[$i]['2'],
-					'tgl_lahir'			=> $data[$i]['3'],
+					'tgl_lahir'			=> date("Y-m-d", strtotime($data[$i]['3'])),
 					'id_jk'				=> $data[$i]['6'],
 					'id_agama'			=> $data[$i]['7'],
 					'id_sekolah'		=> $data[$i]['8'],

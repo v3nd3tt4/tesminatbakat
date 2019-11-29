@@ -115,7 +115,7 @@
 	      </div>
 	      <div class="modal-footer bg-whitesmoke br">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-	        <button type="submit" class="btn btn-primary btn-ya-update"><i class="fas fa-trash"></i> Ya</button>
+	        <button type="submit" class="btn btn-primary btn-ya-update">Ya</button>
 	      </div>
       </form>
     </div>

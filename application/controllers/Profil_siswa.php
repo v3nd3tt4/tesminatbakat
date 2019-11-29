@@ -73,4 +73,45 @@ class Profil_siswa extends CI_Controller {
 		}
 	}
 
+	public function ganti_password(){
+		$get_data = $this->db->get_where('tb_user', array('username' => $this->session->userdata('username')));
+		$data = array(
+			'page' => 'user/ganti_password/index',
+			'link' => 'ganti_password',
+			'script' => 'user/ganti_password/script',
+			'data' => $get_data,
+			
+		);
+		$this->load->view('template/wrapper', $data);
+	}
+
+	public function update_password(){
+		$pass = $this->input->post('password');
+		$confirm_pass = $this->input->post('confirm_password');
+		// var_dump($_POST);exit();
+		if($pass != $confirm_pass){
+			$return = array(
+				'status' => 'failed',
+				'text' => '<div class="alert alert-danger">Password tidak cocok</div>'
+			);
+			echo json_encode($return);
+			exit();
+		}else{
+			$update = $this->db->update('tb_user', array('password' => $pass), array('username' => $this->session->userdata('username')));
+			if($update){
+				$return = array(
+					'status' => 'success',
+					'text' => '<div class="alert alert-success">Password berhasil diganti</div>'
+				);
+				echo json_encode($return);
+			}else{
+				$return = array(
+					'status' => 'failed',
+					'text' => '<div class="alert alert-danger">Password gagal diganti</div>'
+				);
+				echo json_encode($return);
+			}
+		}
+	}
+
 }
