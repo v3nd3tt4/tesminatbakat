@@ -34,7 +34,7 @@
         <li class="nav-item dropdown <?=$link=='siswa' || $link=='siswa_import'? 'active':''?>">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Data</span></a>
           <ul class="dropdown-menu">
-            <li class="<?=$link=='siswa'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>siswa">Tambah Siswa</a></li>
+            <li class="<?=$link=='siswa'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>siswa">Siswa</a></li>
             <li class="<?=$link=='siswa_import'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>siswa_import">Import Siswa</a></li>
           </ul>
         </li>
