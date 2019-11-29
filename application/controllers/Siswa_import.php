@@ -152,6 +152,63 @@ class Siswa_import extends CI_Controller {
 		$this->load->view('template/wrapper', $data);
 	}
 
+	public function store_import(){
+		$data_to_save = $this->input->post('data_to_save', true);
+		$data = json_decode($data_to_save);
+
+		$str = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		
+		$isi = array();
+		$isi2 = array();
+		for($i=0;$i<count($data);$i++){
+    		if($i!=(count($data)-1)){
+    			$acak = str_shuffle($str);
+				$potong = substr($acak, 0, 6);
+    			$isi[] = array(
+    				'nama_siswa' 		=> $data[$i]['1'],
+					'tempat_lahir'		=> $data[$i]['2'],
+					'tgl_lahir'			=> $data[$i]['3'],
+					'id_jk'				=> $data[$i]['6'],
+					'id_agama'			=> $data[$i]['7'],
+					'id_sekolah'		=> $data[$i]['8'],
+					'alamat'			=> $data[$i]['11'],
+					'nisn'				=> $data[$i]['0'],
+					'email'				=> $data[$i]['4'],
+					'no_hp'				=> $data[$i]['5'],
+					'id_kategori_sma'	=> $data[$i]['9'],
+					'id_kategori_utbk'	=> $data[$i]['10'],
+    			);;
+
+    			$isi2[] = array(
+    				'username' => $data[$i]['4'],
+    				'password' => $potong,
+    				'level' => 'siswa'
+    			);
+    		}
+    	}
+    	$this->db->trans_begin();
+    	$this->db->insert_batch('tb_siswa', $isi);
+    	$this->db->insert_batch('tb_user', $isi2);
+    	if ($this->db->trans_status() === FALSE)
+		{
+		        $this->db->trans_rollback();
+		        $return = array(
+					'status' => 'failed',
+					'text' => '<div class="alert alert-danger">Data gagal diimport</div>'
+				);
+				echo json_encode($return);
+		}
+		else
+		{
+		        $this->db->trans_commit();
+		        $return = array(
+					'status' => 'success',
+					'text' => '<div class="alert alert-success">Data berhasil diimport</div>'
+				);
+				echo json_encode($return);
+		}
+	}
+
 	public function readCSV($csvFile){
         $delimiter = $this->getFileDelimiter($csvFile); 
         $file_handle = fopen($csvFile, 'r');
@@ -191,4 +248,5 @@ class Siswa_import extends CI_Controller {
         $results = array_keys($results, max($results));
         return $results[0];
     }
+  
 }
