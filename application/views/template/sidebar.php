@@ -7,6 +7,8 @@
       <a href="index.html">MB</a>
     </div>
     <ul class="sidebar-menu">
+      <li class="<?php if($link == 'dashboard'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>welcome"><i class="fas fa-home"></i> <span>Dashboard</span></a></li>
+        <?php if($this->session->userdata('level') == 'admin'){?>
         <li class="menu-header">Pengaturan</li>
         <li class="nav-item dropdown <?=$link=='kategori_sekolah' || $link == 'mapel_rapor'? 'active':''?>">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-cog"></i><span>Setting Nilai Rapor</span></a>
@@ -34,17 +36,26 @@
         <li class="nav-item dropdown <?=$link=='siswa' || $link=='siswa_import'? 'active':''?>">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Data</span></a>
           <ul class="dropdown-menu">
-            <li class="<?=$link=='siswa'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>siswa">Tambah Siswa</a></li>
+            <li class="<?=$link=='siswa'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>siswa">Siswa</a></li>
             <li class="<?=$link=='siswa_import'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>siswa_import">Import Siswa</a></li>
           </ul>
         </li>
+        <?php }else if($this->session->userdata('level') == 'siswa'){?>
+        <li class="<?php if($link == 'profil_siswa'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>profil_siswa"><i class="fas fa-user"></i> <span>Profil</span></a></li>
+        <?php }?>
         <!-- <li class="active"><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li> -->
       </ul>
 
       <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+        <?php if(empty($this->session->userdata('is_login'))){?>
         <a href="<?=base_url()?>login" class="btn btn-primary btn-lg btn-block btn-icon-split">
           <i class="fas fa-sign-in-alt"></i> Login
         </a>
+        <?php }else{?>
+        <a href="<?=base_url()?>login/logout" class="btn btn-primary btn-lg btn-block btn-icon-split">
+          <i class="fas fa-sign-in-alt"></i> Logout
+        </a>
+        <?php }?>
       </div>
   </aside>
 </div>

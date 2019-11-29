@@ -18,12 +18,22 @@ class Siswa extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	
+	public function __construct(){
+		parent::__construct();
+        if($this->session->userdata('level') != 'admin'){
+            echo '<script>alert("Maaf, anda tidak diizinkan mengakses halaman ini")</script>';
+            echo'<script>window.location.href="'.base_url().'";</script>';
+        }            
+	}
+
 	public function index()
 	{
 		$this->db->from('tb_siswa');
 		$this->db->join('tb_jk', 'tb_jk.id_jk = tb_siswa.id_jk');
 		$this->db->join('tb_agama', 'tb_agama.id_agama = tb_siswa.id_agama');
 		$this->db->join('tb_sekolah', 'tb_sekolah.id_sekolah = tb_siswa.id_sekolah');
+		$this->db->join('tb_user', 'tb_siswa.email = tb_user.username');
 		$get_data = $this->db->get();
 
 		$jk = $this->db->get('tb_jk');

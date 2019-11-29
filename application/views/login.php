@@ -31,7 +31,7 @@
               <div class="card-header"><h4>Login</h4></div>
 
               <div class="card-body">
-                <form method="POST" action="#" class="needs-validation" novalidate="">
+                <form method="POST" action="<?=base_url()?>login/proses" class="needs-validation" novalidate="">
                   <div class="form-group">
                     <label for="email">Username</label>
                     <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>

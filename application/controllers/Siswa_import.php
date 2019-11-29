@@ -18,6 +18,15 @@ class Siswa_import extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	
+	public function __construct(){
+		parent::__construct();
+        if($this->session->userdata('level') != 'admin'){
+            echo '<script>alert("Maaf, anda tidak diizinkan mengakses halaman ini")</script>';
+            echo'<script>window.location.href="'.base_url().'";</script>';
+        }            
+	}
+
 	public function index()
 	{
 		$data = array(
@@ -152,6 +161,80 @@ class Siswa_import extends CI_Controller {
 		$this->load->view('template/wrapper', $data);
 	}
 
+	public function store_import(){
+		$data_to_save = $this->input->post('data_to_save', true);
+		$data = json_decode($data_to_save);
+
+		$str = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		
+		$isi = array();
+		$isi2 = array();
+
+		$cek = 0;
+		for($i=0;$i<count($data);$i++){
+			$cek_email = $this->db->get_where('tb_siswa', array('email' => $data[$i]['4']));
+			if($cek_email->num_rows() != 0){
+				$cek++;
+			}
+
+    		if($i!=(count($data)-1)){
+    			$acak = str_shuffle($str);
+				$potong = substr($acak, 0, 6);
+
+    			$isi[] = array(
+    				'nama_siswa' 		=> $data[$i]['1'],
+					'tempat_lahir'		=> $data[$i]['2'],
+					'tgl_lahir'			=> $data[$i]['3'],
+					'id_jk'				=> $data[$i]['6'],
+					'id_agama'			=> $data[$i]['7'],
+					'id_sekolah'		=> $data[$i]['8'],
+					'alamat'			=> $data[$i]['11'],
+					'nisn'				=> $data[$i]['0'],
+					'email'				=> $data[$i]['4'],
+					'no_hp'				=> $data[$i]['5'],
+					'id_kategori_sma'	=> $data[$i]['9'],
+					'id_kategori_utbk'	=> $data[$i]['10'],
+    			);;
+
+    			$isi2[] = array(
+    				'username' => $data[$i]['4'],
+    				'password' => $potong,
+    				'level' => 'siswa'
+    			);
+    		}
+    	}
+    	if($cek > 0){
+    		$return = array(
+				'status' => 'failed',
+				'text' => '<div class="alert alert-danger">Terdapat email yang sama</div>'
+			);
+			echo json_encode($return);
+    	}else{
+    		$this->db->trans_begin();
+	    	$this->db->insert_batch('tb_siswa', $isi);
+	    	$this->db->insert_batch('tb_user', $isi2);
+	    	if ($this->db->trans_status() === FALSE)
+			{
+			        $this->db->trans_rollback();
+			        $return = array(
+						'status' => 'failed',
+						'text' => '<div class="alert alert-danger">Data gagal diimport</div>'
+					);
+					echo json_encode($return);
+			}
+			else
+			{
+			        $this->db->trans_commit();
+			        $return = array(
+						'status' => 'success',
+						'text' => '<div class="alert alert-success">Data berhasil diimport</div>'
+					);
+					echo json_encode($return);
+			}
+    	}
+    	
+	}
+
 	public function readCSV($csvFile){
         $delimiter = $this->getFileDelimiter($csvFile); 
         $file_handle = fopen($csvFile, 'r');
@@ -191,4 +274,5 @@ class Siswa_import extends CI_Controller {
         $results = array_keys($results, max($results));
         return $results[0];
     }
+  
 }

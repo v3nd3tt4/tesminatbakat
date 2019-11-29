@@ -50,6 +50,31 @@
 	    	});
 	    });
 
+	    $(document).on('submit', '#form_import_siswa', function(e){
+	    	e.preventDefault();
+	    	$('#modal-import').modal();
+	    	var data = $('#form_import_siswa').serialize();
+	    	$(document).on('click', '.btn-ya-import', function(e){
+	    		e.preventDefault();
+	    		$('.notif').html('Loading...');
+	    		$.ajax({
+		    		url: '<?=base_url()?>siswa_import/store_import',
+		    		data: data,
+		    		type: 'POST',
+		    		dataType: 'JSON',
+		    		success: function(msg){
+		    			if(msg.status == 'success'){
+		    				$('.notif').html(msg.text);
+		    				// location.reload();
+		    				window.location.href = "<?=base_url()?>siswa";
+		    			}else{
+		    				$('.notif').html(msg.text);
+		    			}
+		    		}
+		    	});
+	    	});
+	    });
+
 	    $(document).on('click', '.btn-hapus', function(e){
 	    	e.preventDefault();
 	    	$('#modal-hapus').modal();
