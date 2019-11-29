@@ -160,10 +160,18 @@ class Siswa_import extends CI_Controller {
 		
 		$isi = array();
 		$isi2 = array();
+
+		$cek = 0;
 		for($i=0;$i<count($data);$i++){
+			$cek_email = $this->db->get_where('tb_siswa', array('email' => $data[$i]['4']));
+			if($cek_email->num_rows() != 0){
+				$cek++;
+			}
+
     		if($i!=(count($data)-1)){
     			$acak = str_shuffle($str);
 				$potong = substr($acak, 0, 6);
+
     			$isi[] = array(
     				'nama_siswa' 		=> $data[$i]['1'],
 					'tempat_lahir'		=> $data[$i]['2'],
@@ -186,27 +194,36 @@ class Siswa_import extends CI_Controller {
     			);
     		}
     	}
-    	$this->db->trans_begin();
-    	$this->db->insert_batch('tb_siswa', $isi);
-    	$this->db->insert_batch('tb_user', $isi2);
-    	if ($this->db->trans_status() === FALSE)
-		{
-		        $this->db->trans_rollback();
-		        $return = array(
-					'status' => 'failed',
-					'text' => '<div class="alert alert-danger">Data gagal diimport</div>'
-				);
-				echo json_encode($return);
-		}
-		else
-		{
-		        $this->db->trans_commit();
-		        $return = array(
-					'status' => 'success',
-					'text' => '<div class="alert alert-success">Data berhasil diimport</div>'
-				);
-				echo json_encode($return);
-		}
+    	if($cek > 0){
+    		$return = array(
+				'status' => 'failed',
+				'text' => '<div class="alert alert-danger">Terdapat email yang sama</div>'
+			);
+			echo json_encode($return);
+    	}else{
+    		$this->db->trans_begin();
+	    	$this->db->insert_batch('tb_siswa', $isi);
+	    	$this->db->insert_batch('tb_user', $isi2);
+	    	if ($this->db->trans_status() === FALSE)
+			{
+			        $this->db->trans_rollback();
+			        $return = array(
+						'status' => 'failed',
+						'text' => '<div class="alert alert-danger">Data gagal diimport</div>'
+					);
+					echo json_encode($return);
+			}
+			else
+			{
+			        $this->db->trans_commit();
+			        $return = array(
+						'status' => 'success',
+						'text' => '<div class="alert alert-success">Data berhasil diimport</div>'
+					);
+					echo json_encode($return);
+			}
+    	}
+    	
 	}
 
 	public function readCSV($csvFile){
