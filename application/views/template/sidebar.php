@@ -41,7 +41,7 @@
           </ul>
         </li>
         <?php }else if($this->session->userdata('level') == 'siswa'){?>
-        <li class="<?php if($link == 'profil'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>profil_siswa"><i class="fas fa-user"></i> <span>Profil</span></a></li>
+        <li class="<?php if($link == 'profil_siswa'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>profil_siswa"><i class="fas fa-user"></i> <span>Profil</span></a></li>
         <?php }?>
         <!-- <li class="active"><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li> -->
       </ul>
