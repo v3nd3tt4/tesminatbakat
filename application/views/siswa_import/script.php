@@ -56,7 +56,7 @@
 	    	var data = $('#form_import_siswa').serialize();
 	    	$(document).on('click', '.btn-ya-import', function(e){
 	    		e.preventDefault();
-	    		$('.notif').html();
+	    		$('.notif').html('Loading...');
 	    		$.ajax({
 		    		url: '<?=base_url()?>siswa_import/store_import',
 		    		data: data,
