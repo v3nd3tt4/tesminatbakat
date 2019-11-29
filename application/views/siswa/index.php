@@ -18,6 +18,7 @@
 	            			<th>NISN</th>
 	            			<th>Nama Siswa</th>
 	            			<th>Asal Sekolah</th>
+	            			<th>Email</th>
 	            			<th>Password</th>
 	            			<th>Aksi</th>
 	            		</tr>
@@ -29,6 +30,7 @@
 	            			<td><?=$row_data->nisn?></td>
 	            			<td><?=$row_data->nama_siswa?></td>
 	            			<td><?=$row_data->nama_sekolah?></td>
+	            			<td><?=$row_data->email?></td>
 	            			<td><?=$row_data->password?></td>
 	            			<td>
 	            				<button class="btn btn-danger btn-hapus" id="<?=$row_data->id_siswa?>"><i class="fas fa-trash"></i> Hapus</button>
