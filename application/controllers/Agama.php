@@ -18,6 +18,14 @@ class Agama extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	public function __construct(){
+		parent::__construct();
+        if($this->session->userdata('level') != 'admin'){
+            echo '<script>alert("Maaf, anda tidak diizinkan mengakses halaman ini")</script>';
+            echo'<script>window.location.href="'.base_url().'";</script>';
+        }            
+	}
+
 	public function index()
 	{
 		$get_data = $this->db->get('tb_agama');
