@@ -33,8 +33,10 @@
 	            			<td><?=$row_data->email?></td>
 	            			<td><?=$row_data->password?></td>
 	            			<td>
-	            				<button class="btn btn-danger btn-hapus" id="<?=$row_data->id_siswa?>"><i class="fas fa-trash"></i> Hapus</button>
-	            				<button class="btn btn-info btn-edit" id="<?=$row_data->id_siswa?>"><i class="fas fa-eye"></i> Lihat</button>
+	            				<button class="btn btn-danger btn-sm btn-hapus" id="<?=$row_data->id_siswa?>"><i class="fas fa-trash"></i> Hapus</button>
+	            				<button class="btn btn-info btn-sm btn-edit" id="<?=$row_data->id_siswa?>"><i class="fas fa-edit"></i> Edit</button>
+	            				<a href="<?=base_url()?>siswa/nilai_rapor/<?=$row_data->id_siswa?>" class="btn btn-warning btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book"></i> Rapor</button>
+	            				<a href="<?=base_url()?>siswa/nilai_utbk/<?=$row_data->id_siswa?>" class="btn btn-success btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book-open"></i> UTBK</button>
 	            			</td>
 	            		</tr>
 	            		<?php }?>

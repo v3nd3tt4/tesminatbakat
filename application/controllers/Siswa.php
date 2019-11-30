@@ -71,19 +71,38 @@ class Siswa extends CI_Controller {
 			'id_kategori_utbk'	=>  $this->input->post('id_kategori_utbk', true),
 		);
 
-		$simpan = $this->db->insert('tb_siswa', $data);
-		if($simpan){
-			$return = array(
-				'status' => 'success',
-				'text' => '<div class="alert alert-success">Data berhasil disimpan</div>'
-			);
-			echo json_encode($return);
-		}else{
-			$return = array(
-				'status' => 'failed',
-				'text' => '<div class="alert alert-danger">Data gagal disimpan</div>'
-			);
-			echo json_encode($return);
+		$str = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$acak = str_shuffle($str);
+		$potong = substr($acak, 0, 6);
+
+		$data2 = array(
+			'username' => $this->input->post('email', true),
+			'password' => $potong,
+			'level' => 'siswa'
+		);
+
+		$this->db->trans_begin();
+
+
+		$this->db->insert('tb_siswa', $data);
+		$this->db->insert('tb_user', $data2);
+		if ($this->db->trans_status() === FALSE)
+		{
+		        $this->db->trans_rollback();
+		        $return = array(
+					'status' => 'failed',
+					'text' => '<div class="alert alert-danger">Data gagal disimpan</div>'
+				);
+				echo json_encode($return);
+		}
+		else
+		{
+		        $this->db->trans_commit();
+		        $return = array(
+					'status' => 'success',
+					'text' => '<div class="alert alert-success">Data berhasil disimpan</div>'
+				);
+				echo json_encode($return);
 		}
 	}
 
@@ -146,5 +165,87 @@ class Siswa extends CI_Controller {
 		);
 		$get_data = $this->db->get_where('tb_siswa', $param);
 		echo json_encode($get_data->row());
+	}
+
+	public function nilai_rapor($id_siswa){
+		$this->db->from('tb_mapel');
+		$this->db->join('tb_siswa', 'tb_siswa.id_kategori_sma = tb_mapel.id_kategori_sma');
+		$this->db->where(array('tb_siswa.id_siswa' => $id_siswa));
+		$get_data = $this->db->get();
+
+		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $id_siswa, 'kategori' => 'rapor'));
+		$data = array(
+			'page' => 'siswa/nilai_rapor',
+			'link' => 'siswa',
+			'script' => 'siswa/script',
+			'data' => $get_data,
+			'id_siswa' => $id_siswa,
+			'status' => $status
+			
+		);
+		$this->load->view('template/wrapper', $data);
+	}
+
+	public function simpan_rasionalisasi_rapor(){
+		$data = array(
+			'rasionalisasi' => $this->input->post('rasionalisasi', true),
+			'status' => 'rasionalisasi',
+			'tgl_create' => date('Y-m-d H:i:s')
+		);
+		$simpan = $this->db->update('tb_status_pengisian_nilai', $data, array('id_siswa' => $this->input->post('id_siswa', true),'kategori' => 'rapor'));
+		if($simpan){
+			$return = array(
+				'status' => 'success',
+				'text' => '<div class="alert alert-success">Data berhasil disimpan</div>'
+			);
+			echo json_encode($return);
+		}else{
+			$return = array(
+				'status' => 'failed',
+				'text' => '<div class="alert alert-danger">Data gagal disimpan</div>'
+			);
+			echo json_encode($return);
+		}
+	}
+
+	public function nilai_utbk($id_siswa){
+		$this->db->from('tb_mapel_utbk');
+		$this->db->join('tb_siswa', 'tb_siswa.id_kategori_utbk = tb_mapel_utbk.id_kategori_utbk');
+		$this->db->where(array('tb_siswa.id_siswa' => $id_siswa));
+		$get_data = $this->db->get();
+
+		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $id_siswa, 'kategori' => 'utbk'));
+		$data = array(
+			'page' => 'siswa/nilai_utbk',
+			'link' => 'siswa',
+			'script' => 'siswa/script',
+			'data' => $get_data,
+			'id_siswa' => $id_siswa,
+			'status' => $status
+			
+		);
+		$this->load->view('template/wrapper', $data);
+	}
+
+	public function simpan_rasionalisasi_utbk(){
+		$data = array(
+			'rasionalisasi' => $this->input->post('rasionalisasi', true),
+			'status' => 'rasionalisasi',
+			'tgl_create' => date('Y-m-d H:i:s')
+		);
+		$simpan = $this->db->update('tb_status_pengisian_nilai', $data, array('id_siswa' => $this->input->post('id_siswa', true),'kategori' => 'utbk'));
+		if($simpan){
+			$return = array(
+				'status' => 'success',
+				'text' => '<div class="alert alert-success">Data berhasil disimpan</div>'
+			);
+			echo json_encode($return);
+		}else{
+			$return = array(
+				'status' => 'failed',
+				'text' => '<div class="alert alert-danger">Data gagal disimpan</div>'
+			);
+			echo json_encode($return);
+		}
 	}
 }

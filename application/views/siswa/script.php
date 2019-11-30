@@ -103,3 +103,58 @@
 	    });
 	} );
 </script>
+
+<script type="text/javascript">
+	$(document).ready( function () {
+
+	    $(document).on('submit', '#form-rasionalisasi-rapor', function(e){
+	    	e.preventDefault();
+	    	$('#modal-rasionalisasi-rapor').modal();
+	    	var data = $('#form-rasionalisasi-rapor').serialize();
+	    	$(document).on('click', '.btn-ya-simpan', function(e){
+	    		e.preventDefault();
+	    		$('.notif').html('Loading...');
+		    	$.ajax({
+		    		url: '<?=base_url()?>siswa/simpan_rasionalisasi_rapor',
+		    		data: data,
+		    		type: 'POST',
+		    		dataType: 'JSON',
+		    		success: function(msg){
+		    			if(msg.status == 'success'){
+		    				$('.notif').html(msg.text);
+		    				location.reload();
+		    			}else{
+		    				$('.notif').html(msg.text);
+		    			}
+		    		}
+		    	});
+	    	});
+	    	
+	    });
+
+	    $(document).on('submit', '#form-rasionalisasi-utbk', function(e){
+	    	e.preventDefault();
+	    	$('#modal-rasionalisasi-utbk').modal();
+	    	var data = $('#form-rasionalisasi-utbk').serialize();
+	    	$(document).on('click', '.btn-ya-simpan', function(e){
+	    		e.preventDefault();
+	    		$('.notif').html('Loading...');
+		    	$.ajax({
+		    		url: '<?=base_url()?>siswa/simpan_rasionalisasi_utbk',
+		    		data: data,
+		    		type: 'POST',
+		    		dataType: 'JSON',
+		    		success: function(msg){
+		    			if(msg.status == 'success'){
+		    				$('.notif').html(msg.text);
+		    				location.reload();
+		    			}else{
+		    				$('.notif').html(msg.text);
+		    			}
+		    		}
+		    	});
+	    	});
+	    	
+	    });
+	});
+</script>
