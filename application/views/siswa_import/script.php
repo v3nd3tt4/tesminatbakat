@@ -58,7 +58,7 @@
 	    		e.preventDefault();
 	    		$('.notif').html('Loading...');
 	    		$.ajax({
-		    		url: '<?=base_url()?>siswa_import/store_import',
+		    		url: '<?=base_url()?>siswa_import/store_import_new',
 		    		data: data,
 		    		type: 'POST',
 		    		dataType: 'JSON',

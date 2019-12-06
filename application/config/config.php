@@ -24,8 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/~vendetta/tesminatbakat/';
-// $config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/';
-$config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/tesminatbakat/';
+$config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/';
+// $config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/tesminatbakat/';
 
 
 /*

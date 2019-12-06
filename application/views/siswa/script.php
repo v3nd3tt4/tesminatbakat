@@ -74,6 +74,30 @@
 	    	});
 	    });
 
+	    $(document).on('click', '.btn-token', function(e){
+	    	e.preventDefault();
+	    	$('#modal-generate').modal();
+	    	var id = $(this).attr('id');
+	    	$(document).on('click', '.btn-ya-generate', function(e){
+	    		e.preventDefault();
+	    		$('.notif').html('Loading...');
+	    		$.ajax({
+		    		url: '<?=base_url()?>siswa/generate_token',
+		    		data: 'id='+id,
+		    		type: 'POST',
+		    		dataType: 'JSON',
+		    		success: function(msg){
+		    			if(msg.status == 'success'){
+		    				$('.notif').html(msg.text);
+		    				location.reload();
+		    			}else{
+		    				$('.notif').html(msg.text);
+		    			}
+		    		}
+		    	});
+	    	});
+	    });
+
 	    $(document).on('click', '.btn-edit', function(e){
 	    	e.preventDefault();
 	    	var id = $(this).attr('id');
