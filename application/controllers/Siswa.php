@@ -241,7 +241,7 @@ class Siswa extends CI_Controller {
 
 		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $id_siswa, 'kategori' => 'utbk'));
 
-		$cek_pendukung = $this->db->get_where('tb_pendukung_utbk', array('id_siswa' => $this->session->userdata('id_siswa')));
+		$cek_pendukung = $this->db->get_where('tb_pendukung_utbk', array('id_siswa' => $id_siswa));
 
 		$data = array(
 			'page' => 'siswa/nilai_utbk',
