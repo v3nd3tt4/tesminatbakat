@@ -30,10 +30,10 @@ class Siswa extends CI_Controller {
 	public function index()
 	{
 		$this->db->from('tb_siswa');
-		$this->db->join('tb_jk', 'tb_jk.id_jk = tb_siswa.id_jk');
-		$this->db->join('tb_agama', 'tb_agama.id_agama = tb_siswa.id_agama');
-		$this->db->join('tb_sekolah', 'tb_sekolah.id_sekolah = tb_siswa.id_sekolah');
-		$this->db->join('tb_user', 'tb_siswa.email = tb_user.username');
+		$this->db->join('tb_jk', 'tb_jk.id_jk = tb_siswa.id_jk', 'left');
+		$this->db->join('tb_agama', 'tb_agama.id_agama = tb_siswa.id_agama', 'left');
+		$this->db->join('tb_sekolah', 'tb_sekolah.id_sekolah = tb_siswa.id_sekolah', 'left');
+		$this->db->join('tb_user', 'tb_siswa.email = tb_user.username', 'left');
 		$get_data = $this->db->get();
 
 		$jk = $this->db->get('tb_jk');
@@ -53,6 +53,28 @@ class Siswa extends CI_Controller {
 			'data_utbk' => $kat_utbk
 		);
 		$this->load->view('template/wrapper', $data);
+	}
+
+	public function generate_token(){
+		// var_dump($_POST);exit();
+		$get_email=$this->db->get_where('tb_siswa', array('id_siswa' => $this->input->post('id', true)));
+		$str = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$acak = str_shuffle($str);
+		$potong = substr($acak, 0, 6);
+		$simpan = $this->db->update('tb_user', array('password'=>$potong), array('username' => $get_email->row()->email));
+		if($simpan){
+			$return = array(
+				'status' => 'success',
+				'text' => '<div class="alert alert-success">Data berhasil diupdate</div>'
+			);
+			echo json_encode($return);
+		}else{
+			$return = array(
+				'status' => 'failed',
+				'text' => '<div class="alert alert-danger">Data gagal diupdate</div>'
+			);
+			echo json_encode($return);
+		}
 	}
 
 	public function store(){

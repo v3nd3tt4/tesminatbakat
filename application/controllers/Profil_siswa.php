@@ -57,20 +57,43 @@ class Profil_siswa extends CI_Controller {
 			'id_kategori_sma'	=>  $this->input->post('id_kategori_sma', true),
 			'id_kategori_utbk'	=>  $this->input->post('id_kategori_utbk', true),
 		);
-		$simpan = $this->db->update('tb_siswa', $data, array('id_siswa' => $this->input->post('id_siswa', true)));
-		if($simpan){
-			$return = array(
-				'status' => 'success',
-				'text' => '<div class="alert alert-success">Data berhasil diupdate</div>'
-			);
-			echo json_encode($return);
-		}else{
-			$return = array(
-				'status' => 'failed',
-				'text' => '<div class="alert alert-danger">Data gagal diupdate</div>'
-			);
-			echo json_encode($return);
+		$data2 = array(
+			'id_siswa' => $this->input->post('id_siswa', true),
+			'kategori' => 'profil',
+			'status' => 'sudah',
+			'tgl_create' => date('Y-m-d H:i:s')
+		);
+		$cek_kel_profil = $this->db->get_where('tb_status_kelengkapan', array('id_siswa' => $this->input->post('id_siswa', true),'kategori' => 'profil',));
+
+		
+		$this->db->trans_begin();
+
+		if($cek_kel_profil->num_rows() == 0){
+			$this->db->insert('tb_status_kelengkapan', $data2);
 		}
+		
+		$simpan = $this->db->update('tb_siswa', $data, array('id_siswa' => $this->input->post('id_siswa', true)));
+
+
+		if ($this->db->trans_status() === FALSE)
+		{
+		        $this->db->trans_rollback();
+		        $return = array(
+					'status' => 'failed',
+					'text' => '<div class="alert alert-danger">Data gagal diupdate</div>'
+				);
+				echo json_encode($return);
+		}
+		else
+		{
+		        $this->db->trans_commit();
+		        $return = array(
+					'status' => 'success',
+					'text' => '<div class="alert alert-success">Data berhasil diupdate</div>'
+				);
+				echo json_encode($return);
+		}
+		
 	}
 
 	public function ganti_password(){
@@ -97,17 +120,37 @@ class Profil_siswa extends CI_Controller {
 			echo json_encode($return);
 			exit();
 		}else{
+			$cek_kel_profil = $this->db->get_where('tb_status_kelengkapan', array('id_siswa' => $this->session->userdata('id_siswa'),'kategori' => 'password'));
+
+			$data2 = array(
+				'id_siswa' => $this->session->userdata('id_siswa'),
+				'kategori' => 'password',
+				'status' => 'sudah',
+				'tgl_create' => date('Y-m-d H:i:s')
+			);
+		
+			$this->db->trans_begin();
+
+			if($cek_kel_profil->num_rows() == 0){
+				$this->db->insert('tb_status_kelengkapan', $data2);
+			}
+
 			$update = $this->db->update('tb_user', array('password' => $pass), array('username' => $this->session->userdata('username')));
-			if($update){
-				$return = array(
-					'status' => 'success',
-					'text' => '<div class="alert alert-success">Password berhasil diganti</div>'
-				);
-				echo json_encode($return);
-			}else{
-				$return = array(
+			if ($this->db->trans_status() === FALSE)
+			{
+		        $this->db->trans_rollback();
+		        $return = array(
 					'status' => 'failed',
 					'text' => '<div class="alert alert-danger">Password gagal diganti</div>'
+				);
+				echo json_encode($return);
+			}
+			else
+			{
+		        $this->db->trans_commit();
+		        $return = array(
+					'status' => 'success',
+					'text' => '<div class="alert alert-success">Password berhasil diganti</div>'
 				);
 				echo json_encode($return);
 			}
@@ -122,12 +165,15 @@ class Profil_siswa extends CI_Controller {
 
 		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $this->session->userdata('id_siswa'), 'kategori' => 'rapor'));
 
+		$cek_pendukung = $this->db->get_where('tb_pendukung_rapor', array('id_siswa' => $this->session->userdata('id_siswa')));
+
 		$data = array(
 			'page' => 'user/nilai_rapor/index',
 			'link' => 'nilai_rapor',
 			'script' => 'user/nilai_rapor/script',
 			'data' => $get_data,
-			'status' => $status
+			'status' => $status,
+			'data_pendukung_rapor' => $cek_pendukung
 			
 		);
 		$this->load->view('template/wrapper', $data);
@@ -144,7 +190,33 @@ class Profil_siswa extends CI_Controller {
 				'nilai' => $value
 			);
 		}
+
+		$data2 = array(
+			'id_siswa' => $this->session->userdata('id_siswa'),
+			'kategori' => 'rapor',
+			'status' => 'sudah',
+			'tgl_create' => date('Y-m-d H:i:s')
+		);
+
+		$data_pendukung_rapor = array(
+			'jur_1' => $this->input->post('jur_1', true),
+			'kampus_1' => $this->input->post('kampus_1', true),
+			'jur_2' => $this->input->post('jur_2', true),
+			'kampus_2' => $this->input->post('kampus_2', true),
+			'jur_3' => $this->input->post('jur_3', true),
+			'kampus_3' => $this->input->post('kampus_3', true),
+			'good_mapel' => $this->input->post('good_mapel', true),
+			'bad_mapel' => $this->input->post('bad_mapel', true),
+			'id_siswa' => $this->session->userdata('id_siswa'),
+			'status' => 'sudah',
+			'tgl_create' => date('Y-m-d H:i:s')
+		);
+		$cek_pendukung = $this->db->get_where('tb_pendukung_rapor', array('id_siswa' => $this->session->userdata('id_siswa')));
+
+		$cek_kel_profil = $this->db->get_where('tb_status_kelengkapan', array('id_siswa' => $this->session->userdata('id_siswa'),'kategori' => 'rapor'));
+
 		$this->db->trans_begin();
+
 
 		if($cek->num_rows() == 0){
 			$this->db->insert_batch('tb_nilai_mapel', $data);
@@ -166,6 +238,16 @@ class Profil_siswa extends CI_Controller {
 			}
 			$this->db->update('tb_status_pengisian_nilai', array('status' => 'update', 'tgl_create' => date('Y-m-d H:i:s')),array('id_siswa'=>$this->session->userdata('id_siswa'), 'kategori' => 'rapor'));
 			
+		}
+
+		if($cek_pendukung->num_rows() == 0){
+			$this->db->insert('tb_pendukung_rapor', $data_pendukung_rapor);
+		}else{
+			$this->db->update('tb_pendukung_rapor', $data_pendukung_rapor, array('id_siswa'=>$this->session->userdata('id_siswa')));
+		}
+
+		if($cek_kel_profil->num_rows() == 0){
+			$this->db->insert('tb_status_kelengkapan', $data2);
 		}
 
 		if ($this->db->trans_status() === FALSE)
@@ -197,12 +279,15 @@ class Profil_siswa extends CI_Controller {
 
 		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $this->session->userdata('id_siswa'), 'kategori' => 'utbk'));
 
+		$cek_pendukung = $this->db->get_where('tb_pendukung_utbk', array('id_siswa' => $this->session->userdata('id_siswa')));
+
 		$data = array(
 			'page' => 'user/nilai_utbk/index',
 			'link' => 'nilai_utbk',
 			'script' => 'user/nilai_utbk/script',
 			'data' => $get_data,
-			'status' => $status
+			'status' => $status,
+			'data_pendukung_utbk' => $cek_pendukung
 			
 		);
 		$this->load->view('template/wrapper', $data);
@@ -219,6 +304,31 @@ class Profil_siswa extends CI_Controller {
 				'nilai' => $value
 			);
 		}
+
+		$data2 = array(
+			'id_siswa' => $this->session->userdata('id_siswa'),
+			'kategori' => 'utbk',
+			'status' => 'sudah',
+			'tgl_create' => date('Y-m-d H:i:s')
+		);
+
+		$data_pendukung_rapor = array(
+			'jur_1' => $this->input->post('jur_1', true),
+			'kampus_1' => $this->input->post('kampus_1', true),
+			'jur_2' => $this->input->post('jur_2', true),
+			'kampus_2' => $this->input->post('kampus_2', true),
+			'jur_3' => $this->input->post('jur_3', true),
+			'kampus_3' => $this->input->post('kampus_3', true),
+			'good_mapel' => $this->input->post('good_mapel', true),
+			'bad_mapel' => $this->input->post('bad_mapel', true),
+			'id_siswa' => $this->session->userdata('id_siswa'),
+			'status' => 'sudah',
+			'tgl_create' => date('Y-m-d H:i:s')
+		);
+		$cek_pendukung = $this->db->get_where('tb_pendukung_utbk', array('id_siswa' => $this->session->userdata('id_siswa')));
+
+		$cek_kel_profil = $this->db->get_where('tb_status_kelengkapan', array('id_siswa' => $this->session->userdata('id_siswa'),'kategori' => 'utbk'));
+
 		$this->db->trans_begin();
 
 		if($cek->num_rows() == 0){
@@ -241,6 +351,16 @@ class Profil_siswa extends CI_Controller {
 			}
 			$this->db->update('tb_status_pengisian_nilai', array('status' => 'update', 'tgl_create' => date('Y-m-d H:i:s')),array('id_siswa'=>$this->session->userdata('id_siswa'), 'kategori' => 'utbk'));
 			
+		}
+
+		if($cek_pendukung->num_rows() == 0){
+			$this->db->insert('tb_pendukung_utbk', $data_pendukung_rapor);
+		}else{
+			$this->db->update('tb_pendukung_utbk', $data_pendukung_rapor, array('id_siswa'=>$this->session->userdata('id_siswa')));
+		}
+
+		if($cek_kel_profil->num_rows() == 0){
+			$this->db->insert('tb_status_kelengkapan', $data2);
 		}
 
 		if ($this->db->trans_status() === FALSE)

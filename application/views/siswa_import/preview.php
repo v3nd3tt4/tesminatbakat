@@ -19,18 +19,18 @@
 		            	<thead>
 		            		<tr>
 		            			<th>No</th>
-		            			<th>NISN</th>
+		            			<!-- <th>NISN</th> -->
 		            			<th>Nama</th>
-		            			<th>Tempat Lahir</th>
-		            			<th>Tanggal Lahir</th>
+		            			<!-- <th>Tempat Lahir</th>
+		            			<th>Tanggal Lahir</th> -->
 		            			<th>Email</th>
-		            			<th>No HP</th>
+		            			<!-- <th>No HP</th>
 		            			<th>Jenis Kelamin</th>
 		            			<th>Agama</th>
 		            			<th>Sekolah</th>
 		            			<th>Jurusan SMA</th>
 		            			<th>Jenis UTBK</th>
-		            			<th>Alamat</th>
+		            			<th>Alamat</th> -->
 		            		</tr>
 		            	</thead>
 		            	<tbody>
@@ -42,11 +42,11 @@
 		            			<td><?=$no++?></td>	
 		            			<td><?=$data[$i][0]?></td>
 		            			<td><?=$data[$i][1]?></td>	
-		            			<td><?=$data[$i][2]?></td>	
+		            			<!-- <td><?=$data[$i][2]?></td>	
 		            			<td><?=$data[$i][3]?></td>	
 		            			<td><?=$data[$i][4]?></td>	
-		            			<td><?=$data[$i][5]?></td>	
-		            			<td>
+		            			<td><?=$data[$i][5]?></td>	 -->
+		            			<!-- <td>
 		            				<?php echo @$this->db->get_where('tb_jk', array('id_jk' => $data[$i][6]))->row()->nama_jk?>
 		            			</td>	
 		            			<td>
@@ -61,7 +61,7 @@
 		            			<td>
 		            				<?php echo @$this->db->get_where('tb_kategori_utbk', array('id_kategori_utbk' => $data[$i][10]))->row()->nama_kategori_utbk?>
 		            			</td>	
-		            			<td><?=$data[$i][11]?></td>	
+		            			<td><?=$data[$i][11]?></td>	 -->
 		            		</tr>	
 				            <?php
 				        			}

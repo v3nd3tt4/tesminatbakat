@@ -12,6 +12,21 @@
 	          </div>
 	          <div class="card-body">
 	            <h3>Selamat datang, dalam aplikasi tes minat bakat</h3>
+	            <hr/>
+	            <ul>
+	            <?php if($status_update_profil->num_rows()==0){?>
+	            	<li>Silahkan lengkapi profil <a class="btn btn-sm btn-primary" href="<?=base_url()?>profil_siswa">disini</a></li>
+	            <?php }?>
+	            <?php if($status_update_password->num_rows()==0){?>
+	            	<li>Silahkan ganti password <a class="btn btn-sm btn-primary" href="<?=base_url()?>profil_siswa/ganti_password">disini</a></li>
+	            <?php }?>
+	            <?php if($status_update_rapor->num_rows()==0){?>
+	            	<li>Silahkan isi nilai rapor <a class="btn btn-sm btn-primary" href="<?=base_url()?>profil_siswa/nilai_rapor">disini</a></li>
+	            <?php }?>
+	            <?php if($status_update_utbk->num_rows()==0){?>
+	            	<li>Silahkan isi nilai utbk <a class="btn btn-sm btn-primary" href="<?=base_url()?>profil_siswa/nilai_utbk">disini</a></li>
+	            <?php }?>
+	            </ul>
 	          </div>
 	        </div>
 	    </div>

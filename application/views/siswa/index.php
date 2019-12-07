@@ -15,11 +15,11 @@
 	            	<thead>
 	            		<tr>
 	            			<th>No</th>
-	            			<th>NISN</th>
+	            			<!-- <th>NISN</th> -->
 	            			<th>Nama Siswa</th>
 	            			<th>Asal Sekolah</th>
-	            			<th>Email</th>
-	            			<th>Password</th>
+	            			<!-- <th>Email</th> -->
+	            			<th>Password/Token</th>
 	            			<th>Aksi</th>
 	            		</tr>
 	            	</thead>
@@ -27,16 +27,17 @@
 	            		<?php $no=1;foreach($data->result() as $row_data){?>
 	            		<tr>
 	            			<td><?=$no++?>.</td>
-	            			<td><?=$row_data->nisn?></td>
+	            			<!-- <td><?=$row_data->nisn?></td> -->
 	            			<td><?=$row_data->nama_siswa?></td>
-	            			<td><?=$row_data->nama_sekolah?></td>
+	            			<!-- <td><?=$row_data->nama_sekolah?></td> -->
 	            			<td><?=$row_data->email?></td>
-	            			<td><?=$row_data->password?></td>
+	            			<td><?=empty($row_data->password)?'<button class="btn btn-sm btn-danger">belum diset</button>':$row_data->password?></td>
 	            			<td>
 	            				<button class="btn btn-danger btn-sm btn-hapus" id="<?=$row_data->id_siswa?>"><i class="fas fa-trash"></i> Hapus</button>
 	            				<button class="btn btn-info btn-sm btn-edit" id="<?=$row_data->id_siswa?>"><i class="fas fa-edit"></i> Edit</button>
-	            				<a href="<?=base_url()?>siswa/nilai_rapor/<?=$row_data->id_siswa?>" class="btn btn-warning btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book"></i> Rapor</button>
-	            				<a href="<?=base_url()?>siswa/nilai_utbk/<?=$row_data->id_siswa?>" class="btn btn-success btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book-open"></i> UTBK</button>
+	            				<a href="<?=base_url()?>siswa/nilai_rapor/<?=$row_data->id_siswa?>" class="btn btn-warning btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book"></i> Rapor</a>
+	            				<a href="<?=base_url()?>siswa/nilai_utbk/<?=$row_data->id_siswa?>" class="btn btn-success btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book-open"></i> UTBK</a>
+	            				<button class="btn btn-light btn-sm btn-token" id="<?=$row_data->id_siswa?>"><i class="fas fa-key"></i> Generate Password/Token</button>
 	            			</td>
 	            		</tr>
 	            		<?php }?>
@@ -167,6 +168,29 @@
 	      <div class="modal-footer bg-whitesmoke br">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
 	        <button type="submit" class="btn btn-primary btn-ya-hapus"><i class="fas fa-trash"></i> Ya</button>
+	      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-generate">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Generate Password/Token</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="form-tambah-kategori">
+	      <div class="modal-body">
+	        	<p>Apakah anda yakin?</p>
+	        	<div class="notif"></div>
+	      </div>
+	      <div class="modal-footer bg-whitesmoke br">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+	        <button type="submit" class="btn btn-primary btn-ya-generate"><!-- <i class="fas fa-trash"></i> --> Ya</button>
 	      </div>
       </form>
     </div>
