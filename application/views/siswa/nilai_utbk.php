@@ -39,6 +39,72 @@
 	            		<?php }?>
 	            		
 	            	</table>
+	            	<hr>
+	            	<p>Kampus dan jurusan yang akan dipilih</p>
+		            
+		            <table class="table table-striped">
+		            	<tr>
+		            		<td>
+		            			<div class="form-group">
+		            				<label>Kampus</label>
+			            			<input type="text" name="kampus_1" value="<?=@$data_pendukung_utbk->row()->kampus_1?>" class="form-control">
+			            		</div>
+		            		</td>
+		            		<td>
+		            			<div class="form-group">
+		            				<label>Jurusan</label>
+			            			<input type="text" name="jur_1" value="<?=@$data_pendukung_utbk->row()->jur_1?>" class="form-control">
+			            		</div>
+		            		</td>
+		            	</tr>
+		            	<tr>
+		            		<td>
+		            			<div class="form-group">
+		            				<label>Kampus</label>
+			            			<input type="text" name="kampus_2" value="<?=@$data_pendukung_utbk->row()->kampus_2?>" class="form-control">
+			            		</div>
+		            		</td>
+		            		<td>
+		            			<div class="form-group">
+		            				<label>Jurusan</label>
+			            			<input type="text" name="jur_2" value="<?=@$data_pendukung_utbk->row()->jur_2?>" class="form-control">
+			            		</div>
+		            		</td>
+		            	</tr>
+		            	<tr>
+		            		<td>
+		            			<div class="form-group">
+		            				<label>Kampus</label>
+			            			<input type="text" name="kampus_3" value="<?=@$data_pendukung_utbk->row()->kampus_3?>" class="form-control">
+			            		</div>
+		            		</td>
+		            		<td>
+		            			<div class="form-group">
+		            				<label>Jurusan</label>
+			            			<input type="text" name="jur_3" value="<?=@$data_pendukung_utbk->row()->jur_3?>" class="form-control">
+			            		</div>
+		            		</td>
+		            	</tr>
+		            </table>
+
+		            <hr>
+		            <p>Mata Pelajaran disukai dan tidak disukai</p>
+		            <table class="table table-striped">
+		            	<tr>
+		            		<td>
+		            			<div class="form-group">
+		            				<label>Mata pelajaran paling disukai</label>
+			            			<input type="text" name="good_mapel" value="<?=@$data_pendukung_utbk->row()->good_mapel?>" class="form-control">
+			            		</div>
+		            		</td>
+		            		<td>
+		            			<div class="form-group">
+		            				<label>Mata pelajaran paling tidak disukai</label>
+			            			<input type="text" name="bad_mapel" value="<?=@$data_pendukung_utbk->row()->bad_mapel?>" class="form-control">
+			            		</div>
+		            		</td>
+		            	</tr>
+		            </table>
 	            </form>
 	            <hr>
 	            <form id="form-rasionalisasi-utbk">

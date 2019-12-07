@@ -196,13 +196,16 @@ class Siswa extends CI_Controller {
 		$get_data = $this->db->get();
 
 		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $id_siswa, 'kategori' => 'rapor'));
+
+		$cek_pendukung = $this->db->get_where('tb_pendukung_rapor', array('id_siswa' => $id_siswa));
 		$data = array(
 			'page' => 'siswa/nilai_rapor',
 			'link' => 'siswa',
 			'script' => 'siswa/script',
 			'data' => $get_data,
 			'id_siswa' => $id_siswa,
-			'status' => $status
+			'status' => $status,
+			'data_pendukung_rapor' => $cek_pendukung
 			
 		);
 		$this->load->view('template/wrapper', $data);
@@ -237,13 +240,17 @@ class Siswa extends CI_Controller {
 		$get_data = $this->db->get();
 
 		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $id_siswa, 'kategori' => 'utbk'));
+
+		$cek_pendukung = $this->db->get_where('tb_pendukung_utbk', array('id_siswa' => $this->session->userdata('id_siswa')));
+
 		$data = array(
 			'page' => 'siswa/nilai_utbk',
 			'link' => 'siswa',
 			'script' => 'siswa/script',
 			'data' => $get_data,
 			'id_siswa' => $id_siswa,
-			'status' => $status
+			'status' => $status,
+			'data_pendukung_utbk' => $cek_pendukung
 			
 		);
 		$this->load->view('template/wrapper', $data);
