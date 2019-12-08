@@ -39,6 +39,31 @@ class Pertanyaan extends CI_Controller {
 		$this->load->view('template/wrapper', $data);
 	}
 
+	public function isi(){
+		$get_data = $this->db->get('tb_kategori_pertanyaan');
+		$data = array(
+			'page' => 'pertanyaan/isi/index',
+			'link' => 'isi_pertanyaan',
+			'script' => 'pertanyaan/isi/script',
+			'data' => $get_data
+		);
+		$this->load->view('template/wrapper', $data);
+	}
+
+	public function preview_buat_soal($id_kategori_soal){
+		$get_kategori = $this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' => $id_kategori_soal));
+		$get_soal = $this->db->get_where('tb_pertanyaan', array('id_kategori_soal' => $id_kategori_soal));
+		$data = array(
+			'page' => 'pertanyaan/isi/pertanyaan',
+			'link' => 'isi_pertanyaan',
+			'script' => 'pertanyaan/isi/script',
+			'data_kategori' => $get_kategori,
+			'data_soal' => $get_soal,
+			'id_kategori_soal' => $id_kategori_soal
+		);
+		$this->load->view('template/wrapper', $data);
+	}
+
 	public function store(){
 		$data = array(
 			'nama_kategori' => $this->input->post('nama_kategori', true),
@@ -46,6 +71,29 @@ class Pertanyaan extends CI_Controller {
 		);
 
 		$simpan = $this->db->insert('tb_kategori_pertanyaan', $data);
+		if($simpan){
+			$return = array(
+				'status' => 'success',
+				'text' => '<div class="alert alert-success">Data berhasil disimpan</div>'
+			);
+			echo json_encode($return);
+		}else{
+			$return = array(
+				'status' => 'failed',
+				'text' => '<div class="alert alert-danger">Data gagal disimpan</div>'
+			);
+			echo json_encode($return);
+		}
+	}
+
+	public function store_pertanyaan(){
+		$data = array(
+			'pertanyaan' => $this->input->post('pertanyaan', true),
+			'id_kategori_soal' => $this->input->post('id_kategori_soal', true),
+			'tgl_create' => date('Y-m-d H:i:s')
+		);
+
+		$simpan = $this->db->insert('tb_pertanyaan', $data);
 		if($simpan){
 			$return = array(
 				'status' => 'success',
@@ -83,6 +131,29 @@ class Pertanyaan extends CI_Controller {
 		}
 	}
 
+	public function update_pertanyaan(){
+		$data = array(
+			'pertanyaan' => $this->input->post('pertanyaan', true),
+			'tgl_create' => date('Y-m-d H:i:s')
+		);
+
+		$simpan = $this->db->update('tb_pertanyaan', $data, array('id_pertanyaan' => $this->input->post('id_pertanyaan', true)));
+		
+		if($simpan){
+			$return = array(
+				'status' => 'success',
+				'text' => '<div class="alert alert-success">Data berhasil diupdate</div>'
+			);
+			echo json_encode($return);
+		}else{
+			$return = array(
+				'status' => 'failed',
+				'text' => '<div class="alert alert-danger">Data gagal diupdate</div>'
+			);
+			echo json_encode($return);
+		}
+	}
+
 	public function remove(){
 		$param = array(
 			'id_kategori_soal' => $this->input->post('id', true),
@@ -104,11 +175,40 @@ class Pertanyaan extends CI_Controller {
 		}
 	}
 
+	public function remove_pertanyaan(){
+		$param = array(
+			'id_pertanyaan' => $this->input->post('id', true),
+		);
+
+		$delete = $this->db->delete('tb_pertanyaan', $param);
+		if($delete){
+			$return = array(
+				'status' => 'success',
+				'text' => '<div class="alert alert-success">Data berhasil dihapus</div>'
+			);
+			echo json_encode($return);
+		}else{
+			$return = array(
+				'status' => 'failed',
+				'text' => '<div class="alert alert-danger">Data gagal dihapus</div>'
+			);
+			echo json_encode($return);
+		}
+	}
+
 	public function get_data(){
 		$param = array(
 			'id_kategori_soal' => $this->input->post('id', true),
 		);
 		$get_data = $this->db->get_where('tb_kategori_pertanyaan', $param);
+		echo json_encode($get_data->row());
+	}
+
+	public function get_data_pertanyaan(){
+		$param = array(
+			'id_pertanyaan' => $this->input->post('id', true),
+		);
+		$get_data = $this->db->get_where('tb_pertanyaan', $param);
 		echo json_encode($get_data->row());
 	}
 }
