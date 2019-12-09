@@ -175,25 +175,25 @@ CREATE TABLE `tb_nilai_mapel` (
   `semester` int(10) DEFAULT NULL,
   `id_riwayat_isi_rapor` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_nilai_mapel`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_nilai_mapel` */
 
 insert  into `tb_nilai_mapel`(`id_nilai_mapel`,`id_mapel`,`nilai`,`id_siswa`,`semester`,`id_riwayat_isi_rapor`) values 
 (1,1,'80',1,1,1),
-(2,2,'67',1,1,1),
-(3,3,'57',1,1,1),
+(2,2,'90',1,1,1),
+(3,3,'78',1,1,1),
 (4,4,'86',1,1,1),
-(5,5,'69',1,1,1),
-(6,6,'98',1,1,1),
-(7,7,'68',1,1,1),
-(8,1,'89',1,2,1),
-(9,2,'45',1,2,1),
-(10,3,'47',1,2,1),
-(11,4,'78',1,2,1),
-(12,5,'90',1,2,1),
-(13,6,'78',1,2,1),
-(14,7,'68',1,2,1),
+(5,5,'56',1,1,1),
+(6,6,'89',1,1,1),
+(7,7,'90',1,1,1),
+(8,1,'',1,2,1),
+(9,2,'',1,2,1),
+(10,3,'',1,2,1),
+(11,4,'',1,2,1),
+(12,5,'',1,2,1),
+(13,6,'',1,2,1),
+(14,7,'',1,2,1),
 (15,1,'',1,3,1),
 (16,2,'',1,3,1),
 (17,3,'',1,3,1),
@@ -214,7 +214,42 @@ insert  into `tb_nilai_mapel`(`id_nilai_mapel`,`id_mapel`,`nilai`,`id_siswa`,`se
 (32,4,'',1,5,1),
 (33,5,'',1,5,1),
 (34,6,'',1,5,1),
-(35,7,'',1,5,1);
+(35,7,'',1,5,1),
+(36,1,'80',1,1,2),
+(37,2,'90',1,1,2),
+(38,3,'78',1,1,2),
+(39,4,'86',1,1,2),
+(40,5,'56',1,1,2),
+(41,6,'89',1,1,2),
+(42,7,'90',1,1,2),
+(43,1,'87',1,2,2),
+(44,2,'98',1,2,2),
+(45,3,'90',1,2,2),
+(46,4,'67',1,2,2),
+(47,5,'89',1,2,2),
+(48,6,'95',1,2,2),
+(49,7,'87',1,2,2),
+(50,1,'',1,3,2),
+(51,2,'',1,3,2),
+(52,3,'',1,3,2),
+(53,4,'',1,3,2),
+(54,5,'',1,3,2),
+(55,6,'',1,3,2),
+(56,7,'',1,3,2),
+(57,1,'',1,4,2),
+(58,2,'',1,4,2),
+(59,3,'',1,4,2),
+(60,4,'',1,4,2),
+(61,5,'',1,4,2),
+(62,6,'',1,4,2),
+(63,7,'',1,4,2),
+(64,1,'',1,5,2),
+(65,2,'',1,5,2),
+(66,3,'',1,5,2),
+(67,4,'',1,5,2),
+(68,5,'',1,5,2),
+(69,6,'',1,5,2),
+(70,7,'',1,5,2);
 
 /*Table structure for table `tb_nilai_mapel_utbk` */
 
@@ -225,6 +260,7 @@ CREATE TABLE `tb_nilai_mapel_utbk` (
   `id_mapel_utbk` int(11) NOT NULL,
   `nilai` varchar(255) NOT NULL,
   `id_siswa` int(11) NOT NULL,
+  `id_riwayat_isi_utbk` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_nilai_mapel_utbk`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -249,14 +285,13 @@ CREATE TABLE `tb_pendukung_rapor` (
   `tgl_create` datetime NOT NULL,
   `id_riwayat_isi_rapor` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_pendukung_rapor`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_pendukung_rapor` */
 
 insert  into `tb_pendukung_rapor`(`id_pendukung_rapor`,`id_siswa`,`jur_1`,`kampus_1`,`jur_2`,`kampus_2`,`jur_3`,`kampus_3`,`good_mapel`,`bad_mapel`,`status`,`tgl_create`,`id_riwayat_isi_rapor`) values 
-(1,1,'TEKNIK KIMIA3','UNILA1','TEKNIK FISIKA4','UNILA2','INFORMATIKA6','ITERA5','KIMIA7','SENI BUDAYA8','sudah','2019-12-07 14:06:29',NULL),
-(2,3,'Hukum','UNILA','Hubungan Internasional','UNILA','Teknik Informatika','ITERA','Matematika','Ekonomi','sudah','2019-12-09 04:27:04',NULL),
-(3,1,'aku','sayang','kamu','tapi','kamu','ga','sayang','aku','sudah','2019-12-09 06:24:13',1);
+(1,1,'jjh','ddd','uuy','dr','gg','ytr','uuu','kjnj','sudah','2019-12-09 10:15:29',1),
+(2,1,'jhhh','ds','jjh','lkj','gg','ggg','tre','ee','sudah','2019-12-09 10:16:04',2);
 
 /*Table structure for table `tb_pendukung_utbk` */
 
@@ -278,9 +313,6 @@ CREATE TABLE `tb_pendukung_utbk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_pendukung_utbk` */
-
-insert  into `tb_pendukung_utbk`(`id_pendukung_utbk`,`id_siswa`,`jur_1`,`kampus_1`,`jur_2`,`kampus_2`,`jur_3`,`kampus_3`,`good_mapel`,`bad_mapel`,`status`,`tgl_create`) values 
-(0,1,'TEKNIK KIMIA','UNILA1','TEKNIK FISIKA','UNILA','INFORMATIKA','ITERA','KIMIA','SENI BUDAYA','sudah','2019-12-07 14:17:49');
 
 /*Table structure for table `tb_pertanyaan` */
 
@@ -387,12 +419,13 @@ CREATE TABLE `tb_riwayat_isi_rapor` (
   `tgl_isi` datetime DEFAULT NULL,
   `id_siswa` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_riwayat_isi_rapor`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_riwayat_isi_rapor` */
 
 insert  into `tb_riwayat_isi_rapor`(`id_riwayat_isi_rapor`,`tgl_isi`,`id_siswa`) values 
-(1,'2019-12-09 06:24:13',1);
+(1,'2019-12-09 10:15:29',1),
+(2,'2019-12-09 10:16:04',1);
 
 /*Table structure for table `tb_riwayat_isi_utbk` */
 
@@ -401,6 +434,7 @@ DROP TABLE IF EXISTS `tb_riwayat_isi_utbk`;
 CREATE TABLE `tb_riwayat_isi_utbk` (
   `id_riwayat_isi_rapor` int(11) NOT NULL AUTO_INCREMENT,
   `tgl_isi` datetime DEFAULT NULL,
+  `id_siswa` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_riwayat_isi_rapor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -440,14 +474,16 @@ CREATE TABLE `tb_siswa` (
   `id_kategori_sma` int(11) DEFAULT NULL,
   `id_kategori_utbk` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_siswa`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_siswa` */
 
 insert  into `tb_siswa`(`id_siswa`,`nama_siswa`,`tempat_lahir`,`tgl_lahir`,`id_jk`,`id_agama`,`id_sekolah`,`alamat`,`nisn`,`email`,`no_hp`,`id_kategori_sma`,`id_kategori_utbk`) values 
 (1,'arief','bandar lampung','2019-12-04',1,3,2,'test','15432','arief@mail.com','98766',1,NULL),
 (2,'ridho','bandar lampung','0000-00-00',1,3,2,'test','15433','ridho@mail.com','98766',1,2),
-(3,'Okta Pilopa','Bandar Lampung','1992-10-27',1,3,2,'jl test','764552','okta@mail.com','0974567',2,NULL);
+(3,'Okta Pilopa','Bandar Lampung','1992-10-27',1,3,2,'jl test','764552','okta@mail.com','0974567',2,NULL),
+(4,'Danzen',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'danzen@mail.com',NULL,NULL,NULL),
+(5,'Adam',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'adam@mail.com',NULL,NULL,NULL);
 
 /*Table structure for table `tb_status_kelengkapan` */
 
@@ -465,9 +501,9 @@ CREATE TABLE `tb_status_kelengkapan` (
 /*Data for the table `tb_status_kelengkapan` */
 
 insert  into `tb_status_kelengkapan`(`id_status_kelengkapan`,`id_siswa`,`kategori`,`status`,`tgl_create`) values 
-(1,1,'profil','sudah','2019-12-09 06:23:22'),
-(2,1,'password','sudah','2019-12-09 06:23:27'),
-(3,1,'rapor','sudah','2019-12-09 06:24:13');
+(1,1,'profil','sudah','2019-12-09 10:11:09'),
+(2,1,'password','sudah','2019-12-09 10:11:14'),
+(3,1,'rapor','sudah','2019-12-09 10:15:29');
 
 /*Table structure for table `tb_status_pengisian_nilai` */
 
@@ -482,15 +518,13 @@ CREATE TABLE `tb_status_pengisian_nilai` (
   `rasionalisasi` text NOT NULL,
   `id_riwayat_isi_rapor` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_status_pengisian_nilai`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_status_pengisian_nilai` */
 
 insert  into `tb_status_pengisian_nilai`(`id_status_pengisian_nilai`,`id_siswa`,`kategori`,`status`,`tgl_create`,`rasionalisasi`,`id_riwayat_isi_rapor`) values 
-(1,1,'rapor','update','2019-12-07 14:06:29','',1),
-(2,1,'utbk','update','2019-12-07 14:17:49','tes rasionalisasi utbk',NULL),
-(3,2,'rapor','sudah','2019-12-01 10:14:02','',NULL),
-(6,3,'rapor','update','2019-12-09 04:27:04','',NULL);
+(1,1,'rapor','rasionalisasi','2019-12-09 10:17:16','ini rasionalisasi 2',1),
+(2,1,'rapor','rasionalisasi','2019-12-09 10:17:01','ini rasionalisasi 1',2);
 
 /*Table structure for table `tb_user` */
 
@@ -502,14 +536,16 @@ CREATE TABLE `tb_user` (
   `password` varchar(255) DEFAULT NULL,
   `level` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_user` */
 
 insert  into `tb_user`(`id_user`,`username`,`password`,`level`) values 
 (1,'okta@mail.com','1','siswa'),
 (2,'admin@mail.com','adminku','admin'),
-(3,'arief@mail.com','1','siswa');
+(3,'arief@mail.com','1','siswa'),
+(4,'danzen@mail.com',NULL,'siswa'),
+(5,'adam@mail.com',NULL,'siswa');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
