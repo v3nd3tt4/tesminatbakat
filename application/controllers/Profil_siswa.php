@@ -350,9 +350,9 @@ class Profil_siswa extends CI_Controller {
 			$this->db->insert('tb_status_kelengkapan', $data2);
 		}
 
-		if($cek->num_rows() == 0){
-			$this->db->insert('tb_status_pengisian_nilai', array('id_siswa'=>$this->session->userdata('id_siswa'), 'kategori' => 'rapor', 'status' => 'sudah', 'tgl_create' => date('Y-m-d H:i:s')));
-		}
+		// if($cek->num_rows() == 0){
+			$this->db->insert('tb_status_pengisian_nilai', array('id_siswa'=>$this->session->userdata('id_siswa'), 'kategori' => 'rapor', 'status' => 'sudah', 'tgl_create' => date('Y-m-d H:i:s'), 'id_riwayat_isi_rapor' => $id_riwayat_isi_rapor));
+		// }
 
 		if ($this->db->trans_status() === FALSE)
 		{

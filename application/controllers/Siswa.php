@@ -213,12 +213,13 @@ class Siswa extends CI_Controller {
 	}
 
 	public function nilai_rapor_new($id_siswa){
-		$data_siswa = $this->db->get_where()
+		$data_siswa = $this->db->get_where('tb_siswa', array('id_siswa' => $id_siswa));
 		$row_data = $this->db->order_by('tgl_isi', 'DESC')->get_where('tb_riwayat_isi_rapor', array('id_siswa' => $id_siswa));
 		$data = array(
 			'page' => 'siswa/nilai_rapor_new',
 			'link' => 'siswa',
-			'data_riwayat' => $row_data
+			'data_riwayat' => $row_data,
+			'data_siswa' => $data_siswa
 		);
 		$this->load->view('template/wrapper', $data);
 	}
@@ -229,7 +230,7 @@ class Siswa extends CI_Controller {
 			'status' => 'rasionalisasi',
 			'tgl_create' => date('Y-m-d H:i:s')
 		);
-		$simpan = $this->db->update('tb_status_pengisian_nilai', $data, array('id_siswa' => $this->input->post('id_siswa', true),'kategori' => 'rapor'));
+		$simpan = $this->db->update('tb_status_pengisian_nilai', $data, array('id_siswa' => $this->input->post('id_siswa', true), 'id_riwayat_isi_rapor' => $this->input->post('id_riwayat_isi_rapor', true),'kategori' => 'rapor'));
 		if($simpan){
 			$return = array(
 				'status' => 'success',
@@ -288,5 +289,35 @@ class Siswa extends CI_Controller {
 			);
 			echo json_encode($return);
 		}
+	}
+
+	public function isi_riwayat($id_riwayat_isi_rapor, $id_siswa){
+		$row_data = $this->db->get_where('tb_riwayat_isi_rapor', array('id_siswa' => $id_siswa, 'id_riwayat_isi_rapor' => $id_riwayat_isi_rapor));
+
+		$this->db->from('tb_mapel');
+		$this->db->join('tb_siswa', 'tb_siswa.id_kategori_sma = tb_mapel.id_kategori_sma');
+		$this->db->where(array('tb_siswa.id_siswa' => $id_siswa));
+		$get_data = $this->db->get();
+
+		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $id_siswa, 'kategori' => 'rapor', 'id_riwayat_isi_rapor' => $id_riwayat_isi_rapor));
+
+		$cek_pendukung = $this->db->get_where('tb_pendukung_rapor', array('id_siswa' => $id_siswa, 'id_riwayat_isi_rapor' => $id_riwayat_isi_rapor));
+
+		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $id_siswa, 'kategori' => 'rapor', 'id_riwayat_isi_rapor' => $id_riwayat_isi_rapor));
+		// var_dump($this->db->last_query());exit();
+		$data = array(
+			// 'page' => 'user/nilai_rapor/index',
+			'page' => 'siswa/riwayat_detail',
+			'link' => 'siswa',
+			'script' => 'siswa/script',
+			'data' => $get_data,
+			'status' => $status,
+			'data_pendukung_rapor' => $cek_pendukung,
+			'data_riwayat' => $row_data, 
+			'id_riwayat_isi_rapor' => $id_riwayat_isi_rapor, 
+			'id_siswa' => $id_siswa,
+			'status' => $status,
+		);
+		$this->load->view('template/wrapper', $data);
 	}
 }

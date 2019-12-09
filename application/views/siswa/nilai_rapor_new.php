@@ -9,6 +9,16 @@
 	            
 	          </div>
 	          <div class="card-body">
+	          	<table class="table-striped table">
+	          		<tr>
+	          			<td>NISN</td>
+	          			<td><?=$data_siswa->row()->nisn?></td>
+	          		</tr>
+	          		<tr>
+	          			<td>Nama</td>
+	          			<td><?=$data_siswa->row()->nama_siswa?></td>
+	          		</tr>
+	          	</table>
 	            <table class="table table-striped">
 	            	<thead>
 	            		<tr>
@@ -23,7 +33,7 @@
 	            			<td><?=$no++?>.</td>
 	            			<td><?=$row->tgl_isi?></td>
 	            			<td>
-	            				<a href="<?=base_url()?>profil_siswa/isi_riwayat/<?=$row->id_riwayat_isi_rapor?>" class=" btn btn-primary"><i class="fas fa-eye"></i> Lihat</a>
+	            				<a href="<?=base_url()?>siswa/isi_riwayat/<?=$row->id_riwayat_isi_rapor?>/<?=$data_siswa->row()->id_siswa?>" class=" btn btn-primary"><i class="fas fa-eye"></i> Lihat</a>
 	            			</td>
 	            		</tr>
 	            		<?php }?>

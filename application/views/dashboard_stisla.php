@@ -161,9 +161,15 @@
 					            	<center>
 					            		<img src="<?=base_url()?>assets/done.svg" style="width: 150px;" >
 						                <h3> Selesai</h3>
-						                
-						                <!-- <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button> -->
+						                <?php if($status_update_rapor->num_rows()==0){?>
+						                <a class="btn btn-warning " href="<?=base_url()?>profil_siswa/nilai_rapor" >Isi Nilai Rapor</a>
+						            	<?php }?>
+						            	<?php if($status_update_utbk->num_rows()==0){?>
+						                <a class="btn btn-info" href="<?=base_url()?>profil_siswa/nilai_utbk" >Isi Nilai UTBK</a>
+						                <?php }?>
+						                <a class="btn btn-success" href="<?=base_url()?>profil_siswa/test" >Tes Minat Bakat</a>
 					                </center>
+
 					                <!-- <div class="alert alert-primary">untuk melakukan tes minat bakat silahkan klik <a class="btn btn-sm btn-info" href="<?=base_url()?>profil_siswa/nilai_rapor">disini</a></div> -->
 					                <!-- <ol>
 					                <?php if($status_update_rapor->num_rows()==0){?>
