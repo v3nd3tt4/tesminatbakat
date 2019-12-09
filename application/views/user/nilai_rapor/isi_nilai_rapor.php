@@ -5,26 +5,35 @@
 	  	<div class="card">
 	        <div class="card-wrap">
 	          <div class="card-header">
-	            <h4>Nilai Rapor</h4>
+	            <h4>Isi Nilai Rapor</h4>
 	            
 	          </div>
 	          <div class="card-body">
-	            <form id="form-rapor">
-	            	<table class="table table-striped">
-	            		<?php foreach($data->result() as $row_data){
-	            			$nilai = $this->db->get_where('tb_nilai_mapel', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel' => $row_data->id_mapel));
-	            		?>
-	            		<tr>
-	            			<td>
-	            				<?=$row_data->nama_mapel?>
-	            			</td>
-	            			<td>
-	            				<input type="number" name="mapel[<?=$row_data->id_mapel?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required>
-	            			</td>
-	            		</tr>
-	            		<?php }?>
+	          	<div class="alert alert-info">Isi sampai semester terakhir anda saja</div>
+	            <form id="form-rapor-new">
+	            	<?php 
+	            		$semester = array('1', '2', '3', '4', '5');
+	            		foreach($semester as $sem){
+	            		echo '<h3>Semester '.$sem.'</h3>';
+	            		echo '<table class="table table-striped">';
+		            		foreach($data->result() as $row_data){
+		            			$nilai = $this->db->get_where('tb_nilai_mapel', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel' => $row_data->id_mapel));
+		            		?>
+		            		<tr>
+		            			<td>
+		            				<?=$row_data->nama_mapel?>
+		            			</td>
+		            			<td>
+		            				<!-- <input type="number" name="mapel[<?=$row_data->id_mapel?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required> -->
+		            				<input type="number" name="mapel[<?=$sem?>][<?=$row_data->id_mapel?>]" class="form-control">
+		            				<!-- <input type="hidden" name="semester[]" class="form-control" value="<?=$sem?>"> -->
+		            			</td>
+		            		</tr>
 	            		
-	            	</table>
+	            	<?php 
+	            			}
+	            		echo '</table>';
+	            		}?>
 	            
 
 	            <h6>Kampus dan jurusan yang akan dipilih</h6>
@@ -34,13 +43,13 @@
 	            		<td>
 	            			<div class="form-group">
 	            				<label>Kampus</label>
-		            			<input type="text" name="kampus_1" value="<?=@$data_pendukung_rapor->row()->kampus_1?>" required class="form-control">
+		            			<input type="text" name="kampus_1"  required class="form-control">
 		            		</div>
 	            		</td>
 	            		<td>
 	            			<div class="form-group">
 	            				<label>Jurusan</label>
-		            			<input type="text" name="jur_1" value="<?=@$data_pendukung_rapor->row()->jur_1?>" required class="form-control">
+		            			<input type="text" name="jur_1"  required class="form-control">
 		            		</div>
 	            		</td>
 	            	</tr>
@@ -48,13 +57,13 @@
 	            		<td>
 	            			<div class="form-group">
 	            				<label>Kampus</label>
-		            			<input type="text" name="kampus_2" value="<?=@$data_pendukung_rapor->row()->kampus_2?>" required class="form-control">
+		            			<input type="text" name="kampus_2" required class="form-control">
 		            		</div>
 	            		</td>
 	            		<td>
 	            			<div class="form-group">
 	            				<label>Jurusan</label>
-		            			<input type="text" name="jur_2" value="<?=@$data_pendukung_rapor->row()->jur_2?>" required class="form-control">
+		            			<input type="text" name="jur_2" required class="form-control">
 		            		</div>
 	            		</td>
 	            	</tr>
@@ -62,13 +71,13 @@
 	            		<td>
 	            			<div class="form-group">
 	            				<label>Kampus</label>
-		            			<input type="text" name="kampus_3" value="<?=@$data_pendukung_rapor->row()->kampus_3?>" required class="form-control">
+		            			<input type="text" name="kampus_3" required class="form-control">
 		            		</div>
 	            		</td>
 	            		<td>
 	            			<div class="form-group">
 	            				<label>Jurusan</label>
-		            			<input type="text" name="jur_3" value="<?=@$data_pendukung_rapor->row()->jur_3?>" required class="form-control">
+		            			<input type="text" name="jur_3" required class="form-control">
 		            		</div>
 	            		</td>
 	            	</tr>
@@ -80,20 +89,21 @@
 	            		<td>
 	            			<div class="form-group">
 	            				<label>Mata pelajaran paling disukai</label>
-		            			<input type="text" name="good_mapel" value="<?=@$data_pendukung_rapor->row()->good_mapel?>" required class="form-control">
+		            			<input type="text" name="good_mapel" required class="form-control">
 		            		</div>
 	            		</td>
 	            		<td>
 	            			<div class="form-group">
 	            				<label>Mata pelajaran paling tidak disukai</label>
-		            			<input type="text" name="bad_mapel" value="<?=@$data_pendukung_rapor->row()->bad_mapel?>" required class="form-control">
+		            			<input type="text" name="bad_mapel" required class="form-control">
 		            		</div>
 	            		</td>
 	            	</tr>
 	            </table>
 	            <button style="float: right;" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
 	            </form>
-	            <?php if($status->num_rows() != 0){?>
+	            <br/><br>
+	            <!-- <?php if($status->num_rows() != 0){?>
 	            <br><br>
 	            <?php if(empty($status->row()->rasionalisasi)){?>
 	            <div class="alert alert-warning">Menunggu saran rasionalisasi dari admin</div>
@@ -110,15 +120,14 @@
 	            </table>
 	        	<?php }?>
 	        	<?php }else{?>
-	        	<!-- <div class="alert alert-warning">Menunggu saran rasionalisasi dari admin</div> -->
-	        	<?php }?>
+	        		<div class="alert alert-warning">Menunggu saran rasionalisasi dari admin</div> 
+	        	<?php }?> -->
 	          </div>
 	        </div>
 	    </div>
 	  </div>
 	</section>
 </div>
-
 <div class="modal fade" tabindex="-1" role="dialog" id="modal-nilai-rapor-siswa">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

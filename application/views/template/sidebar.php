@@ -48,10 +48,23 @@
           </ul>
         </li>
         <?php }else if($this->session->userdata('level') == 'siswa'){?>
-        <li class="<?php if($link == 'profil_siswa'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>profil_siswa"><i class="fas fa-user"></i> <span>Profil</span></a></li>
-        <li class="<?php if($link == 'ganti_password'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/ganti_password"><i class="fas fa-key"></i> <span>Ganti Password</span></a></li>
-        <li class="<?php if($link == 'nilai_rapor'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/nilai_rapor"><i class="fas fa-book"></i> <span>Nilai Rapor</span></a></li>
-        <li class="<?php if($link == 'nilai_utbk'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/nilai_utbk"><i class="fas fa-book-open"></i> <span>Nilai UTBK</span></a></li>
+        <?php 
+        $update_profil = $this->db->get_where('tb_status_kelengkapan', array('id_siswa' => $this->session->userdata('id_siswa'), 'kategori' => 'profil'));
+        $update_password = $this->db->get_where('tb_status_kelengkapan', array('id_siswa' => $this->session->userdata('id_siswa'), 'kategori' => 'password'));
+        if($update_profil->num_rows() != 0 && $update_password->num_rows() != 0){?>
+          <li class="<?php if($link == 'profil_siswa'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>profil_siswa"><i class="fas fa-user"></i> <span>Profil</span></a></li>
+          <li class="<?php if($link == 'ganti_password'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/ganti_password"><i class="fas fa-key"></i> <span>Ganti Password</span></a></li>
+          <!-- <li class="<?php if($link == 'nilai_rapor'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/nilai_rapor"><i class="fas fa-book"></i> <span>Nilai Rapor</span></a></li> -->
+
+          <li class="nav-item dropdown <?=$link=='nilai_rapor' || $link == 'riwayat_rapor'? 'active':''?>">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-book"></i><span>Nilai Rapor</span></a>
+            <ul class="dropdown-menu">
+              <li class="<?=$link=='nilai_rapor'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/nilai_rapor">Isi</a></li>
+              <li class="<?=$link=='riwayat_rapor'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/riwayat">Riwayat</a></li>
+            </ul>
+          </li>
+          <li class="<?php if($link == 'nilai_utbk'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/nilai_utbk"><i class="fas fa-book-open"></i> <span>Nilai UTBK</span></a></li>
+        <?php }?>
         <?php }?>
         <!-- <li class="active"><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li> -->
       </ul>

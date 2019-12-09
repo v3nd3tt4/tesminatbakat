@@ -53,31 +53,31 @@
 					        <div class="col-md-6">
 				      			<div class="form-group">
 					        		<label>NISN</label>
-					        		<input type="hidden" required class="form-control" name="id_siswa" id="id_siswa" value="<?=$data->row()->id_siswa?>">
-					        		<input type="text" required class="form-control" name="nisn" id="nisn" value="<?=$data->row()->nisn?>">
+					        		<input type="hidden" required class="form-control" name="id_siswa" id="id_siswa" value="<?=@$data->row()->id_siswa?>">
+					        		<input type="text" required class="form-control" name="nisn" id="nisn" value="<?=@$data->row()->nisn?>">
 					        	</div>
 					        	<div class="form-group">
 					        		<label>Nama Siswa</label>
-					        		<input type="text" required class="form-control" name="nama_siswa" id="nama_siswa"  value="<?=$data->row()->nama_siswa?>">
+					        		<input type="text" required class="form-control" name="nama_siswa" id="nama_siswa"  value="<?=@$data->row()->nama_siswa?>">
 					        	</div>
 					        	<div class="form-group">
 					        		<label>Tempat Lahir</label>
-					        		<input type="text" required class="form-control" name="tempat_lahir" id="tempat_lahir"  value="<?=$data->row()->tempat_lahir?>">
+					        		<input type="text" required class="form-control" name="tempat_lahir" id="tempat_lahir"  value="<?=@$data->row()->tempat_lahir?>">
 					        	</div>
 					        	<div class="form-group">
 					        		<label>Tanggal Lahir</label>
-					        		<input type="date" required class="form-control" name="tgl_lahir" id="tgl_lahir" value="<?=$data->row()->tgl_lahir?>">
+					        		<input type="date" required class="form-control" name="tgl_lahir" id="tgl_lahir" value="<?=@$data->row()->tgl_lahir?>">
 					        	</div>
 					        	<div class="form-group">
 					        		<label>Email</label>
-					        		<input type="email" required class="form-control" name="email" id="email" value="<?=$data->row()->email?>" readonly>
+					        		<input type="email" required class="form-control" name="email" id="email" value="<?=@$data->row()->email?>" readonly>
 					        	</div>
 					        	<div class="form-group">
 					        		<label>Jurusan Sekolah</label>
 					        		<select class="form-control" required name="id_kategori_sma" id="id_kategori_sma">
 					        			<option value="">--pilih--</option>
 					        			<?php foreach($data_sma->result() as $row_sma){?>
-					        				<option value="<?=$row_sma->id_kategori_sma?>" <?=$data->row()->id_kategori_sma == $row_sma->id_kategori_sma? 'selected' : ''?>><?=$row_sma->nama_kategori?></option>
+					        				<option value="<?=$row_sma->id_kategori_sma?>" <?=@$data->row()->id_kategori_sma == $row_sma->id_kategori_sma? 'selected' : ''?>><?=$row_sma->nama_kategori?></option>
 					        			<?php }?>
 					        		</select>
 					        	</div>
@@ -94,14 +94,14 @@
 				      		<div class="col-md-6">
 				      			<div class="form-group">
 					        		<label>No. HP</label>
-					        		<input type="number" required class="form-control" name="no_hp" id="no_hp" value="<?=$data->row()->no_hp?>">
+					        		<input type="number" required class="form-control" name="no_hp" id="no_hp" value="<?=@$data->row()->no_hp?>">
 					        	</div>
 					        	<div class="form-group">
 					        		<label>Jenis Kelamin</label>
 					        		<select class="form-control" required name="id_jk" id="id_jk">
 					        			<option value="">--pilih--</option>
 					        			<?php foreach($data_jk->result() as $row_jk){?>
-					        				<option value="<?=$row_jk->id_jk?>" <?=$data->row()->id_jk == $row_jk->id_jk? 'selected' : ''?>><?=$row_jk->nama_jk?></option>
+					        				<option value="<?=$row_jk->id_jk?>" <?=@$data->row()->id_jk == $row_jk->id_jk? 'selected' : ''?>><?=$row_jk->nama_jk?></option>
 					        			<?php }?>
 					        		</select>
 					        	</div>
@@ -110,7 +110,7 @@
 					        		<select class="form-control" required name="id_agama" id="id_agama">
 					        			<option value="">--pilih--</option>
 					        			<?php foreach($data_agama->result() as $row_agama){?>
-					        				<option value="<?=$row_agama->id_agama?>" <?=$data->row()->id_agama == $row_agama->id_agama? 'selected' : ''?>><?=$row_agama->nama_agama?></option>
+					        				<option value="<?=$row_agama->id_agama?>" <?=@$data->row()->id_agama == $row_agama->id_agama? 'selected' : ''?>><?=$row_agama->nama_agama?></option>
 					        			<?php }?>
 					        		</select>
 					        	</div>
@@ -119,7 +119,7 @@
 					        		<select class="form-control" required name="id_sekolah" id="id_sekolah">
 					        			<option value="">--pilih--</option>
 					        			<?php foreach($data_sekolah->result() as $row_sekolah){?>
-					        				<option value="<?=$row_sekolah->id_sekolah?>" <?=$data->row()->id_sekolah == $row_sekolah->id_sekolah? 'selected' : ''?>><?=$row_sekolah->nama_sekolah?></option>
+					        				<option value="<?=$row_sekolah->id_sekolah?>" <?=@$data->row()->id_sekolah == $row_sekolah->id_sekolah? 'selected' : ''?>><?=$row_sekolah->nama_sekolah?></option>
 					        			<?php }?>
 					        		</select>
 					        	</div>
@@ -160,8 +160,18 @@
 					            	<center>
 					            		<img src="<?=base_url()?>assets/done.svg" style="width: 150px;" >
 						                <h3> Selesai</h3>
+						                
 						                <!-- <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button> -->
 					                </center>
+					                <!-- <div class="alert alert-primary">untuk melakukan tes minat bakat silahkan klik <a class="btn btn-sm btn-info" href="<?=base_url()?>profil_siswa/nilai_rapor">disini</a></div> -->
+					                <!-- <ol>
+					                <?php if($status_update_rapor->num_rows()==0){?>
+						            	<li>Silahkan isi nilai rapor <a class="btn btn-sm btn-primary" href="<?=base_url()?>profil_siswa/nilai_rapor">disini</a></li>
+						            <?php }?>
+						            <?php if($status_update_utbk->num_rows()==0){?>
+						            	<li>Silahkan isi nilai utbk <a class="btn btn-sm btn-primary" href="<?=base_url()?>profil_siswa/nilai_utbk">disini</a></li>
+						            <?php }?>
+						            </ol> -->
 					            </div>
 					        <!-- </div> -->
 					    </div>

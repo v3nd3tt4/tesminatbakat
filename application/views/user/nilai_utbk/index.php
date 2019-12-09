@@ -31,13 +31,13 @@
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Kampus</label>
-			            			<input type="text" name="kampus_1" value="<?=@$data_pendukung_utbk->row()->kampus_1?>" class="form-control">
+			            			<input type="text" name="kampus_1" value="<?=@$data_pendukung_utbk->row()->kampus_1?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Jurusan</label>
-			            			<input type="text" name="jur_1" value="<?=@$data_pendukung_utbk->row()->jur_1?>" class="form-control">
+			            			<input type="text" name="jur_1" value="<?=@$data_pendukung_utbk->row()->jur_1?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            	</tr>
@@ -45,13 +45,13 @@
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Kampus</label>
-			            			<input type="text" name="kampus_2" value="<?=@$data_pendukung_utbk->row()->kampus_2?>" class="form-control">
+			            			<input type="text" name="kampus_2" value="<?=@$data_pendukung_utbk->row()->kampus_2?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Jurusan</label>
-			            			<input type="text" name="jur_2" value="<?=@$data_pendukung_utbk->row()->jur_2?>" class="form-control">
+			            			<input type="text" name="jur_2" value="<?=@$data_pendukung_utbk->row()->jur_2?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            	</tr>
@@ -59,13 +59,13 @@
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Kampus</label>
-			            			<input type="text" name="kampus_3" value="<?=@$data_pendukung_utbk->row()->kampus_3?>" class="form-control">
+			            			<input type="text" name="kampus_3" value="<?=@$data_pendukung_utbk->row()->kampus_3?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Jurusan</label>
-			            			<input type="text" name="jur_3" value="<?=@$data_pendukung_utbk->row()->jur_3?>" class="form-control">
+			            			<input type="text" name="jur_3" value="<?=@$data_pendukung_utbk->row()->jur_3?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            	</tr>
@@ -78,13 +78,13 @@
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Mata pelajaran paling disukai</label>
-			            			<input type="text" name="good_mapel" value="<?=@$data_pendukung_utbk->row()->good_mapel?>" class="form-control">
+			            			<input type="text" name="good_mapel" value="<?=@$data_pendukung_utbk->row()->good_mapel?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Mata pelajaran paling tidak disukai</label>
-			            			<input type="text" name="bad_mapel" value="<?=@$data_pendukung_utbk->row()->bad_mapel?>" class="form-control">
+			            			<input type="text" name="bad_mapel" value="<?=@$data_pendukung_utbk->row()->bad_mapel?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            	</tr>
@@ -94,6 +94,9 @@
 
 	            <?php if($status->num_rows() != 0){?>
 	            <br><br>
+	            <?php if(empty($status->row()->rasionalisasi)){?>
+	            <div class="alert alert-warning">Menunggu saran rasionalisasi dari admin</div>
+	        	<?php }else{?>
 	            <table class="table-striped table">
 	            	<tr>
 	            		<td>Saran dari admin</td>
@@ -102,6 +105,7 @@
 	            		</td>
 	            	</tr>
 	            </table>
+	            <?php }?>
 	        	<?php }?>
 	          </div>
 	        </div>

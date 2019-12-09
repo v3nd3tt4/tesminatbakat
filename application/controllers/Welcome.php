@@ -32,7 +32,7 @@ class Welcome extends CI_Controller {
 		$kat_utbk = $this->db->get('tb_kategori_utbk');
 
 		$this->db->from('tb_siswa');
-		$this->db->join('tb_user', 'tb_user.username = tb_siswa.email');
+		$this->db->join('tb_user', 'tb_user.username = tb_siswa.email', 'left');
 		$this->db->where(array('id_siswa' => $this->session->userdata('id_siswa')));
 		$get_data = $this->db->get();
 
