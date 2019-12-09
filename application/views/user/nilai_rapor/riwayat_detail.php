@@ -23,7 +23,7 @@
 	            		echo '<h3>Semester '.$sem.'</h3>';
 	            		echo '<table class="table table-striped">';
 		            		foreach($data->result() as $row_data){
-		            			$nilai = $this->db->get_where('tb_nilai_mapel', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel' => $row_data->id_mapel));
+		            			$nilai = $this->db->get_where('tb_nilai_mapel', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel' => $row_data->id_mapel, 'id_riwayat_isi_rapor' => $id_riwayat_isi_rapor, 'semester' => $sem));
 		            		?>
 		            		<tr>
 		            			<td>
@@ -31,7 +31,7 @@
 		            			</td>
 		            			<td>
 		            				<!-- <input type="number" name="mapel[<?=$row_data->id_mapel?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required> -->
-		            				<input type="number" name="mapel[<?=$sem?>][<?=$row_data->id_mapel?>]" class="form-control">
+		            				<input type="number" name="mapel[<?=$sem?>][<?=$row_data->id_mapel?>]" class="form-control" value="<?=@$nilai->row()->nilai?>">
 		            				<!-- <input type="hidden" name="semester[]" class="form-control" value="<?=$sem?>"> -->
 		            			</td>
 		            		</tr>

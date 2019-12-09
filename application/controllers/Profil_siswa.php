@@ -505,7 +505,8 @@ class Profil_siswa extends CI_Controller {
 			'data' => $get_data,
 			'status' => $status,
 			'data_pendukung_rapor' => $cek_pendukung,
-			'data_riwayat' => $row_data
+			'data_riwayat' => $row_data, 
+			'id_riwayat_isi_rapor' => $id_riwayat_isi_rapor
 			
 		);
 		$this->load->view('template/wrapper', $data);
