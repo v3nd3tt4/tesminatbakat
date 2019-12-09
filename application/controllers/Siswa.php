@@ -224,6 +224,18 @@ class Siswa extends CI_Controller {
 		$this->load->view('template/wrapper', $data);
 	}
 
+	public function nilai_utbk_new($id_siswa){
+		$data_siswa = $this->db->get_where('tb_siswa', array('id_siswa' => $id_siswa));
+		$row_data = $this->db->order_by('tgl_isi', 'DESC')->get_where('tb_riwayat_isi_utbk', array('id_siswa' => $id_siswa));
+		$data = array(
+			'page' => 'siswa/nilai_utbk_new',
+			'link' => 'siswa',
+			'data_riwayat' => $row_data,
+			'data_siswa' => $data_siswa
+		);
+		$this->load->view('template/wrapper', $data);
+	}
+
 	public function simpan_rasionalisasi_rapor(){
 		$data = array(
 			'rasionalisasi' => $this->input->post('rasionalisasi', true),
@@ -273,9 +285,9 @@ class Siswa extends CI_Controller {
 		$data = array(
 			'rasionalisasi' => $this->input->post('rasionalisasi', true),
 			'status' => 'rasionalisasi',
-			'tgl_create' => date('Y-m-d H:i:s')
+			'tgl_create' => date('Y-m-d H:i:s'),
 		);
-		$simpan = $this->db->update('tb_status_pengisian_nilai', $data, array('id_siswa' => $this->input->post('id_siswa', true),'kategori' => 'utbk'));
+		$simpan = $this->db->update('tb_status_pengisian_nilai', $data, array('id_siswa' => $this->input->post('id_siswa', true),'kategori' => 'utbk', 'id_riwayat_isi_rapor' => $this->input->post('id_riwayat_isi_utbk', true)));
 		if($simpan){
 			$return = array(
 				'status' => 'success',
@@ -317,6 +329,34 @@ class Siswa extends CI_Controller {
 			'id_riwayat_isi_rapor' => $id_riwayat_isi_rapor, 
 			'id_siswa' => $id_siswa,
 			'status' => $status,
+		);
+		$this->load->view('template/wrapper', $data);
+	}
+
+	public function isi_riwayat_utbk($id_riwayat_isi_utbk, $id_siswa){
+		$row_data = $this->db->order_by('tgl_isi', 'DESC')->get_where('tb_riwayat_isi_utbk', array('id_siswa' => $id_siswa, 'id_riwayat_isi_utbk' => $id_riwayat_isi_utbk));
+
+		$this->db->from('tb_nilai_mapel_utbk');
+		$this->db->join('tb_mapel_utbk', 'tb_mapel_utbk.id_mapel_utbk = tb_nilai_mapel_utbk.id_mapel_utbk');
+		$this->db->where(array('tb_nilai_mapel_utbk.id_siswa' => $id_siswa, 'tb_nilai_mapel_utbk.id_riwayat_isi_utbk' => $id_riwayat_isi_utbk));
+		$data1 = $this->db->get();
+
+		$utbk = $this->db->get_where('tb_kategori_utbk', array('id_kategori_utbk' => $data1->row()->id_kategori_utbk));
+
+		$cek_pendukung = $this->db->get_where('tb_pendukung_utbk', array('id_siswa' => $id_siswa, 'id_riwayat_isi_utbk' => $id_riwayat_isi_utbk));
+
+		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $id_siswa, 'kategori' => 'utbk', 'id_riwayat_isi_rapor' => $id_riwayat_isi_utbk));
+		$data = array(
+			'page' => 'siswa/riwayat_detail_utbk',
+			'link' => 'siswa',
+			'script' => 'siswa/script',
+			'data_riwayat' => $row_data, 
+			'data' => $data1,
+			'utbk' => $utbk,
+			'data_pendukung_utbk' => $cek_pendukung, 
+			'status' => $status, 
+			'id_siswa' => $id_siswa,
+			'id_riwayat_isi_utbk' => $id_riwayat_isi_utbk
 		);
 		$this->load->view('template/wrapper', $data);
 	}

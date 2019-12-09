@@ -262,9 +262,23 @@ CREATE TABLE `tb_nilai_mapel_utbk` (
   `id_siswa` int(11) NOT NULL,
   `id_riwayat_isi_utbk` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_nilai_mapel_utbk`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_nilai_mapel_utbk` */
+
+insert  into `tb_nilai_mapel_utbk`(`id_nilai_mapel_utbk`,`id_mapel_utbk`,`nilai`,`id_siswa`,`id_riwayat_isi_utbk`) values 
+(17,7,'68',1,5),
+(18,8,'98',1,5),
+(19,9,'78',1,5),
+(20,10,'66',1,5),
+(21,7,'80',1,6),
+(22,8,'80',1,6),
+(23,9,'80',1,6),
+(24,10,'80',1,6),
+(25,7,'76',1,7),
+(26,8,'76',1,7),
+(27,9,'76',1,7),
+(28,10,'76',1,7);
 
 /*Table structure for table `tb_pendukung_rapor` */
 
@@ -298,7 +312,7 @@ insert  into `tb_pendukung_rapor`(`id_pendukung_rapor`,`id_siswa`,`jur_1`,`kampu
 DROP TABLE IF EXISTS `tb_pendukung_utbk`;
 
 CREATE TABLE `tb_pendukung_utbk` (
-  `id_pendukung_utbk` int(11) NOT NULL,
+  `id_pendukung_utbk` int(11) NOT NULL AUTO_INCREMENT,
   `id_siswa` int(11) NOT NULL,
   `jur_1` varchar(255) NOT NULL,
   `kampus_1` varchar(255) NOT NULL,
@@ -309,10 +323,17 @@ CREATE TABLE `tb_pendukung_utbk` (
   `good_mapel` varchar(255) NOT NULL,
   `bad_mapel` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
-  `tgl_create` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `tgl_create` datetime NOT NULL,
+  `id_riwayat_isi_utbk` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_pendukung_utbk`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_pendukung_utbk` */
+
+insert  into `tb_pendukung_utbk`(`id_pendukung_utbk`,`id_siswa`,`jur_1`,`kampus_1`,`jur_2`,`kampus_2`,`jur_3`,`kampus_3`,`good_mapel`,`bad_mapel`,`status`,`tgl_create`,`id_riwayat_isi_utbk`) values 
+(1,1,'gg','sss','ff','gg','hhh','ff','yyt','nh','sudah','2019-12-09 11:23:35',5),
+(2,1,'f','ss','ff','ff','ff','ff','ff','ff','sudah','2019-12-09 11:59:12',6),
+(3,1,'p','p','p','p','p','p','p','p','sudah','2019-12-09 12:03:23',7);
 
 /*Table structure for table `tb_pertanyaan` */
 
@@ -432,13 +453,18 @@ insert  into `tb_riwayat_isi_rapor`(`id_riwayat_isi_rapor`,`tgl_isi`,`id_siswa`)
 DROP TABLE IF EXISTS `tb_riwayat_isi_utbk`;
 
 CREATE TABLE `tb_riwayat_isi_utbk` (
-  `id_riwayat_isi_rapor` int(11) NOT NULL AUTO_INCREMENT,
+  `id_riwayat_isi_utbk` int(11) NOT NULL AUTO_INCREMENT,
   `tgl_isi` datetime DEFAULT NULL,
   `id_siswa` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_riwayat_isi_rapor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id_riwayat_isi_utbk`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_riwayat_isi_utbk` */
+
+insert  into `tb_riwayat_isi_utbk`(`id_riwayat_isi_utbk`,`tgl_isi`,`id_siswa`) values 
+(5,'2019-12-09 11:23:35',1),
+(6,'2019-12-09 11:59:12',1),
+(7,'2019-12-09 12:03:23',1);
 
 /*Table structure for table `tb_sekolah` */
 
@@ -496,14 +522,15 @@ CREATE TABLE `tb_status_kelengkapan` (
   `status` varchar(255) NOT NULL,
   `tgl_create` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_status_kelengkapan`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_status_kelengkapan` */
 
 insert  into `tb_status_kelengkapan`(`id_status_kelengkapan`,`id_siswa`,`kategori`,`status`,`tgl_create`) values 
 (1,1,'profil','sudah','2019-12-09 10:11:09'),
 (2,1,'password','sudah','2019-12-09 10:11:14'),
-(3,1,'rapor','sudah','2019-12-09 10:15:29');
+(3,1,'rapor','sudah','2019-12-09 10:15:29'),
+(6,1,'utbk','sudah','2019-12-09 11:23:35');
 
 /*Table structure for table `tb_status_pengisian_nilai` */
 
@@ -518,13 +545,16 @@ CREATE TABLE `tb_status_pengisian_nilai` (
   `rasionalisasi` text NOT NULL,
   `id_riwayat_isi_rapor` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_status_pengisian_nilai`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_status_pengisian_nilai` */
 
 insert  into `tb_status_pengisian_nilai`(`id_status_pengisian_nilai`,`id_siswa`,`kategori`,`status`,`tgl_create`,`rasionalisasi`,`id_riwayat_isi_rapor`) values 
 (1,1,'rapor','rasionalisasi','2019-12-09 10:17:16','ini rasionalisasi 2',1),
-(2,1,'rapor','rasionalisasi','2019-12-09 10:17:01','ini rasionalisasi 1',2);
+(2,1,'rapor','rasionalisasi','2019-12-09 10:17:01','ini rasionalisasi 1',2),
+(3,1,'utbk','rasionalisasi','2019-12-09 12:16:11','ras 1',5),
+(4,1,'utbk','rasionalisasi','2019-12-09 12:13:13','',6),
+(5,1,'utbk','rasionalisasi','2019-12-09 12:13:13','',7);
 
 /*Table structure for table `tb_user` */
 
