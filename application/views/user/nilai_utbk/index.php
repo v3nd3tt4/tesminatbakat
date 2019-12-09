@@ -9,6 +9,12 @@
 	            
 	          </div>
 	          <div class="card-body">
+	          	<table class="table table-striped">
+	          		<tr>
+	          			<td>Jurusan</td>
+	          			<td>: <?=$utbk->row()->nama_kategori_utbk?></td>
+	          		</tr>
+	          	</table>
 	            <form id="form-rapor">
 	            	<table class="table table-striped">
 	            		<?php foreach($data->result() as $row_data){
@@ -91,7 +97,7 @@
 		            </table>
 		            <button style="float: right;" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
 	            </form>
-
+	            <br/><br/>
 	            <?php if($status->num_rows() != 0){?>
 	            <br><br>
 	            <?php if(empty($status->row()->rasionalisasi)){?>

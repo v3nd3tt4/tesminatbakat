@@ -384,13 +384,43 @@ class Profil_siswa extends CI_Controller {
 
 		$cek_pendukung = $this->db->get_where('tb_pendukung_utbk', array('id_siswa' => $this->session->userdata('id_siswa')));
 
+		$utbk = $this->db->get('tb_kategori_utbk');
 		$data = array(
-			'page' => 'user/nilai_utbk/index',
+			// 'page' => 'user/nilai_utbk/index',
+			'page' => 'user/nilai_utbk/pilih_jurusan',
 			'link' => 'nilai_utbk',
 			'script' => 'user/nilai_utbk/script',
 			'data' => $get_data,
 			'status' => $status,
-			'data_pendukung_utbk' => $cek_pendukung
+			'data_pendukung_utbk' => $cek_pendukung,
+			'utbk' => $utbk
+			
+		);
+		$this->load->view('template/wrapper', $data);
+	}
+
+	public function isi_nilai_utbk(){
+		$this->db->from('tb_mapel_utbk');
+		// $this->db->join('tb_siswa', 'tb_siswa.id_kategori_utbk= tb_mapel_utbk.id_kategori_utbk');
+		$this->db->where(array('id_kategori_utbk' => $this->input->post('id_kategori_utbk')));
+		$get_data = $this->db->get();
+
+		// $kategori_utbk = 
+
+		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $this->session->userdata('id_siswa'), 'kategori' => 'utbk'));
+
+		$cek_pendukung = $this->db->get_where('tb_pendukung_utbk', array('id_siswa' => $this->session->userdata('id_siswa')));
+
+		$utbk = $this->db->get_where('tb_kategori_utbk', array('id_kategori_utbk' => $this->input->post('id_kategori_utbk')));
+		$data = array(
+			'page' => 'user/nilai_utbk/index',
+			// 'page' => 'user/nilai_utbk/pilih_jurusan',
+			'link' => 'nilai_utbk',
+			'script' => 'user/nilai_utbk/script',
+			'data' => $get_data,
+			'status' => $status,
+			'data_pendukung_utbk' => $cek_pendukung,
+			'utbk' => $utbk
 			
 		);
 		$this->load->view('template/wrapper', $data);
@@ -484,6 +514,10 @@ class Profil_siswa extends CI_Controller {
 			);
 			echo json_encode($return);
 		}
+
+	}
+
+	public function simpan_nilai_utbk_new(){
 
 	}
 

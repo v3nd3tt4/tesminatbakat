@@ -9,7 +9,7 @@
 	    		e.preventDefault();
 	    		$('.notif').html('Loading...');
 		    	$.ajax({
-		    		url: '<?=base_url()?>profil_siswa/simpan_nilai_utbk',
+		    		url: '<?=base_url()?>profil_siswa/simpan_nilai_utbk_new',
 		    		data: data,
 		    		type: 'POST',
 		    		dataType: 'JSON',
