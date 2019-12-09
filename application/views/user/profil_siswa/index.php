@@ -42,7 +42,7 @@
 				        			<?php }?>
 				        		</select>
 				        	</div>
-				        	<div class="form-group">
+				        	<!-- <div class="form-group">
 				        		<label>UTBK</label>
 				        		<select class="form-control" required name="id_kategori_utbk" id="id_kategori_utbk">
 				        			<option value="">--pilih--</option>
@@ -50,7 +50,7 @@
 				        				<option value="<?=$row_utbk->id_kategori_utbk?>" <?=$data->row()->id_kategori_utbk == $row_utbk->id_kategori_utbk? 'selected' : ''?>><?=$row_utbk->nama_kategori_utbk?></option>
 				        			<?php }?>
 				        		</select>
-				        	</div>
+				        	</div> -->
 			      		</div>
 			      		<div class="col-md-6">
 			      			<div class="form-group">

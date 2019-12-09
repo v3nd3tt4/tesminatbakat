@@ -58,7 +58,8 @@ class Siswa extends CI_Controller {
 	public function generate_token(){
 		// var_dump($_POST);exit();
 		$get_email=$this->db->get_where('tb_siswa', array('id_siswa' => $this->input->post('id', true)));
-		$str = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		// $str = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$str = '0123456789';
 		$acak = str_shuffle($str);
 		$potong = substr($acak, 0, 6);
 		$simpan = $this->db->update('tb_user', array('password'=>$potong), array('username' => $get_email->row()->email));
