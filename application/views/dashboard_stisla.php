@@ -5,7 +5,7 @@
 	  	<div class="card">
 	        <div class="card-wrap">
 	          <div class="card-header">
-	            <h4>Siswa</h4>
+	            <h4>Selamat datang, dalam aplikasi tes minat bakat</h4>
 	            <!-- <div class="card-header-action">
 	            	<button class="btn btn-primary btn-tambah" ><i class="fas fa-plus"></i> Tambah</button>
 	            </div> -->
@@ -33,7 +33,7 @@
 		        	<div class="stepwizard col-md-offset-3">
 					    <div class="stepwizard-row setup-panel">
 					        <div class="stepwizard-step">
-					            <a href="#step-1" type="button" class="btn btn-circle <?=$status_update_profil->num_rows()==1? 'disabled' : 'btn-primary '?>">1</a>
+					            <a href="#step-1" type="button" class="btn btn-circle <?=$status_update_profil->num_rows()!=0? 'disabled' : 'btn-primary '?>">1</a>
 					            <p>Lengkapi Profil</p>
 					        </div>
 					        <div class="stepwizard-step">
@@ -41,7 +41,7 @@
 					            <p>Ganti Password</p>
 					        </div>
 					        <div class="stepwizard-step">
-					            <a href="#step-3" type="button" class="btn btn-default btn-circle <?=$status_update_password->num_rows()==0 ? 'disabled' : 'btn-primary '?>">3</a>
+					            <a href="#step-3" type="button" class="btn btn-default btn-circle <?=$status_update_password->num_rows()==0  ? 'disabled' : 'btn-primary '?>">3</a>
 					            <p>Selesai</p>
 					        </div>
 					    </div>
