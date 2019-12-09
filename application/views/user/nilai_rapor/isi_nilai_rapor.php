@@ -10,6 +10,9 @@
 	          </div>
 	          <div class="card-body">
 	          	<div class="alert alert-info">Isi sampai semester terakhir anda saja</div>
+	          	<?php if($data_riwayat->num_rows() != 0){?>
+	          	<div class="alert alert-warning">Karena terdapat riwayat pengisian nilai rapor, maka data riwayat terakhir ditampilkan dipengisian ini</div>
+	          	<?php }?>
 	            <form id="form-rapor-new">
 	            	<?php 
 	            		$semester = array('1', '2', '3', '4', '5');
@@ -17,7 +20,7 @@
 	            		echo '<h3>Semester '.$sem.'</h3>';
 	            		echo '<table class="table table-striped">';
 		            		foreach($data->result() as $row_data){
-		            			$nilai = $this->db->get_where('tb_nilai_mapel', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel' => $row_data->id_mapel));
+		            			$nilai = $this->db->get_where('tb_nilai_mapel', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel' => $row_data->id_mapel, 'id_riwayat_isi_rapor' => $data_riwayat->row()->id_riwayat_isi_rapor, 'semester' => $sem));
 		            		?>
 		            		<tr>
 		            			<td>
@@ -25,7 +28,7 @@
 		            			</td>
 		            			<td>
 		            				<!-- <input type="number" name="mapel[<?=$row_data->id_mapel?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required> -->
-		            				<input type="number" name="mapel[<?=$sem?>][<?=$row_data->id_mapel?>]" class="form-control">
+		            				<input type="number" name="mapel[<?=$sem?>][<?=$row_data->id_mapel?>]" value="<?=@$nilai->row()->nilai?>" class="form-control">
 		            				<!-- <input type="hidden" name="semester[]" class="form-control" value="<?=$sem?>"> -->
 		            			</td>
 		            		</tr>

@@ -167,6 +167,8 @@ class Profil_siswa extends CI_Controller {
 
 		$cek_pendukung = $this->db->get_where('tb_pendukung_rapor', array('id_siswa' => $this->session->userdata('id_siswa')));
 
+		$get_riwayat = $this->db->query("select * from tb_riwayat_isi_rapor where id_siswa = '".$this->session->userdata('id_siswa')."' order by id_riwayat_isi_rapor DESC LIMIT 1");
+
 		$data = array(
 			// 'page' => 'user/nilai_rapor/index',
 			'page' => 'user/nilai_rapor/isi_nilai_rapor',
@@ -174,7 +176,8 @@ class Profil_siswa extends CI_Controller {
 			'script' => 'user/nilai_rapor/script',
 			'data' => $get_data,
 			'status' => $status,
-			'data_pendukung_rapor' => $cek_pendukung
+			'data_pendukung_rapor' => $cek_pendukung,
+			'data_riwayat' => $get_riwayat
 			
 		);
 		$this->load->view('template/wrapper', $data);
@@ -475,7 +478,7 @@ class Profil_siswa extends CI_Controller {
 	}
 
 	public function riwayat(){
-		$row_data = $this->db->get_where('tb_riwayat_isi_rapor', array('id_siswa' => $this->session->userdata('id_siswa')));
+		$row_data = $this->db->order_by('tgl_isi', 'DESC')->get_where('tb_riwayat_isi_rapor', array('id_siswa' => $this->session->userdata('id_siswa')));
 		$data = array(
 			'page' => 'user/nilai_rapor/riwayat',
 			'link' => 'riwayat_rapor',
