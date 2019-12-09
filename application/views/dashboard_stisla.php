@@ -29,6 +29,7 @@
 	            <?php }?>
 	            </ul>
 	        	<?php }?> -->
+	        	<?php if($this->session->userdata('level') == 'siswa'){?>
 	        	<center>
 		        	<div class="stepwizard col-md-offset-3">
 					    <div class="stepwizard-row setup-panel">
@@ -176,6 +177,7 @@
 					        <!-- </div> -->
 					    </div>
 				<!-- </center> -->
+				<?php }?>
 	          </div>
 	        </div>
 	    </div>
