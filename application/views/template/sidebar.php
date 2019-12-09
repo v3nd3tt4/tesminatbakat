@@ -64,11 +64,11 @@
             </ul>
           </li>
           <!-- <li class="<?php if($link == 'nilai_utbk'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/nilai_utbk"><i class="fas fa-book-open"></i> <span>Nilai UTBK</span></a></li> -->
-          <li class="nav-item dropdown <?=$link=='nilai_utbk' || $link == 'riwayat_rapor'? 'active':''?>">
+          <li class="nav-item dropdown <?=$link=='nilai_utbk' || $link == 'riwayat_utbk'? 'active':''?>">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-book-open"></i> <span>Nilai UTBK</span></a>
             <ul class="dropdown-menu">
               <li class="<?=$link=='nilai_utbk'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/nilai_utbk">Isi</a></li>
-              <li class="<?=$link=='riwayat_rapor'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/riwayat_utbk">Riwayat</a></li>
+              <li class="<?=$link=='riwayat_utbk'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/riwayat_utbk">Riwayat</a></li>
             </ul>
           </li>
         <?php }?>

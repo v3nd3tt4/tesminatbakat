@@ -16,7 +16,8 @@
 		    		success: function(msg){
 		    			if(msg.status == 'success'){
 		    				$('.notif').html(msg.text);
-		    				location.reload();
+		    				location.href = "<?=base_url()?>profil_siswa/riwayat_utbk";
+		    				// location.reload();
 		    			}else{
 		    				$('.notif').html(msg.text);
 		    			}
