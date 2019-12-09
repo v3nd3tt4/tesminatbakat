@@ -6,9 +6,9 @@
 	        <div class="card-wrap">
 	          <div class="card-header">
 	            <h4>Siswa</h4>
-	            <div class="card-header-action">
+	            <!-- <div class="card-header-action">
 	            	<button class="btn btn-primary btn-tambah" ><i class="fas fa-plus"></i> Tambah</button>
-	            </div>
+	            </div> -->
 	          </div>
 	          <div class="card-body">
 	            <table class="table table-striped dt">
@@ -35,7 +35,7 @@
 	            			<td>
 	            				<button class="btn btn-danger btn-sm btn-hapus" id="<?=$row_data->id_siswa?>"><i class="fas fa-trash"></i> Hapus</button>
 	            				<button class="btn btn-info btn-sm btn-edit" id="<?=$row_data->id_siswa?>"><i class="fas fa-eye"></i> Detail</button>
-	            				<a href="<?=base_url()?>siswa/nilai_rapor/<?=$row_data->id_siswa?>" class="btn btn-warning btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book"></i> Rapor</a>
+	            				<a href="<?=base_url()?>siswa/nilai_rapor_new/<?=$row_data->id_siswa?>" class="btn btn-warning btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book"></i> Rapor</a>
 	            				<a href="<?=base_url()?>siswa/nilai_utbk/<?=$row_data->id_siswa?>" class="btn btn-success btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book-open"></i> UTBK</a>
 	            				<button class="btn btn-light btn-sm btn-token" id="<?=$row_data->id_siswa?>"><i class="fas fa-key"></i> Generate Password/Token</button>
 	            			</td>

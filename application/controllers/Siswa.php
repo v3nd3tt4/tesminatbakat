@@ -212,6 +212,17 @@ class Siswa extends CI_Controller {
 		$this->load->view('template/wrapper', $data);
 	}
 
+	public function nilai_rapor_new($id_siswa){
+		$data_siswa = $this->db->get_where()
+		$row_data = $this->db->order_by('tgl_isi', 'DESC')->get_where('tb_riwayat_isi_rapor', array('id_siswa' => $id_siswa));
+		$data = array(
+			'page' => 'siswa/nilai_rapor_new',
+			'link' => 'siswa',
+			'data_riwayat' => $row_data
+		);
+		$this->load->view('template/wrapper', $data);
+	}
+
 	public function simpan_rasionalisasi_rapor(){
 		$data = array(
 			'rasionalisasi' => $this->input->post('rasionalisasi', true),
