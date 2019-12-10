@@ -23,19 +23,19 @@
 	            ?>
 	            <table>
 	            	<tr>
-	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="1" <?=$row_soal->jawaban==1? 'checked':''?>> Sangat Tidak Setuju</label></td>
+	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="1" <?=@$row_soal->jawaban==1? 'checked':''?>> Sangat Tidak Setuju</label></td>
 	            	</tr>
 	            	<tr>
-	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="2" <?=$row_soal->jawaban==2? 'checked':''?>> Tidak Setuju</label></td>
+	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="2" <?=@$row_soal->jawaban==2? 'checked':''?>> Tidak Setuju</label></td>
 	            	</tr>
 	            	<tr>
-	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="3" <?=$row_soal->jawaban==3? 'checked':''?>> Agak Setuju</label></td>
+	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="3" <?=@$row_soal->jawaban==3? 'checked':''?>> Agak Setuju</label></td>
 	            	</tr>
 	            	<tr>
-	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="4" <?=$row_soal->jawaban==4? 'checked':''?>> Setuju</label></td>
+	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="4" <?=@$row_soal->jawaban==4? 'checked':''?>> Setuju</label></td>
 	            	</tr>
 	            	<tr>
-	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="5" <?=$row_soal->jawaban==5? 'checked':''?>> Sangat Setuju</label></td>
+	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="5" <?=@$row_soal->jawaban==5? 'checked':''?>> Sangat Setuju</label></td>
 	            	</tr>
 	            </table>
 	          </div>
@@ -63,7 +63,8 @@
 	          <div class="card-body">
 	            
 	            <?php for ($i=1; $i<=$pages ; $i++){ 
-	            	$get = $this->db->get_where('tb_temporary_soal', array('id_temporary_soal' => $i, 'id_siswa' => $this->session->userdata('id_siswa')));
+	            	$get = $this->db->get_where('tb_temporary_soal', array('id_temporary_soal' => $pages, 'id_siswa' => $this->session->userdata('id_siswa')));
+	            	// var_dump($this->db->last_query());
 	            ?>
 	            	<?php if($this->input->get('halaman', true) == $i){
 	            		// if(empty($get->row()->jawaban)){

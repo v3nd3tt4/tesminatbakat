@@ -91,7 +91,7 @@ class Minat_bakat extends CI_Controller {
 		if(isset($_POST['id_temporary_soal'])){
 			$id_temporary_soal = $this->input->post('id_temporary_soal', true);
 			$jawaban = $this->input->post('jawaban', true);
-			$next_page=$id_temporary_soal+1;
+			$next_page=$page+1;
 			if(!empty($jawaban)){
 				$this->db->trans_begin();
 				$this->db->update('tb_temporary_soal', array('jawaban' => $jawaban), array('id_temporary_soal' => $id_temporary_soal));
