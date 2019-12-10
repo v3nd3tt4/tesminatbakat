@@ -51,15 +51,15 @@ class Minat_bakat extends CI_Controller {
 
 	public function tes(){
 		// var_dump($this->input->post('submit', true));exit();
-		$get_data = $this->db->get_where("tb_riwayat_tes", array('id_siswa' => $this->session->userdata('id_siswa')));
-		if($get_data->num_rows() != 0){
-			echo '<script>alert("Maaf, untuk saat ini tes hanya bisa dilakukan sebanyak 1 kali");</script>';
-			echo '<script>location.href="'.base_url().'minat_bakat/riwayat"</script>';
-			exit();
-		}
+		// $get_data = $this->db->get_where("tb_riwayat_tes", array('id_siswa' => $this->session->userdata('id_siswa')));
+		// if($get_data->num_rows() != 0){
+		// 	echo '<script>alert("Maaf, untuk saat ini tes hanya bisa dilakukan sebanyak 1 kali");</script>';
+		// 	echo '<script>location.href="'.base_url().'minat_bakat/riwayat"</script>';
+		// 	exit();
+		// }
 
 		$soal = $this->db->query("select * from tb_pertanyaan order by rand()");
-		$get_status = $this->db->get_where('tb_temporary_soal', array('id_siswa' => $this->session->userdata('id_siswa')));
+		$get_status = $this->db->get_where('tb_temporary_soal', array('id_siswa' => $this->session->userdata('id_siswa'), 'status' => 'belum'));
 		// var_dump($soal);exit();
 		if($get_status->num_rows() == 0){
 			$dt = array();
@@ -68,7 +68,8 @@ class Minat_bakat extends CI_Controller {
 				$dt[] = array(
 					'id_siswa' => $this->session->userdata('id_siswa'),
 					'id_pertanyaan' =>$row_soal->id_pertanyaan,
-					'no_soal' => $no
+					'no_soal' => $no,
+					'status' => 'belum'
 				);
 				$no++;
 			}
@@ -76,14 +77,12 @@ class Minat_bakat extends CI_Controller {
 			
 		}
 
-
-
 		$halaman = 1; //batasan halaman
 		$page = isset($_GET['halaman'])? (int)$_GET["halaman"]:1;
 		$mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
 
-		$q1 = "select * from tb_temporary_soal left join tb_pertanyaan on tb_pertanyaan.id_pertanyaan=tb_temporary_soal.id_pertanyaan where id_siswa = '".$this->session->userdata('id_siswa')."' LIMIT $mulai, $halaman";
-		$q2 = "select * from tb_temporary_soal where id_siswa = '".$this->session->userdata('id_siswa')."'";
+		$q1 = "select * from tb_temporary_soal left join tb_pertanyaan on tb_pertanyaan.id_pertanyaan=tb_temporary_soal.id_pertanyaan where id_siswa = '".$this->session->userdata('id_siswa')."' and status = 'belum' LIMIT $mulai, $halaman";
+		$q2 = "select * from tb_temporary_soal where id_siswa = '".$this->session->userdata('id_siswa')."' and status = 'belum'";
 
 		
 		$query = $this->db->query($q1);
@@ -132,7 +131,7 @@ class Minat_bakat extends CI_Controller {
 		$id_temporary_soal = $this->input->post('id_temporary_soal', true);
 		$this->db->update('tb_temporary_soal', array('jawaban' => $jawaban), array('id_temporary_soal' => $id_temporary_soal));
 
-		$q = "SELECT tb_pertanyaan.`id_kategori_soal`, tb_temporary_soal.id_siswa, SUM(jawaban) AS skor FROM tb_temporary_soal JOIN tb_pertanyaan ON tb_pertanyaan.`id_pertanyaan` = tb_temporary_soal.`id_pertanyaan` WHERE id_siswa = '".$this->session->userdata('id_siswa')."' GROUP BY tb_pertanyaan.`id_kategori_soal` ORDER BY skor DESC ";
+		$q = "SELECT tb_pertanyaan.`id_kategori_soal`, tb_temporary_soal.id_siswa, SUM(jawaban) AS skor FROM tb_temporary_soal JOIN tb_pertanyaan ON tb_pertanyaan.`id_pertanyaan` = tb_temporary_soal.`id_pertanyaan` WHERE id_siswa = '".$this->session->userdata('id_siswa')."' and status = 'belum' GROUP BY tb_pertanyaan.`id_kategori_soal` ORDER BY skor DESC ";
 		$exe = $this->db->query($q);
 		$total_skor = 0;
 		if($exe->num_rows() != 0){			
@@ -155,7 +154,9 @@ class Minat_bakat extends CI_Controller {
 		);
 
 		$this->db->insert('tb_riwayat_tes', $data);
-		$this->db->delete('tb_temporary_soal', array('id_siswa' => $this->session->userdata('id_siswa')));
+		$id_temporary_soal = $this->db->insert_id();
+		$this->db->update('tb_temporary_soal', array('status' => 'sudah', 'id_riwayat_tes' => $id_temporary_soal), array('id_siswa' => $this->session->userdata('id_siswa'), 'status' => 'belum'));
+		// $this->db->delete('tb_temporary_soal', array('id_siswa' => $this->session->userdata('id_siswa')));
 		if ($this->db->trans_status() === FALSE)
 		{
 		    $this->db->trans_rollback();

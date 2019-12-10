@@ -63,7 +63,7 @@
 	          <div class="card-body">
 	            
 	            <?php for ($i=1; $i<=$pages ; $i++){ 
-	            	$get = $this->db->get_where('tb_temporary_soal', array('no_soal' => $i, 'id_siswa' => $this->session->userdata('id_siswa')));
+	            	$get = $this->db->get_where('tb_temporary_soal', array('no_soal' => $i, 'id_siswa' => $this->session->userdata('id_siswa'), 'status' => 'belum'));
 	            	// var_dump($this->db->last_query());
 	            ?>
 	            	<?php if($this->input->get('halaman', true) == $i){

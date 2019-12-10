@@ -37,6 +37,7 @@
 	            				<button class="btn btn-info btn-sm btn-edit" id="<?=$row_data->id_siswa?>"><i class="fas fa-eye"></i> Detail</button>
 	            				<a href="<?=base_url()?>siswa/nilai_rapor_new/<?=$row_data->id_siswa?>" class="btn btn-warning btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book"></i> Rapor</a>
 	            				<a href="<?=base_url()?>siswa/nilai_utbk_new/<?=$row_data->id_siswa?>" class="btn btn-success btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book-open"></i> UTBK</a>
+	            				<a href="<?=base_url()?>siswa/riwayat_tes/<?=$row_data->id_siswa?>" class="btn btn-primary btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-pencil-alt"></i> Tes Minat Bakat</a>
 	            				<button class="btn btn-light btn-sm btn-token" id="<?=$row_data->id_siswa?>"><i class="fas fa-key"></i> Generate Password/Token</button>
 	            			</td>
 	            		</tr>

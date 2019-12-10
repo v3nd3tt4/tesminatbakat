@@ -361,4 +361,18 @@ class Siswa extends CI_Controller {
 		);
 		$this->load->view('template/wrapper', $data);
 	}
+
+	public function riwayat_tes($id_siswa){
+		$data_siswa = $this->db->get_where('tb_siswa', array('id_siswa' => $id_siswa));
+		$riwayat = $this->db->get_where('tb_riwayat_tes', array('id_siswa' => $id_siswa));
+
+		$data = array(
+			'page' => 'siswa/riwayat_minat_bakat',
+			'link' => 'siswa',
+			'script' => 'siswa/script',
+			'data_riwayat' => $riwayat,
+			'data_siswa' => $data_siswa
+		);
+		$this->load->view('template/wrapper', $data);
+	}
 }
