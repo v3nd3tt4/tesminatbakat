@@ -63,11 +63,14 @@ class Minat_bakat extends CI_Controller {
 		// var_dump($soal);exit();
 		if($get_status->num_rows() == 0){
 			$dt = array();
+			$no=1;
 			foreach ($soal->result() as $row_soal) {
 				$dt[] = array(
 					'id_siswa' => $this->session->userdata('id_siswa'),
-					'id_pertanyaan' =>$row_soal->id_pertanyaan
+					'id_pertanyaan' =>$row_soal->id_pertanyaan,
+					'no_soal' => $no
 				);
+				$no++;
 			}
 			$save_soal = $this->db->insert_batch('tb_temporary_soal', $dt);
 			

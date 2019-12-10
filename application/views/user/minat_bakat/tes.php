@@ -44,7 +44,7 @@
 	          		<a href="<?php if($hal <= 1){ echo '#'; } else { echo "?halaman=".($hal - 1); } ?>" class="btn btn-info"><i class="fas fa-angle-left"></i> Sebelumnya</a>
 	          	<?php }?>
 	          	<?php if($hal < $tot_hal){?>
-	            <a type="submit" onclick='document.forms["form-tes-minat-bakat"].submit(); return false;' name="submit" value="lanjutkan" href="<?php if($hal >= $tot_hal){ echo '#'; } else { echo "?halaman=".($hal + 1); } ?>" class="btn btn-success text-right">Simpan & Lanjutkan</a>
+	            <button type="submit" onclick='document.forms["form-tes-minat-bakat"].submit(); return false;' name="submit" value="lanjutkan" href="<?php if($hal >= $tot_hal){ echo '#'; } else { echo "?halaman=".($hal + 1); } ?>" class="btn btn-success text-right">Simpan & Lanjutkan</button>
 	        	<?php }else{?>
 	        	<button type="button" class="btn btn-danger btn-selesai-tes">Selesai</but>
 	        	<?php }?>
@@ -63,7 +63,7 @@
 	          <div class="card-body">
 	            
 	            <?php for ($i=1; $i<=$pages ; $i++){ 
-	            	$get = $this->db->get_where('tb_temporary_soal', array('id_temporary_soal' => $pages, 'id_siswa' => $this->session->userdata('id_siswa')));
+	            	$get = $this->db->get_where('tb_temporary_soal', array('no_soal' => $i, 'id_siswa' => $this->session->userdata('id_siswa')));
 	            	// var_dump($this->db->last_query());
 	            ?>
 	            	<?php if($this->input->get('halaman', true) == $i){
@@ -74,9 +74,11 @@
 	            		// }
 	            	?>
 	            	<?php }else{
+	            		// var_dump($get->row()->jawaban);
 	            		if(empty($get->row()->jawaban)){
 	            			echo '<a href="?halaman='.$i.'"><span class="badge badge-secondary">'.$i.'</span></a>';
 	            		}else{
+
 	            			echo '<a href="?halaman='.$i.'"><span class="badge badge-info">'.$i.'</span></a>';
 	            		}
 	            		?>
