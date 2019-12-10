@@ -466,6 +466,24 @@ insert  into `tb_riwayat_isi_utbk`(`id_riwayat_isi_utbk`,`tgl_isi`,`id_siswa`) v
 (6,'2019-12-09 11:59:12',1),
 (7,'2019-12-09 12:03:23',1);
 
+/*Table structure for table `tb_riwayat_tes` */
+
+DROP TABLE IF EXISTS `tb_riwayat_tes`;
+
+CREATE TABLE `tb_riwayat_tes` (
+  `id_riwayat_tes` int(11) NOT NULL AUTO_INCREMENT,
+  `id_siswa` int(11) DEFAULT NULL,
+  `tgl_mulai` datetime DEFAULT NULL,
+  `hasil_1` int(11) DEFAULT NULL,
+  `hasil_2` int(11) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `tgl_selesai` datetime DEFAULT NULL,
+  `total_skor` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_riwayat_tes`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_riwayat_tes` */
+
 /*Table structure for table `tb_sekolah` */
 
 DROP TABLE IF EXISTS `tb_sekolah`;
@@ -505,7 +523,7 @@ CREATE TABLE `tb_siswa` (
 /*Data for the table `tb_siswa` */
 
 insert  into `tb_siswa`(`id_siswa`,`nama_siswa`,`tempat_lahir`,`tgl_lahir`,`id_jk`,`id_agama`,`id_sekolah`,`alamat`,`nisn`,`email`,`no_hp`,`id_kategori_sma`,`id_kategori_utbk`) values 
-(1,'arief','bandar lampung','2019-12-04',1,3,2,'test','15432','arief@mail.com','98766',1,NULL),
+(1,'arief edit','bandar lampung','2019-12-04',1,3,2,'test','15432','arief@mail.com','98766',1,NULL),
 (2,'ridho','bandar lampung','0000-00-00',1,3,2,'test','15433','ridho@mail.com','98766',1,2),
 (3,'Okta Pilopa','Bandar Lampung','1992-10-27',1,3,2,'jl test','764552','okta@mail.com','0974567',2,NULL),
 (4,'Danzen',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'danzen@mail.com',NULL,NULL,NULL),
@@ -522,7 +540,7 @@ CREATE TABLE `tb_status_kelengkapan` (
   `status` varchar(255) NOT NULL,
   `tgl_create` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_status_kelengkapan`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_status_kelengkapan` */
 
@@ -530,7 +548,9 @@ insert  into `tb_status_kelengkapan`(`id_status_kelengkapan`,`id_siswa`,`kategor
 (1,1,'profil','sudah','2019-12-09 10:11:09'),
 (2,1,'password','sudah','2019-12-09 10:11:14'),
 (3,1,'rapor','sudah','2019-12-09 10:15:29'),
-(6,1,'utbk','sudah','2019-12-09 11:23:35');
+(6,1,'utbk','sudah','2019-12-09 11:23:35'),
+(7,3,'profil','sudah','2019-12-10 09:18:03'),
+(8,3,'password','sudah','2019-12-10 09:18:08');
 
 /*Table structure for table `tb_status_pengisian_nilai` */
 
@@ -556,6 +576,20 @@ insert  into `tb_status_pengisian_nilai`(`id_status_pengisian_nilai`,`id_siswa`,
 (4,1,'utbk','rasionalisasi','2019-12-09 12:13:13','',6),
 (5,1,'utbk','rasionalisasi','2019-12-09 12:13:13','',7);
 
+/*Table structure for table `tb_temporary_soal` */
+
+DROP TABLE IF EXISTS `tb_temporary_soal`;
+
+CREATE TABLE `tb_temporary_soal` (
+  `id_temporary_soal` int(11) NOT NULL AUTO_INCREMENT,
+  `id_siswa` int(11) DEFAULT NULL,
+  `id_pertanyaan` int(11) DEFAULT NULL,
+  `jawaban` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_temporary_soal`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_temporary_soal` */
+
 /*Table structure for table `tb_user` */
 
 DROP TABLE IF EXISTS `tb_user`;
@@ -573,9 +607,29 @@ CREATE TABLE `tb_user` (
 insert  into `tb_user`(`id_user`,`username`,`password`,`level`) values 
 (1,'okta@mail.com','1','siswa'),
 (2,'admin@mail.com','adminku','admin'),
-(3,'arief@mail.com','1','siswa'),
+(3,'arief@mail.com','2','siswa'),
 (4,'danzen@mail.com',NULL,'siswa'),
 (5,'adam@mail.com',NULL,'siswa');
+
+/*Table structure for table `view_skor` */
+
+DROP TABLE IF EXISTS `view_skor`;
+
+/*!50001 DROP VIEW IF EXISTS `view_skor` */;
+/*!50001 DROP TABLE IF EXISTS `view_skor` */;
+
+/*!50001 CREATE TABLE  `view_skor`(
+ `id_kategori_soal` int(11) ,
+ `id_siswa` int(11) ,
+ `skor` decimal(32,0) 
+)*/;
+
+/*View structure for view view_skor */
+
+/*!50001 DROP TABLE IF EXISTS `view_skor` */;
+/*!50001 DROP VIEW IF EXISTS `view_skor` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_skor` AS (select `tb_pertanyaan`.`id_kategori_soal` AS `id_kategori_soal`,`tb_temporary_soal`.`id_siswa` AS `id_siswa`,sum(`tb_temporary_soal`.`jawaban`) AS `skor` from (`tb_temporary_soal` join `tb_pertanyaan` on((`tb_pertanyaan`.`id_pertanyaan` = `tb_temporary_soal`.`id_pertanyaan`))) group by `tb_pertanyaan`.`id_kategori_soal`) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

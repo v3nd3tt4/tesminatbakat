@@ -120,9 +120,12 @@ class Minat_bakat extends CI_Controller {
 	public function selesai_tes(){
 		$this->db->trans_begin();
 
-		$q = "SELECT tb_pertanyaan.`id_kategori_soal`, tb_temporary_soal.id_siswa, SUM(jawaban) AS skor FROM tb_temporary_soal JOIN tb_pertanyaan ON tb_pertanyaan.`id_pertanyaan` = tb_temporary_soal.`id_pertanyaan` WHERE id_siswa = '".$this->session->userdata('id_siswa')."' GROUP BY tb_pertanyaan.`id_kategori_soal` ORDER BY skor DESC LIMIT 2";
+		// $q = "SELECT tb_pertanyaan.`id_kategori_soal`, tb_temporary_soal.id_siswa, SUM(jawaban) AS skor FROM tb_temporary_soal JOIN tb_pertanyaan ON tb_pertanyaan.`id_pertanyaan` = tb_temporary_soal.`id_pertanyaan` WHERE id_siswa = '".$this->session->userdata('id_siswa')."' GROUP BY tb_pertanyaan.`id_kategori_soal` ORDER BY skor DESC LIMIT 2";
 		$exe = $this->db->query($q);
-		// var_dump($exe->result());exit();
+		if($exe->num_rows() != 0){
+			
+		}
+		
 
 		$data = array(
 			'id_siswa' => $this->session->userdata('id_siswa', true),
