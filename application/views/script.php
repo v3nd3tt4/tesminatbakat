@@ -135,5 +135,16 @@
 	    	});
 	    	
 	    });
+
+	  	$(document).on('click', '.btn-tes-mb', function(e){
+			e.preventDefault();
+			$('#modal-tes-mb').modal();
+		});
+
+		$(document).on('click', '.btn-ya-tes-mb', function(e){
+			e.preventDefault();
+			location.href = "<?=base_url()?>minat_bakat/tes";
+		});
+		
 	});
 </script>
