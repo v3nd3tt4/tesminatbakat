@@ -480,9 +480,12 @@ CREATE TABLE `tb_riwayat_tes` (
   `tgl_selesai` datetime DEFAULT NULL,
   `total_skor` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_riwayat_tes`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_riwayat_tes` */
+
+insert  into `tb_riwayat_tes`(`id_riwayat_tes`,`id_siswa`,`tgl_mulai`,`hasil_1`,`hasil_2`,`status`,`tgl_selesai`,`total_skor`) values 
+(1,1,NULL,3,5,'sudah','2019-12-10 10:32:51','297');
 
 /*Table structure for table `tb_sekolah` */
 
@@ -586,7 +589,7 @@ CREATE TABLE `tb_temporary_soal` (
   `id_pertanyaan` int(11) DEFAULT NULL,
   `jawaban` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_temporary_soal`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_temporary_soal` */
 
