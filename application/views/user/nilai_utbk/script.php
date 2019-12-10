@@ -9,14 +9,15 @@
 	    		e.preventDefault();
 	    		$('.notif').html('Loading...');
 		    	$.ajax({
-		    		url: '<?=base_url()?>profil_siswa/simpan_nilai_utbk',
+		    		url: '<?=base_url()?>profil_siswa/simpan_nilai_utbk_new',
 		    		data: data,
 		    		type: 'POST',
 		    		dataType: 'JSON',
 		    		success: function(msg){
 		    			if(msg.status == 'success'){
 		    				$('.notif').html(msg.text);
-		    				location.reload();
+		    				location.href = "<?=base_url()?>profil_siswa/riwayat_utbk";
+		    				// location.reload();
 		    			}else{
 		    				$('.notif').html(msg.text);
 		    			}

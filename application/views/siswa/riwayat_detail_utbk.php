@@ -5,23 +5,24 @@
 	  	<div class="card">
 	        <div class="card-wrap">
 	          <div class="card-header">
-	            <h4>Nilai UTBK</h4>
+	            <h4>Riwayat Pengisian Nilai UTBK</h4>
 	            
 	          </div>
 	          <div class="card-body">
-	          	<table class="table table-striped">
+	            <table class="table table-striped">
+	            	<tr>
+	            		<td>Tanggal Pengisian</td>
+	            		<td>: <?=$data_riwayat->row()->tgl_isi?></td>
+	            	</tr>
 	          		<tr>
 	          			<td>Jurusan</td>
 	          			<td>: <?=$utbk->row()->nama_kategori_utbk?></td>
 	          		</tr>
 	          	</table>
-	          	<?php if($riwayat->num_rows() != 0){?>
-	          		<div class="alert alert-info">Karena terdapat riwayat pengisian nilai rapor, maka data riwayat terakhir ditampilkan dipengisian ini</div>
-	          	<?php }?>
-	            <form id="form-rapor">
+	            <!-- <form id="form-rapor"> -->
 	            	<table class="table table-striped">
 	            		<?php foreach($data->result() as $row_data){
-	            			$nilai = $this->db->get_where('tb_nilai_mapel_utbk', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel_utbk' => $row_data->id_mapel_utbk, 'id_riwayat_isi_utbk'=> $riwayat->row()->id_riwayat_isi_utbk));
+	            			$nilai = $this->db->get_where('tb_nilai_mapel_utbk', array('id_siswa' => $id_siswa, 'id_mapel_utbk' => $row_data->id_mapel_utbk, 'id_riwayat_isi_utbk' => $row_data->id_riwayat_isi_utbk));
 	            		?>
 	            		<tr>
 	            			<td>
@@ -40,13 +41,13 @@
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Kampus</label>
-			            			<input type="text" name="kampus_1"  required class="form-control">
+			            			<input type="text" name="kampus_1" value="<?=@$data_pendukung_utbk->row()->kampus_1?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Jurusan</label>
-			            			<input type="text" name="jur_1" required class="form-control">
+			            			<input type="text" name="jur_1" value="<?=@$data_pendukung_utbk->row()->jur_1?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            	</tr>
@@ -54,13 +55,13 @@
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Kampus</label>
-			            			<input type="text" name="kampus_2" required class="form-control">
+			            			<input type="text" name="kampus_2" value="<?=@$data_pendukung_utbk->row()->kampus_2?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Jurusan</label>
-			            			<input type="text" name="jur_2" required class="form-control">
+			            			<input type="text" name="jur_2" value="<?=@$data_pendukung_utbk->row()->jur_2?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            	</tr>
@@ -68,13 +69,13 @@
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Kampus</label>
-			            			<input type="text" name="kampus_3" required class="form-control">
+			            			<input type="text" name="kampus_3" value="<?=@$data_pendukung_utbk->row()->kampus_3?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Jurusan</label>
-			            			<input type="text" name="jur_3" required class="form-control">
+			            			<input type="text" name="jur_3" value="<?=@$data_pendukung_utbk->row()->jur_3?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            	</tr>
@@ -87,43 +88,37 @@
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Mata pelajaran paling disukai</label>
-			            			<input type="text" name="good_mapel" required class="form-control">
+			            			<input type="text" name="good_mapel" value="<?=@$data_pendukung_utbk->row()->good_mapel?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Mata pelajaran paling tidak disukai</label>
-			            			<input type="text" name="bad_mapel" required class="form-control">
+			            			<input type="text" name="bad_mapel" value="<?=@$data_pendukung_utbk->row()->bad_mapel?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            	</tr>
 		            </table>
-		            <button style="float: right;" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
-	            </form>
+		            <!-- <button style="float: right;" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button> -->
+	            <!-- </form> -->
 	            <br/><br/>
-	            <!-- <?php if($status->num_rows() != 0){?>
-	            <br><br>
-	            <?php if(empty($status->row()->rasionalisasi)){?>
-	            <div class="alert alert-warning">Menunggu saran rasionalisasi dari admin</div>
-	        	<?php }else{?>
-	            <table class="table-striped table">
-	            	<tr>
-	            		<td>Saran dari admin</td>
-	            		<td>
-	            			<?=$status->row()->rasionalisasi?>
-	            		</td>
-	            	</tr>
-	            </table>
-	            <?php }?>
-	        	<?php }?> -->
+	            <form id="form-rasionalisasi-utbk">
+	            	<div class="form-group">
+	            		<label>Rasionalisasi:</label>
+	            		<input type="hidden" name="id_riwayat_isi_utbk" value="<?=$id_riwayat_isi_utbk?>">
+	            		<input type="hidden" name="id_siswa" value="<?=$id_siswa?>">
+	            		<textarea class="form-control" name="rasionalisasi" style="min-height: 200px; resize: none"><?=$status->row()->rasionalisasi?></textarea>
+	            	</div>
+    			
+    			<button type="submi" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+    			</form>
 	          </div>
 	        </div>
 	    </div>
 	  </div>
 	</section>
 </div>
-
-<div class="modal fade" tabindex="-1" role="dialog" id="modal-nilai-rapor-siswa">
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-rasionalisasi-utbk">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
