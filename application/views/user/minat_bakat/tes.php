@@ -46,7 +46,7 @@
 	          	<?php if($hal < $tot_hal){?>
 	            <a type="submit" onclick='document.forms["form-tes-minat-bakat"].submit(); return false;' name="submit" value="lanjutkan" href="<?php if($hal >= $tot_hal){ echo '#'; } else { echo "?halaman=".($hal + 1); } ?>" class="btn btn-success text-right">Simpan & Lanjutkan</a>
 	        	<?php }else{?>
-	        	<a href="#" class="btn btn-danger">Selesai</a>
+	        	<button type="button" class="btn btn-danger btn-selesai-tes">Selesai</but>
 	        	<?php }?>
 	          </div>
 	        </div>
@@ -114,4 +114,28 @@
 	    </div>
 	  </div>
 	</section>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-selesai-tes">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Pengingat</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="form-tambah-kategori">
+	      <div class="modal-body">
+	      		<div class="alert alert-warning">Pastikan data yang anda isi sudah benar</div>
+	        	<p>Apakah anda yakin akan menyelesaikan Tes Minat Bakat?</p>
+	        	<div class="notif"></div>
+	      </div>
+	      <div class="modal-footer bg-whitesmoke br">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+	        <button type="submit" class="btn btn-primary btn-ya-selesai-tes">Ya</button>
+	      </div>
+      </form>
+    </div>
+  </div>
 </div>

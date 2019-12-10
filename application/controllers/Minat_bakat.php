@@ -116,4 +116,29 @@ class Minat_bakat extends CI_Controller {
 		);
 		$this->load->view('template/wrapper', $data);
 	}
+
+	public function selesai_tes(){
+		$this->db->trans_begin();
+
+		$q = "SELECT tb_pertanyaan.`id_kategori_soal`, tb_temporary_soal.id_siswa, SUM(jawaban) AS skor FROM tb_temporary_soal JOIN tb_pertanyaan ON tb_pertanyaan.`id_pertanyaan` = tb_temporary_soal.`id_pertanyaan` WHERE id_siswa = '".$this->session->userdata('id_siswa')."' GROUP BY tb_pertanyaan.`id_kategori_soal` ORDER BY skor DESC LIMIT 2";
+		$exe = $this->db->query($q);
+		// var_dump($exe->result());exit();
+
+		$data = array(
+			'id_siswa' => $this->session->userdata('id_siswa', true),
+			'tgl_selesai' => date('Y-m-d H:i:s'),
+			'status' => 'sudah', 
+			'hasil_1' => $hasil_1,
+			'hasil_2' => $hasil_2,
+			'total_skor' => $total_skor
+		);
+		if ($this->db->trans_status() === FALSE)
+		{
+		    $this->db->trans_rollback();
+		}
+		else
+		{
+		    $this->db->trans_commit();
+		}
+	}
 }
