@@ -51,12 +51,12 @@ class Minat_bakat extends CI_Controller {
 
 	public function tes(){
 		// var_dump($this->input->post('submit', true));exit();
-		// $get_data = $this->db->get_where("tb_riwayat_tes", array('id_siswa' => $this->session->userdata('id_siswa')));
-		// if($get_data->num_rows() != 0){
-		// 	echo '<script>alert("Maaf, untuk saat ini tes hanya bisa dilakukan sebanyak 1 kali");</script>';
-		// 	echo '<script>location.href="'.base_url().'minat_bakat/riwayat"</script>';
-		// 	exit();
-		// }
+		$get_data = $this->db->get_where("tb_riwayat_tes", array('id_siswa' => $this->session->userdata('id_siswa')));
+		if($get_data->num_rows() != 0){
+			echo '<script>alert("Maaf, untuk saat ini tes hanya bisa dilakukan sebanyak 1 kali");</script>';
+			echo '<script>location.href="'.base_url().'minat_bakat/riwayat"</script>';
+			exit();
+		}
 
 		$soal = $this->db->query("select * from tb_pertanyaan order by rand()");
 		$get_status = $this->db->get_where('tb_temporary_soal', array('id_siswa' => $this->session->userdata('id_siswa'), 'status' => 'belum'));
