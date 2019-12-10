@@ -13,7 +13,7 @@
 	          <div class="card-body">
 	            <h3>Selamat datang, dalam aplikasi tes minat bakat</h3>
 	            <hr/>
-	            <?php if($this->session->userdata('levek') == 'siswa'){?>
+	            <?php if($this->session->userdata('level') == 'siswa'){?>
 	            <ul>
 	            <?php if($status_update_profil->num_rows()==0){?>
 	            	<li>Silahkan lengkapi profil <a class="btn btn-sm btn-primary" href="<?=base_url()?>profil_siswa">disini</a></li>
