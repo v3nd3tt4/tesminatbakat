@@ -28,7 +28,7 @@
 	            		<tr>
 	            			<td><?=$no++?>.</td>
 	            			<td><?=$row_riwayat->tgl_selesai?></td>
-	            			<td></td>
+	            			<td><?=$row_riwayat->total_skor?></td>
 	            			<td>
 	            			<?php 
 	            			echo $this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' => $row_riwayat->hasil_1))->row()->keterangan;

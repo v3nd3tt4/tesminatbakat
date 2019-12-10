@@ -25,7 +25,8 @@
 		    		success: function(msg){
 		    			if(msg.status == 'success'){
 		    				$('.notif').html(msg.text);
-		    				location.reload();
+		    				location.href = "<?=base_url()?>minat_bakat/riwayat";
+		    				// location.reload();
 		    			}else{
 		    				$('.notif').html(msg.text);
 		    			}

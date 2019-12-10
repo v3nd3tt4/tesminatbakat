@@ -51,7 +51,12 @@ class Minat_bakat extends CI_Controller {
 
 	public function tes(){
 		// var_dump($this->input->post('submit', true));exit();
-		
+		$get_data = $this->db->get_where("tb_riwayat_tes", array('id_siswa' => $this->session->userdata('id_siswa')));
+		if($get_data->num_rows() != 0){
+			echo '<script>alert("Maaf, untuk saat ini tes hanya bisa dilakukan sebanyak 1 kali");</script>';
+			echo '<script>location.href="'.base_url().'minat_bakat/riwayat"</script>';
+			exit();
+		}
 
 		$soal = $this->db->query("select * from tb_pertanyaan order by rand()");
 		$get_status = $this->db->get_where('tb_temporary_soal', array('id_siswa' => $this->session->userdata('id_siswa')));
@@ -120,13 +125,23 @@ class Minat_bakat extends CI_Controller {
 	public function selesai_tes(){
 		$this->db->trans_begin();
 
-		// $q = "SELECT tb_pertanyaan.`id_kategori_soal`, tb_temporary_soal.id_siswa, SUM(jawaban) AS skor FROM tb_temporary_soal JOIN tb_pertanyaan ON tb_pertanyaan.`id_pertanyaan` = tb_temporary_soal.`id_pertanyaan` WHERE id_siswa = '".$this->session->userdata('id_siswa')."' GROUP BY tb_pertanyaan.`id_kategori_soal` ORDER BY skor DESC LIMIT 2";
-		$exe = $this->db->query($q);
-		if($exe->num_rows() != 0){
-			
-		}
-		
+		$jawaban = $this->input->post('jawaban', true);
+		$id_temporary_soal = $this->input->post('id_temporary_soal', true);
+		$this->db->update('tb_temporary_soal', array('jawaban' => $jawaban), array('id_temporary_soal' => $id_temporary_soal));
 
+		$q = "SELECT tb_pertanyaan.`id_kategori_soal`, tb_temporary_soal.id_siswa, SUM(jawaban) AS skor FROM tb_temporary_soal JOIN tb_pertanyaan ON tb_pertanyaan.`id_pertanyaan` = tb_temporary_soal.`id_pertanyaan` WHERE id_siswa = '".$this->session->userdata('id_siswa')."' GROUP BY tb_pertanyaan.`id_kategori_soal` ORDER BY skor DESC ";
+		$exe = $this->db->query($q);
+		$total_skor = 0;
+		if($exe->num_rows() != 0){			
+			foreach ($exe->result() as $row) {
+				$total_skor += $row->skor;
+			}
+		}else{
+			exit();
+		}
+		// var_dump($exe->result()) ;
+		$hasil_1 = $exe->result()[0]->id_kategori_soal;
+		$hasil_2 = $exe->result()[1]->id_kategori_soal;
 		$data = array(
 			'id_siswa' => $this->session->userdata('id_siswa', true),
 			'tgl_selesai' => date('Y-m-d H:i:s'),
@@ -135,13 +150,26 @@ class Minat_bakat extends CI_Controller {
 			'hasil_2' => $hasil_2,
 			'total_skor' => $total_skor
 		);
+
+		$this->db->insert('tb_riwayat_tes', $data);
+		$this->db->delete('tb_temporary_soal', array('id_siswa' => $this->session->userdata('id_siswa')));
 		if ($this->db->trans_status() === FALSE)
 		{
 		    $this->db->trans_rollback();
+		    $return = array(
+				'status' => 'failed',
+				'text' => '<div class="alert alert-danger">Data gagal disimpan</div>'
+			);
+			echo json_encode($return);
 		}
 		else
 		{
 		    $this->db->trans_commit();
+		    $return = array(
+				'status' => 'success',
+				'text' => '<div class="alert alert-success">Data berhasil disimpan</div>'
+			);
+			echo json_encode($return);
 		}
 	}
 }
