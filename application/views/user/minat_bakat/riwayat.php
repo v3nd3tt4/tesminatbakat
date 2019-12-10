@@ -7,7 +7,9 @@
 	          <div class="card-header">
 	            <h4>Riwayat Tes Minat Bakat</h4>
 	            <div class="card-header-action">
-	            	<a href="<?=base_url()?>minat_bakat/tes" class="btn btn-primary btn-tambah"><i class="fas fa-pencil-alt"></i> Lakukan Tes</a>
+	            	<!-- <a href="<?=base_url()?>minat_bakat/tes" class="btn btn-primary btn-tambah"><i class="fas fa-pencil-alt"></i> Lakukan Tes</a> 
+	            	-->
+	            	<button class="btn btn-primary btn-tambah"><i class="fas fa-pencil-alt"></i> Lakukan Tes</button>
 	            </div>
 	          </div>
 	          <div class="card-body">
@@ -44,4 +46,25 @@
 	  </div>
 	</section>
 </div>
-
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-tes-mb">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Pengingat</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="form-tambah-kategori">
+	      <div class="modal-body">
+	        	<p>Apakah anda yakin akan Melakukan Tes?</p>
+	        	<div class="notif"></div>
+	      </div>
+	      <div class="modal-footer bg-whitesmoke br">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+	        <button type="submit" class="btn btn-primary btn-ya-tes-mb">Ya</button>
+	      </div>
+      </form>
+    </div>
+  </div>
+</div>

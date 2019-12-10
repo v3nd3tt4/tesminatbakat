@@ -76,7 +76,7 @@
               <li class="<?=$link=='riwayat_utbk'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>profil_siswa/riwayat_utbk">Riwayat</a></li>
             </ul>
           </li>
-          <!-- <li class="<?php if($link == 'minat_bakat'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>minat_bakat/riwayat"><i class="fas fa-pencil-alt"></i> <span>Minat Bakat</span></a></li> -->
+          <li class="<?php if($link == 'minat_bakat'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>minat_bakat/riwayat"><i class="fas fa-pencil-alt"></i> <span>Minat Bakat</span></a></li>
         <?php }?>
         <?php }?>
         <!-- <li class="active"><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li> -->

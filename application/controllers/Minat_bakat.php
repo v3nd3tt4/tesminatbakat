@@ -51,11 +51,40 @@ class Minat_bakat extends CI_Controller {
 
 	public function tes(){
 		$soal = $this->db->query("select * from tb_pertanyaan order by rand()");
+		$get_status = $this->db->get_where('tb_temporary_soal', array('id_siswa' => $this->session->userdata('id_siswa')));
+		// var_dump($soal);exit();
+		if($get_status->num_rows() == 0){
+			$dt = array();
+			foreach ($soal->result() as $row_soal) {
+				$dt[] = array(
+					'id_siswa' => $this->session->userdata('id_siswa'),
+					'id_pertanyaan' =>$row_soal->id_pertanyaan
+				);
+			}
+			$save_soal = $this->db->insert_batch('tb_temporary_soal', $dt);
+			
+		}
+		$halaman = 1; //batasan halaman
+		$page = isset($_GET['halaman'])? (int)$_GET["halaman"]:1;
+		$mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
+
+		$q1 = "select * from tb_temporary_soal left join tb_pertanyaan on tb_pertanyaan.id_pertanyaan=tb_temporary_soal.id_pertanyaan where id_siswa = '".$this->session->userdata('id_siswa')."' LIMIT $mulai, $halaman";
+		$q2 = "select * from tb_temporary_soal where id_siswa = '".$this->session->userdata('id_siswa')."'";
+
+		
+		$query = $this->db->query($q1);
+		$sql = $this->db->query($q2);
+		$total = $sql->num_rows();
+		$pages = ceil($total/$halaman); 
+
 		$data = array(
 			'page' => 'user/minat_bakat/tes',
 			'link' => 'minat_bakat',
 			'script' => 'user/minat_bakat/script',
-			'data_soal' => $soal
+			'data_soal' => $query, 
+			'pages' => $pages, 
+			'hal' => $page,
+			'tot_hal' => $total
 		);
 		$this->load->view('template/wrapper', $data);
 	}
