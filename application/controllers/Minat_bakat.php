@@ -50,6 +50,9 @@ class Minat_bakat extends CI_Controller {
 	}
 
 	public function tes(){
+		// var_dump($this->input->post('submit', true));exit();
+		
+
 		$soal = $this->db->query("select * from tb_pertanyaan order by rand()");
 		$get_status = $this->db->get_where('tb_temporary_soal', array('id_siswa' => $this->session->userdata('id_siswa')));
 		// var_dump($soal);exit();
@@ -64,6 +67,9 @@ class Minat_bakat extends CI_Controller {
 			$save_soal = $this->db->insert_batch('tb_temporary_soal', $dt);
 			
 		}
+
+
+
 		$halaman = 1; //batasan halaman
 		$page = isset($_GET['halaman'])? (int)$_GET["halaman"]:1;
 		$mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
@@ -76,6 +82,28 @@ class Minat_bakat extends CI_Controller {
 		$sql = $this->db->query($q2);
 		$total = $sql->num_rows();
 		$pages = ceil($total/$halaman); 
+
+		if(isset($_POST['id_temporary_soal'])){
+			$id_temporary_soal = $this->input->post('id_temporary_soal', true);
+			$jawaban = $this->input->post('jawaban', true);
+			$next_page=$id_temporary_soal+1;
+			if(!empty($jawaban)){
+				$this->db->trans_begin();
+				$this->db->update('tb_temporary_soal', array('jawaban' => $jawaban), array('id_temporary_soal' => $id_temporary_soal));
+				if ($this->db->trans_status() === FALSE)
+				{
+				        $this->db->trans_rollback();
+				        echo '<script>location.href="'.base_url().'minat_bakat/tes?halaman='.$next_page.'"</script>';
+				}
+				else
+				{
+				        $this->db->trans_commit();
+				        echo '<script>location.href="'.base_url().'minat_bakat/tes?halaman='.$next_page.'"</script>';
+				}
+			}else{
+				echo '<script>location.href="'.base_url().'minat_bakat/tes?halaman='.$next_page.'"</script>';
+			}
+		}
 
 		$data = array(
 			'page' => 'user/minat_bakat/tes',

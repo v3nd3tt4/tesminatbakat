@@ -18,6 +18,7 @@
 	            		<tr>
 	            			<th>No</th>
 	            			<th>Tanggal</th>
+	            			<th>Skor</th>
 	            			<th>Hasil 1</th>
 	            			<th>Hasil 2</th>
 	            		</tr>
@@ -26,7 +27,8 @@
 	            		<?php $no=1;foreach($data_riwayat->result() as $row_riwayat){?>
 	            		<tr>
 	            			<td><?=$no++?>.</td>
-	            			<td><?=$row_riwayat->tgl_tes?></td>
+	            			<td><?=$row_riwayat->tgl_selesai?></td>
+	            			<td></td>
 	            			<td>
 	            			<?php 
 	            			echo $this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' => $row_riwayat->hasil_1))->row()->keterangan;
