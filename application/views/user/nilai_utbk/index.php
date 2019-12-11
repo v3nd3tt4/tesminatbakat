@@ -24,7 +24,7 @@
 	            	<div class="table-responsive">
 		            	<table class="table table-striped">
 		            		<?php foreach($data->result() as $row_data){
-		            			$nilai = $this->db->get_where('tb_nilai_mapel_utbk', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel_utbk' => $row_data->id_mapel_utbk, 'id_riwayat_isi_utbk'=> $riwayat->row()->id_riwayat_isi_utbk));
+		            			@$nilai = $this->db->get_where('tb_nilai_mapel_utbk', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel_utbk' => $row_data->id_mapel_utbk, 'id_riwayat_isi_utbk'=> $riwayat->row()->id_riwayat_isi_utbk));
 		            		?>
 		            		<tr>
 		            			<td>
