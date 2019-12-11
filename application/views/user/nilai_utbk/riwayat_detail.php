@@ -9,17 +9,20 @@
 	            
 	          </div>
 	          <div class="card-body">
-	            <table class="table table-striped">
-	            	<tr>
-	            		<td>Tanggal Pengisian</td>
-	            		<td>: <?=$data_riwayat->row()->tgl_isi?></td>
-	            	</tr>
-	          		<tr>
-	          			<td>Jurusan</td>
-	          			<td>: <?=$utbk->row()->nama_kategori_utbk?></td>
-	          		</tr>
-	          	</table>
+	          	<div class="table-responsive">
+		            <table class="table table-striped">
+		            	<tr>
+		            		<td>Tanggal Pengisian</td>
+		            		<td>: <?=$data_riwayat->row()->tgl_isi?></td>
+		            	</tr>
+		          		<tr>
+		          			<td>Jurusan</td>
+		          			<td>: <?=$utbk->row()->nama_kategori_utbk?></td>
+		          		</tr>
+		          	</table>
+		        </div>
 	            <!-- <form id="form-rapor"> -->
+	            <div class="table-responsive">
 	            	<table class="table table-striped">
 	            		<?php foreach($data->result() as $row_data){
 	            			$nilai = $this->db->get_where('tb_nilai_mapel_utbk', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel_utbk' => $row_data->id_mapel_utbk, 'id_riwayat_isi_utbk' => $row_data->id_riwayat_isi_utbk));
@@ -34,8 +37,10 @@
 	            		</tr>
 	            		<?php }?>
 	            	</table>
+	            </div>
 	            	<h6>Kampus dan jurusan yang akan dipilih</h6>
 		            <hr>
+		        <div class="table-responsive">
 		            <table class="table table-striped">
 		            	<tr>
 		            		<td>
@@ -80,9 +85,10 @@
 		            		</td>
 		            	</tr>
 		            </table>
-
+		        </div>
 		            <h6>Mata Pelajaran disukai dan tidak disukai</h6>
 		            <hr>
+		        <div class="table-responsive">
 		            <table class="table table-striped">
 		            	<tr>
 		            		<td>
@@ -99,6 +105,7 @@
 		            		</td>
 		            	</tr>
 		            </table>
+		        </div>
 		            <!-- <button style="float: right;" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button> -->
 	            <!-- </form> -->
 	            <br/><br/>
@@ -107,14 +114,16 @@
 	            <?php if(empty($status->row()->rasionalisasi)){?>
 	            <div class="alert alert-warning">Menunggu saran rasionalisasi dari admin</div>
 	        	<?php }else{?>
-	            <table class="table-striped table">
-	            	<tr>
-	            		<td>Saran dari admin</td>
-	            		<td>
-	            			<?=$status->row()->rasionalisasi?>
-	            		</td>
-	            	</tr>
-	            </table>
+	        	<div class="table-responsive">
+		            <table class="table-striped table">
+		            	<tr>
+		            		<td>Saran dari admin</td>
+		            		<td>
+		            			<?=$status->row()->rasionalisasi?>
+		            		</td>
+		            	</tr>
+		            </table>
+		        </div>
 	            <?php }?>
 	        	<?php }?>
 	          </div>

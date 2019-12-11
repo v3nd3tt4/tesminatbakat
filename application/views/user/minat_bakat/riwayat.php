@@ -13,35 +13,37 @@
 	            </div>
 	          </div>
 	          <div class="card-body">
-	            <table class="table table-striped" >
-	            	<thead>
-	            		<tr>
-	            			<th>No</th>
-	            			<th>Tanggal</th>
-	            			<th>Skor</th>
-	            			<th>Hasil 1</th>
-	            			<th>Hasil 2</th>
-	            		</tr>
-	            	</thead>
-	            	<tbody>
-	            		<?php $no=1;foreach($data_riwayat->result() as $row_riwayat){?>
-	            		<tr>
-	            			<td><?=$no++?>.</td>
-	            			<td><?=$row_riwayat->tgl_selesai?></td>
-	            			<td><?=$row_riwayat->total_skor?></td>
-	            			<td>
-	            			<?php 
-	            			echo $this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' => $row_riwayat->hasil_1))->row()->keterangan;
-	            			?></td>
-	            			<td>
-	            			<?php 
-	            			echo $this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' => $row_riwayat->hasil_2))->row()->keterangan;
-	            			?>
-	            			</td>
-	            		</tr>
-	            		<?php }?>
-	            	</tbody>
-	            </table>
+	          	<div class="table-responsive">
+		            <table class="table table-striped" >
+		            	<thead>
+		            		<tr>
+		            			<th>No</th>
+		            			<th>Tanggal</th>
+		            			<th>Skor</th>
+		            			<th>Hasil 1</th>
+		            			<th>Hasil 2</th>
+		            		</tr>
+		            	</thead>
+		            	<tbody>
+		            		<?php $no=1;foreach($data_riwayat->result() as $row_riwayat){?>
+		            		<tr>
+		            			<td><?=$no++?>.</td>
+		            			<td><?=$row_riwayat->tgl_selesai?></td>
+		            			<td><?=$row_riwayat->total_skor?></td>
+		            			<td>
+		            			<?php 
+		            			echo $this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' => $row_riwayat->hasil_1))->row()->keterangan;
+		            			?></td>
+		            			<td>
+		            			<?php 
+		            			echo $this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' => $row_riwayat->hasil_2))->row()->keterangan;
+		            			?>
+		            			</td>
+		            		</tr>
+		            		<?php }?>
+		            	</tbody>
+		            </table>
+		        </div>
 	          </div>
 	        </div>
 	    </div>

@@ -11,39 +11,41 @@
 	            </div> -->
 	          </div>
 	          <div class="card-body">
-	            <table class="table table-striped dt">
-	            	<thead>
-	            		<tr>
-	            			<th>No</th>
-	            			<!-- <th>NISN</th> -->
-	            			<th>Nama Siswa</th>
-	            			<th>Asal Sekolah</th>
-	            			<!-- <th>Email</th> -->
-	            			<th>Password/Token</th>
-	            			<th>Aksi</th>
-	            		</tr>
-	            	</thead>
-	            	<tbody>
-	            		<?php $no=1;foreach($data->result() as $row_data){?>
-	            		<tr>
-	            			<td><?=$no++?>.</td>
-	            			<!-- <td><?=$row_data->nisn?></td> -->
-	            			<td><?=$row_data->nama_siswa?></td>
-	            			<!-- <td><?=$row_data->nama_sekolah?></td> -->
-	            			<td><?=$row_data->email?></td>
-	            			<td><?=empty($row_data->password)?'<button class="btn btn-sm btn-danger">belum diset</button>':$row_data->password?></td>
-	            			<td>
-	            				<button class="btn btn-danger btn-sm btn-hapus" id="<?=$row_data->id_siswa?>"><i class="fas fa-trash"></i> Hapus</button>
-	            				<button class="btn btn-info btn-sm btn-edit" id="<?=$row_data->id_siswa?>"><i class="fas fa-eye"></i> Detail</button>
-	            				<a href="<?=base_url()?>siswa/nilai_rapor_new/<?=$row_data->id_siswa?>" class="btn btn-warning btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book"></i> Rapor</a>
-	            				<a href="<?=base_url()?>siswa/nilai_utbk_new/<?=$row_data->id_siswa?>" class="btn btn-success btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book-open"></i> UTBK</a>
-	            				<a href="<?=base_url()?>siswa/riwayat_tes/<?=$row_data->id_siswa?>" class="btn btn-primary btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-pencil-alt"></i> Tes Minat Bakat</a>
-	            				<button class="btn btn-light btn-sm btn-token" id="<?=$row_data->id_siswa?>"><i class="fas fa-key"></i> Generate Password/Token</button>
-	            			</td>
-	            		</tr>
-	            		<?php }?>
-	            	</tbody>
-	            </table>
+	          	<div class="table-responsive">
+		            <table class="table table-striped dt">
+		            	<thead>
+		            		<tr>
+		            			<th>No</th>
+		            			<!-- <th>NISN</th> -->
+		            			<th>Nama Siswa</th>
+		            			<th>Asal Sekolah</th>
+		            			<!-- <th>Email</th> -->
+		            			<th>Password/Token</th>
+		            			<th>Aksi</th>
+		            		</tr>
+		            	</thead>
+		            	<tbody>
+		            		<?php $no=1;foreach($data->result() as $row_data){?>
+		            		<tr>
+		            			<td><?=$no++?>.</td>
+		            			<!-- <td><?=$row_data->nisn?></td> -->
+		            			<td><?=$row_data->nama_siswa?></td>
+		            			<!-- <td><?=$row_data->nama_sekolah?></td> -->
+		            			<td><?=$row_data->email?></td>
+		            			<td><?=empty($row_data->password)?'<button class="btn btn-sm btn-danger">belum diset</button>':$row_data->password?></td>
+		            			<td>
+		            				<button class="btn btn-danger btn-sm btn-hapus" id="<?=$row_data->id_siswa?>"><i class="fas fa-trash"></i> Hapus</button>
+		            				<button class="btn btn-info btn-sm btn-edit" id="<?=$row_data->id_siswa?>"><i class="fas fa-eye"></i> Detail</button>
+		            				<a href="<?=base_url()?>siswa/nilai_rapor_new/<?=$row_data->id_siswa?>" class="btn btn-warning btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book"></i> Rapor</a>
+		            				<a href="<?=base_url()?>siswa/nilai_utbk_new/<?=$row_data->id_siswa?>" class="btn btn-success btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book-open"></i> UTBK</a>
+		            				<a href="<?=base_url()?>siswa/riwayat_tes/<?=$row_data->id_siswa?>" class="btn btn-primary btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-pencil-alt"></i> Tes Minat Bakat</a>
+		            				<button class="btn btn-light btn-sm btn-token" id="<?=$row_data->id_siswa?>"><i class="fas fa-key"></i> Generate Password/Token</button>
+		            			</td>
+		            		</tr>
+		            		<?php }?>
+		            	</tbody>
+		            </table>
+		        </div>
 	          </div>
 	        </div>
 	    </div>

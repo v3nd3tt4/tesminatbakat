@@ -10,99 +10,106 @@
 	          </div>
 	          <div class="card-body">
 	          	<p>Data Siswa</p>
-	          	<table class="table table-striped">
-	          		<tr>
-	          			<td>NISN</td>
-	          			<td><?=$data->row()->nisn?></td>
-	          		</tr>
-	          		<tr>
-	          			<td>Nama Siswa</td>
-	          			<td><?=$data->row()->nama_siswa?></td>
-	          		</tr>
-	          	</table>
+	          	<div class="table-responsive">
+		          	<table class="table table-striped">
+		          		<tr>
+		          			<td>NISN</td>
+		          			<td><?=$data->row()->nisn?></td>
+		          		</tr>
+		          		<tr>
+		          			<td>Nama Siswa</td>
+		          			<td><?=$data->row()->nama_siswa?></td>
+		          		</tr>
+		          	</table>
+		        </div>
 	          	<hr>
 	          	<?php if($status->num_rows() != 0){?>
 	          	<p>Nilai Rapor</p>
 	            <form id="form-rapor">
-	            	<table class="table table-striped">
-	            		<?php foreach($data->result() as $row_data){
-	            			$nilai = $this->db->get_where('tb_nilai_mapel', array('id_siswa' => $id_siswa, 'id_mapel' => $row_data->id_mapel));
-	            		?>
-	            		<tr>
-	            			<td>
-	            				<?=$row_data->nama_mapel?>
-	            			</td>
-	            			<td>
-	            				<input type="number" name="mapel[<?=$row_data->id_mapel?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required>
-	            			</td>
-	            		</tr>
-	            		<?php }?>
-	            	</table>
+	            	<div class="table-responsive">
+		            	<table class="table table-striped">
+		            		<?php foreach($data->result() as $row_data){
+		            			$nilai = $this->db->get_where('tb_nilai_mapel', array('id_siswa' => $id_siswa, 'id_mapel' => $row_data->id_mapel));
+		            		?>
+		            		<tr>
+		            			<td>
+		            				<?=$row_data->nama_mapel?>
+		            			</td>
+		            			<td>
+		            				<input type="number" name="mapel[<?=$row_data->id_mapel?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required>
+		            			</td>
+		            		</tr>
+		            		<?php }?>
+		            	</table>
+		            </div>
 	            	<p>Kampus dan jurusan yang akan dipilih</p>
 		            <hr>
-		            <table class="table table-striped">
-		            	<tr>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Kampus</label>
-			            			<input type="text" name="kampus_1" value="<?=@$data_pendukung_rapor->row()->kampus_1?>" class="form-control">
-			            		</div>
-		            		</td>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Jurusan</label>
-			            			<input type="text" name="jur_1" value="<?=@$data_pendukung_rapor->row()->jur_1?>" class="form-control">
-			            		</div>
-		            		</td>
-		            	</tr>
-		            	<tr>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Kampus</label>
-			            			<input type="text" name="kampus_2" value="<?=@$data_pendukung_rapor->row()->kampus_2?>" class="form-control">
-			            		</div>
-		            		</td>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Jurusan</label>
-			            			<input type="text" name="jur_2" value="<?=@$data_pendukung_rapor->row()->jur_2?>" class="form-control">
-			            		</div>
-		            		</td>
-		            	</tr>
-		            	<tr>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Kampus</label>
-			            			<input type="text" name="kampus_3" value="<?=@$data_pendukung_rapor->row()->kampus_3?>" class="form-control">
-			            		</div>
-		            		</td>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Jurusan</label>
-			            			<input type="text" name="jur_3" value="<?=@$data_pendukung_rapor->row()->jur_3?>" class="form-control">
-			            		</div>
-		            		</td>
-		            	</tr>
-		            </table>
-
+		            <div class="table-responsive">
+			            <table class="table table-striped">
+			            	<tr>
+			            		<td>
+			            			<div class="form-group">
+			            				<label>Kampus</label>
+				            			<input type="text" name="kampus_1" value="<?=@$data_pendukung_rapor->row()->kampus_1?>" class="form-control">
+				            		</div>
+			            		</td>
+			            		<td>
+			            			<div class="form-group">
+			            				<label>Jurusan</label>
+				            			<input type="text" name="jur_1" value="<?=@$data_pendukung_rapor->row()->jur_1?>" class="form-control">
+				            		</div>
+			            		</td>
+			            	</tr>
+			            	<tr>
+			            		<td>
+			            			<div class="form-group">
+			            				<label>Kampus</label>
+				            			<input type="text" name="kampus_2" value="<?=@$data_pendukung_rapor->row()->kampus_2?>" class="form-control">
+				            		</div>
+			            		</td>
+			            		<td>
+			            			<div class="form-group">
+			            				<label>Jurusan</label>
+				            			<input type="text" name="jur_2" value="<?=@$data_pendukung_rapor->row()->jur_2?>" class="form-control">
+				            		</div>
+			            		</td>
+			            	</tr>
+			            	<tr>
+			            		<td>
+			            			<div class="form-group">
+			            				<label>Kampus</label>
+				            			<input type="text" name="kampus_3" value="<?=@$data_pendukung_rapor->row()->kampus_3?>" class="form-control">
+				            		</div>
+			            		</td>
+			            		<td>
+			            			<div class="form-group">
+			            				<label>Jurusan</label>
+				            			<input type="text" name="jur_3" value="<?=@$data_pendukung_rapor->row()->jur_3?>" class="form-control">
+				            		</div>
+			            		</td>
+			            	</tr>
+			            </table>
+			        </div>
 		            <p>Mata Pelajaran disukai dan tidak disukai</p>
 		            <hr>
-		            <table class="table table-striped">
-		            	<tr>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Mata pelajaran paling disukai</label>
-			            			<input type="text" name="good_mapel" value="<?=@$data_pendukung_rapor->row()->good_mapel?>" class="form-control">
-			            		</div>
-		            		</td>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Mata pelajaran paling tidak disukai</label>
-			            			<input type="text" name="bad_mapel" value="<?=@$data_pendukung_rapor->row()->bad_mapel?>" class="form-control">
-			            		</div>
-		            		</td>
-		            	</tr>
-		            </table>
+		            <div class="table-responsive">
+			            <table class="table table-striped">
+			            	<tr>
+			            		<td>
+			            			<div class="form-group">
+			            				<label>Mata pelajaran paling disukai</label>
+				            			<input type="text" name="good_mapel" value="<?=@$data_pendukung_rapor->row()->good_mapel?>" class="form-control">
+				            		</div>
+			            		</td>
+			            		<td>
+			            			<div class="form-group">
+			            				<label>Mata pelajaran paling tidak disukai</label>
+				            			<input type="text" name="bad_mapel" value="<?=@$data_pendukung_rapor->row()->bad_mapel?>" class="form-control">
+				            		</div>
+			            		</td>
+			            	</tr>
+			            </table>
+			        </div>
 	            </form>
 	            <hr>
 	            <form id="form-rasionalisasi-rapor">

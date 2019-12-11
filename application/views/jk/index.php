@@ -11,27 +11,29 @@
 	            </div>
 	          </div>
 	          <div class="card-body">
-	            <table class="table table-striped dt">
-	            	<thead>
-	            		<tr>
-	            			<th>No</th>
-	            			<th>Nama Jenis Kelamin</th>
-	            			<th>Aksi</th>
-	            		</tr>
-	            	</thead>
-	            	<tbody>
-	            		<?php $no=1;foreach($data->result() as $row_data){?>
-	            		<tr>
-	            			<td><?=$no++?>.</td>
-	            			<td><?=$row_data->nama_jk?></td>
-	            			<td>
-	            				<button class="btn btn-danger btn-hapus" id="<?=$row_data->id_jk?>"><i class="fas fa-trash"></i> Hapus</button>
-	            				<button class="btn btn-info btn-edit" id="<?=$row_data->id_jk?>"><i class="fas fa-pencil-alt"></i> Edit</button>
-	            			</td>
-	            		</tr>
-	            		<?php }?>
-	            	</tbody>
-	            </table>
+	          	<div class="table-responsive">
+		            <table class="table table-striped dt">
+		            	<thead>
+		            		<tr>
+		            			<th>No</th>
+		            			<th>Nama Jenis Kelamin</th>
+		            			<th>Aksi</th>
+		            		</tr>
+		            	</thead>
+		            	<tbody>
+		            		<?php $no=1;foreach($data->result() as $row_data){?>
+		            		<tr>
+		            			<td><?=$no++?>.</td>
+		            			<td><?=$row_data->nama_jk?></td>
+		            			<td>
+		            				<button class="btn btn-danger btn-hapus" id="<?=$row_data->id_jk?>"><i class="fas fa-trash"></i> Hapus</button>
+		            				<button class="btn btn-info btn-edit" id="<?=$row_data->id_jk?>"><i class="fas fa-pencil-alt"></i> Edit</button>
+		            			</td>
+		            		</tr>
+		            		<?php }?>
+		            	</tbody>
+		            </table>
+		        </div>
 	          </div>
 	        </div>
 	    </div>

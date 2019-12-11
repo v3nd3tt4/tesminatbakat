@@ -21,23 +21,25 @@
 	            <?php
 	            }
 	            ?>
-	            <table>
-	            	<tr>
-	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="1" <?=@$row_soal->jawaban==1? 'checked':''?>> Sangat Tidak Setuju</label></td>
-	            	</tr>
-	            	<tr>
-	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="2" <?=@$row_soal->jawaban==2? 'checked':''?>> Tidak Setuju</label></td>
-	            	</tr>
-	            	<tr>
-	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="3" <?=@$row_soal->jawaban==3? 'checked':''?>> Agak Setuju</label></td>
-	            	</tr>
-	            	<tr>
-	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="4" <?=@$row_soal->jawaban==4? 'checked':''?>> Setuju</label></td>
-	            	</tr>
-	            	<tr>
-	            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="5" <?=@$row_soal->jawaban==5? 'checked':''?>> Sangat Setuju</label></td>
-	            	</tr>
-	            </table>
+	            <div class="table-responsive">
+		            <table>
+		            	<tr>
+		            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="1" <?=@$row_soal->jawaban==1? 'checked':''?>> Sangat Tidak Setuju</label></td>
+		            	</tr>
+		            	<tr>
+		            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="2" <?=@$row_soal->jawaban==2? 'checked':''?>> Tidak Setuju</label></td>
+		            	</tr>
+		            	<tr>
+		            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="3" <?=@$row_soal->jawaban==3? 'checked':''?>> Agak Setuju</label></td>
+		            	</tr>
+		            	<tr>
+		            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="4" <?=@$row_soal->jawaban==4? 'checked':''?>> Setuju</label></td>
+		            	</tr>
+		            	<tr>
+		            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="5" <?=@$row_soal->jawaban==5? 'checked':''?>> Sangat Setuju</label></td>
+		            	</tr>
+		            </table>
+		        </div>
 	          </div>
 	          <div class="card-footer">
 	          	<?php if($hal > 1 ){?>
