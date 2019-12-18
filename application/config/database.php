@@ -79,6 +79,7 @@ $db['default'] = array(
 	'username' => 'root',
 	// 'password' => 'goldroger27',
 	'password' => 'Wahanagerak123@',
+	// 'password' => '',
 	'database' => 'db_minat_bakat',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
