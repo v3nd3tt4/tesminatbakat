@@ -83,7 +83,7 @@
       </ul>
 
       <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-        <?php if($this->session->userdata('is_login') == ''){?>
+        <?php if(empty($this->session->userdata('is_login'))){?>
         <a href="<?=base_url()?>login" class="btn btn-primary btn-lg btn-block btn-icon-split">
           <i class="fas fa-sign-in-alt"></i> Login
         </a>
