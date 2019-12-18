@@ -21,7 +21,7 @@ class Profil_siswa extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-        if(empty($this->session->userdata('level'))){
+        if($this->session->userdata('level') == ''){
             echo '<script>alert("Maaf, anda tidak diizinkan mengakses halaman ini")</script>';
             echo'<script>window.location.href="'.base_url().'";</script>';
         }            

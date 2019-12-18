@@ -32,7 +32,7 @@
 		            			<td><?=$row_data->nama_siswa?></td>
 		            			<!-- <td><?=$row_data->nama_sekolah?></td> -->
 		            			<td><?=$row_data->email?></td>
-		            			<td><?=empty($row_data->password)?'<button class="btn btn-sm btn-danger">belum diset</button>':$row_data->password?></td>
+		            			<td><?=$row_data->password === NULL?'<button class="btn btn-sm btn-danger">belum diset</button>':$row_data->password?></td>
 		            			<td>
 		            				<button class="btn btn-danger btn-sm btn-hapus" id="<?=$row_data->id_siswa?>"><i class="fas fa-trash"></i> Hapus</button>
 		            				<button class="btn btn-info btn-sm btn-edit" id="<?=$row_data->id_siswa?>"><i class="fas fa-eye"></i> Detail</button>
