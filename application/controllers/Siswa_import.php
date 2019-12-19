@@ -190,14 +190,14 @@ class Siswa_import extends CI_Controller {
 					'id_sekolah'		=> $data[$i]['8'],
 					'alamat'			=> $data[$i]['11'],
 					'nisn'				=> $data[$i]['0'],
-					'email'				=> $data[$i]['4'],
+					'email'				=> trim($data[$i]['4']),
 					'no_hp'				=> $data[$i]['5'],
 					'id_kategori_sma'	=> $data[$i]['9'],
 					'id_kategori_utbk'	=> $data[$i]['10'],
     			);;
 
     			$isi2[] = array(
-    				'username' => $data[$i]['4'],
+    				'username' => trims($data[$i]['4']),
     				'password' => $potong,
     				'level' => 'siswa'
     			);
