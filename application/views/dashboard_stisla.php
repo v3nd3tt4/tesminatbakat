@@ -126,7 +126,7 @@
 					        	</div>
 					        	<div class="form-group">
 					        		<label>Alamat</label>
-					        		<textarea required class="form-control" style="min-height: 150px" name="alamat" id="alamat"><?=$data->row()->alamat?></textarea>
+					        		<textarea required class="form-control" style="min-height: 150px" name="alamat" id="alamat"><?=@$data->row()->alamat?></textarea>
 					        	</div>
 					        	<button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
 				      		</div>
@@ -161,12 +161,12 @@
 					            	<center>
 					            		<img src="<?=base_url()?>assets/done.svg" style="width: 150px;" >
 						                <h3> Selesai</h3>
-						                <?php if($status_update_rapor->num_rows()==0){?>
+						                <?php //if($status_update_rapor->num_rows()==0){?>
 						                <a class="btn btn-warning " href="<?=base_url()?>profil_siswa/nilai_rapor" >Isi Nilai Rapor</a>
-						            	<?php }?>
-						            	<?php if($status_update_utbk->num_rows()==0){?>
+						            	<?php //}?>
+						            	<?php //if($status_update_utbk->num_rows()==0){?>
 						                <a class="btn btn-info" href="<?=base_url()?>profil_siswa/nilai_utbk" >Isi Nilai UTBK</a>
-						                <?php }?>
+						                <?php //}?>
 						                <button type="button" class="btn btn-success btn-tes-mb" >Tes Minat Bakat</button>
 					                </center>
 

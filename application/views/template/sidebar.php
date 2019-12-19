@@ -39,6 +39,7 @@
             <li class="<?=$link=='isi_pertanyaan'? 'active':''?>"><a class="nav-link" href="<?=base_url()?>pertanyaan/isi">Pertanyaan</a></li>
           </ul>
         </li>
+        <li class="<?php if($link == 'fasilitas'){?>active<?php }?>"><a class="nav-link" href="<?=base_url()?>setting_fasilitas"><i class="fas fa-cog"></i> <span>Setting Fasilitas</span></a></li>
         <li class="menu-header">Peserta</li>
         <li class="nav-item dropdown <?=$link=='siswa' || $link=='siswa_import'? 'active':''?>">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Data</span></a>

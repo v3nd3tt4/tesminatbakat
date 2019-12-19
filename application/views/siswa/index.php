@@ -32,13 +32,13 @@
 		            			<td><?=$row_data->nama_siswa?></td>
 		            			<!-- <td><?=$row_data->nama_sekolah?></td> -->
 		            			<td><?=$row_data->email?></td>
-		            			<td><?=$row_data->password === NULL?'<button class="btn btn-sm btn-danger">belum diset</button>':$row_data->password?></td>
+		            			<td><?=empty($row_data->password)?'<button class="btn btn-sm btn-danger">belum diset</button>':$row_data->password?></td>
 		            			<td>
 		            				<button class="btn btn-danger btn-sm btn-hapus" id="<?=$row_data->id_siswa?>"><i class="fas fa-trash"></i> Hapus</button>
 		            				<button class="btn btn-info btn-sm btn-edit" id="<?=$row_data->id_siswa?>"><i class="fas fa-eye"></i> Detail</button>
 		            				<a href="<?=base_url()?>siswa/nilai_rapor_new/<?=$row_data->id_siswa?>" class="btn btn-warning btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book"></i> Rapor</a>
 		            				<a href="<?=base_url()?>siswa/nilai_utbk_new/<?=$row_data->id_siswa?>" class="btn btn-success btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-book-open"></i> UTBK</a>
-		            				<a href="<?=base_url()?>siswa/riwayat_tes/<?=$row_data->id_siswa?>" class="btn btn-primary btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-pencil-alt"></i> Tes Minat Bakat</a>
+		            				<!-- <a href="<?=base_url()?>siswa/riwayat_tes/<?=$row_data->id_siswa?>" class="btn btn-primary btn-sm" id="<?=$row_data->id_siswa?>"><i class="fas fa-pencil-alt"></i> Tes Minat Bakat</a> -->
 		            				<button class="btn btn-light btn-sm btn-token" id="<?=$row_data->id_siswa?>"><i class="fas fa-key"></i> Generate Password/Token</button>
 		            			</td>
 		            		</tr>

@@ -9,120 +9,128 @@
 	            
 	          </div>
 	          <div class="card-body">
-	          	<div class="table-responsive">
-		          	<table class="table table-striped">
-		          		<tr>
-		          			<td>Jurusan</td>
-		          			<td>: <?=$utbk->row()->nama_kategori_utbk?></td>
-		          		</tr>
-		          	</table>
-		          </div>
-	          	<?php if($riwayat->num_rows() != 0){?>
-	          		<div class="alert alert-info">Karena terdapat riwayat pengisian nilai rapor, maka data riwayat terakhir ditampilkan dipengisian ini</div>
-	          	<?php }?>
-	            <form id="form-rapor">
-	            	<div class="table-responsive">
-		            	<table class="table table-striped">
-		            		<?php foreach($data->result() as $row_data){
-		            			@$nilai = $this->db->get_where('tb_nilai_mapel_utbk', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel_utbk' => $row_data->id_mapel_utbk, 'id_riwayat_isi_utbk'=> $riwayat->row()->id_riwayat_isi_utbk));
-		            		?>
-		            		<tr>
-		            			<td>
-		            				<?=$row_data->nama_mapel_utbk?>
-		            			</td>
-		            			<td>
-		            				<input type="number" name="mapel[<?=$row_data->id_mapel_utbk?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required>
-		            			</td>
-		            		</tr>
-		            		<?php }?>
-		            	</table>
-		            </div>
-	            	<h6>Kampus dan jurusan yang akan dipilih</h6>
-		            <hr>
-		            <div class="table-responsive">
-			            <table class="table table-striped">
-			            	<tr>
-			            		<td>
-			            			<div class="form-group">
-			            				<label>Kampus</label>
-				            			<input type="text" name="kampus_1"  required class="form-control">
-				            		</div>
-			            		</td>
-			            		<td>
-			            			<div class="form-group">
-			            				<label>Jurusan</label>
-				            			<input type="text" name="jur_1" required class="form-control">
-				            		</div>
-			            		</td>
-			            	</tr>
-			            	<tr>
-			            		<td>
-			            			<div class="form-group">
-			            				<label>Kampus</label>
-				            			<input type="text" name="kampus_2" required class="form-control">
-				            		</div>
-			            		</td>
-			            		<td>
-			            			<div class="form-group">
-			            				<label>Jurusan</label>
-				            			<input type="text" name="jur_2" required class="form-control">
-				            		</div>
-			            		</td>
-			            	</tr>
-			            	<tr>
-			            		<td>
-			            			<div class="form-group">
-			            				<label>Kampus</label>
-				            			<input type="text" name="kampus_3" required class="form-control">
-				            		</div>
-			            		</td>
-			            		<td>
-			            			<div class="form-group">
-			            				<label>Jurusan</label>
-				            			<input type="text" name="jur_3" required class="form-control">
-				            		</div>
-			            		</td>
-			            	</tr>
-			            </table>
+	          	<?php if($status_fasilitas_utbk->row()->status == 'disable'){?>
+	          	<div class="alert alert-warning">Maaf, fasilitas ini ditutup oleh admin</div>
+	          	<?php }else{?>
+	          		<?php if($get_rasionalisasi_terakhir->num_rows() != 0 && (empty($get_rasionalisasi_terakhir->row()->rasionalisasi) || $get_rasionalisasi_terakhir->row()->rasionalisasi == '')){?>
+	          			<div class="alert alert-warning">Maaf, anda tidak bisa menggunakan fitur ini, karena admin belum memberikan saran rasionalisasi dari pengisian sebelumnya</div>
+	          		<?php }else{?>
+		          	<div class="table-responsive">
+			          	<table class="table table-striped">
+			          		<tr>
+			          			<td>Jurusan</td>
+			          			<td>: <?=$utbk->row()->nama_kategori_utbk?></td>
+			          		</tr>
+			          	</table>
 			        </div>
-		            <h6>Mata Pelajaran disukai dan tidak disukai</h6>
-		            <hr>
-		            <div class="table-responsive">
-			            <table class="table table-striped">
-			            	<tr>
-			            		<td>
-			            			<div class="form-group">
-			            				<label>Mata pelajaran paling disukai</label>
-				            			<input type="text" name="good_mapel" required class="form-control">
-				            		</div>
-			            		</td>
-			            		<td>
-			            			<div class="form-group">
-			            				<label>Mata pelajaran paling tidak disukai</label>
-				            			<input type="text" name="bad_mapel" required class="form-control">
-				            		</div>
-			            		</td>
-			            	</tr>
-			            </table>
-			        </div>
-		            <button style="float: right;" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
-	            </form>
-	            <br/><br/>
-	            <!-- <?php if($status->num_rows() != 0){?>
-	            <br><br>
-	            <?php if(empty($status->row()->rasionalisasi)){?>
-	            <div class="alert alert-warning">Menunggu saran rasionalisasi dari admin</div>
-	        	<?php }else{?>
-	            <table class="table-striped table">
-	            	<tr>
-	            		<td>Saran dari admin</td>
-	            		<td>
-	            			<?=$status->row()->rasionalisasi?>
-	            		</td>
-	            	</tr>
-	            </table>
-	            <?php }?>
-	        	<?php }?> -->
+		          	<?php if($riwayat->num_rows() != 0){?>
+		          		<div class="alert alert-info">Karena terdapat riwayat pengisian nilai rapor, maka data riwayat terakhir ditampilkan dipengisian ini</div>
+		          	<?php }?>
+		            <form id="form-rapor">
+		            	<div class="table-responsive">
+			            	<table class="table table-striped">
+			            		<?php foreach($data->result() as $row_data){
+			            			@$nilai = $this->db->get_where('tb_nilai_mapel_utbk', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel_utbk' => $row_data->id_mapel_utbk, 'id_riwayat_isi_utbk'=> $riwayat->row()->id_riwayat_isi_utbk));
+			            		?>
+			            		<tr>
+			            			<td>
+			            				<?=$row_data->nama_mapel_utbk?>
+			            			</td>
+			            			<td>
+			            				<input type="number" name="mapel[<?=$row_data->id_mapel_utbk?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required>
+			            			</td>
+			            		</tr>
+			            		<?php }?>
+			            	</table>
+			            </div>
+		            	<h6>Kampus dan jurusan yang akan dipilih</h6>
+			            <hr>
+			            <div class="table-responsive">
+				            <table class="table table-striped">
+				            	<tr>
+				            		<td>
+				            			<div class="form-group">
+				            				<label>Kampus</label>
+					            			<input type="text" name="kampus_1"  required class="form-control">
+					            		</div>
+				            		</td>
+				            		<td>
+				            			<div class="form-group">
+				            				<label>Jurusan</label>
+					            			<input type="text" name="jur_1" required class="form-control">
+					            		</div>
+				            		</td>
+				            	</tr>
+				            	<tr>
+				            		<td>
+				            			<div class="form-group">
+				            				<label>Kampus</label>
+					            			<input type="text" name="kampus_2" required class="form-control">
+					            		</div>
+				            		</td>
+				            		<td>
+				            			<div class="form-group">
+				            				<label>Jurusan</label>
+					            			<input type="text" name="jur_2" required class="form-control">
+					            		</div>
+				            		</td>
+				            	</tr>
+				            	<tr>
+				            		<td>
+				            			<div class="form-group">
+				            				<label>Kampus</label>
+					            			<input type="text" name="kampus_3" required class="form-control">
+					            		</div>
+				            		</td>
+				            		<td>
+				            			<div class="form-group">
+				            				<label>Jurusan</label>
+					            			<input type="text" name="jur_3" required class="form-control">
+					            		</div>
+				            		</td>
+				            	</tr>
+				            </table>
+				        </div>
+			            <h6>Mata Pelajaran disukai dan tidak disukai</h6>
+			            <hr>
+			            <div class="table-responsive">
+				            <table class="table table-striped">
+				            	<tr>
+				            		<td>
+				            			<div class="form-group">
+				            				<label>Mata pelajaran paling disukai</label>
+					            			<input type="text" name="good_mapel" required class="form-control">
+					            		</div>
+				            		</td>
+				            		<td>
+				            			<div class="form-group">
+				            				<label>Mata pelajaran paling tidak disukai</label>
+					            			<input type="text" name="bad_mapel" required class="form-control">
+					            		</div>
+				            		</td>
+				            	</tr>
+				            </table>
+				        </div>
+			            <button style="float: right;" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+		            </form>
+		            <br/><br/>
+		            <!-- <?php if($status->num_rows() != 0){?>
+		            <br><br>
+		            <?php if(empty($status->row()->rasionalisasi)){?>
+		            <div class="alert alert-warning">Menunggu saran rasionalisasi dari admin</div>
+		        	<?php }else{?>
+		            <table class="table-striped table">
+		            	<tr>
+		            		<td>Saran dari admin</td>
+		            		<td>
+		            			<?=$status->row()->rasionalisasi?>
+		            		</td>
+		            	</tr>
+		            </table>
+		            <?php }?>
+		        	<?php }?> -->
+		        	<?php }?>
+	        	<?php }?>
 	          </div>
 	        </div>
 	    </div>

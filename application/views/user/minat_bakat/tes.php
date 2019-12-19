@@ -1,6 +1,25 @@
 <!-- Main Content -->
 <div class="main-content">
 	<form id="form-tes-minat-bakat" method="POST" action="#">
+	<?php if($status_fasilitas_mb->row()->status == 'disable'){?>
+  	<section class="section">
+	  <div class="section-body">
+	  	<div class="card">
+	        <div class="card-wrap">
+	          <div class="card-header">
+	            <h4>Pemberitahuan</h4>
+	            <!-- <div class="card-header-action">
+	            	<a href="<?=base_url()?>minat_bakat/tes" class="btn btn-primary btn-tambah"><i class="fas fa-pencil-alt"></i> Lakukan Tes</a>
+	            </div> -->
+	          </div>
+	          <div class="card-body">
+	            <div class="alert alert-warning">Maaf, fasilitas tes minat bakat ditutup oleh admin</div>
+	          </div>
+	        </div>
+	    </div>
+	  </div>
+	</section>
+  	<?php }else{?>
 	<section class="section">
 	  <div class="section-body">
 	  	<div class="card">
@@ -13,6 +32,7 @@
 	            </div> -->
 	          </div>
 	          <div class="card-body">
+	          	
 	            <?php 
 	            foreach($data_soal->result() as $row_soal){
 	            	echo '<p>'.(empty($this->input->get('halaman', true)) ? '1': $this->input->get('halaman', true)).'. '.$row_soal->pertanyaan.'</p>';
@@ -30,7 +50,7 @@
 		            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="2" <?=@$row_soal->jawaban==2? 'checked':''?>> Tidak Setuju</label></td>
 		            	</tr>
 		            	<tr>
-		            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="3" <?=@$row_soal->jawaban==3? 'checked':''?>> Agak Setuju</label></td>
+		            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="3" <?=@$row_soal->jawaban==3? 'checked':''?>> Cukup Setuju</label></td>
 		            	</tr>
 		            	<tr>
 		            		<td><label class="radio-inline"><input type="radio" name="jawaban" value="4" <?=@$row_soal->jawaban==4? 'checked':''?>> Setuju</label></td>
@@ -119,6 +139,7 @@
 	    </div>
 	  </div>
 	</section>
+	<?php }?>
 </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="modal-selesai-tes">

@@ -317,6 +317,8 @@ class Siswa extends CI_Controller {
 		$cek_pendukung = $this->db->get_where('tb_pendukung_rapor', array('id_siswa' => $id_siswa, 'id_riwayat_isi_rapor' => $id_riwayat_isi_rapor));
 
 		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $id_siswa, 'kategori' => 'rapor', 'id_riwayat_isi_rapor' => $id_riwayat_isi_rapor));
+
+		$get_test_terakhir = $this->db->query("select * from tb_riwayat_tes where id_siswa = '$id_siswa' order by id_riwayat_tes DESC limit 1");
 		// var_dump($this->db->last_query());exit();
 		$data = array(
 			// 'page' => 'user/nilai_rapor/index',
@@ -330,6 +332,7 @@ class Siswa extends CI_Controller {
 			'id_riwayat_isi_rapor' => $id_riwayat_isi_rapor, 
 			'id_siswa' => $id_siswa,
 			'status' => $status,
+			'get_test_terakhir' => $get_test_terakhir
 		);
 		$this->load->view('template/wrapper', $data);
 	}
@@ -347,6 +350,9 @@ class Siswa extends CI_Controller {
 		$cek_pendukung = $this->db->get_where('tb_pendukung_utbk', array('id_siswa' => $id_siswa, 'id_riwayat_isi_utbk' => $id_riwayat_isi_utbk));
 
 		$status = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $id_siswa, 'kategori' => 'utbk', 'id_riwayat_isi_rapor' => $id_riwayat_isi_utbk));
+
+		$get_test_terakhir = $this->db->query("select * from tb_riwayat_tes where id_siswa = '$id_siswa' order by id_riwayat_tes DESC limit 1");
+
 		$data = array(
 			'page' => 'siswa/riwayat_detail_utbk',
 			'link' => 'siswa',
@@ -357,7 +363,8 @@ class Siswa extends CI_Controller {
 			'data_pendukung_utbk' => $cek_pendukung, 
 			'status' => $status, 
 			'id_siswa' => $id_siswa,
-			'id_riwayat_isi_utbk' => $id_riwayat_isi_utbk
+			'id_riwayat_isi_utbk' => $id_riwayat_isi_utbk,
+			'get_test_terakhir' => $get_test_terakhir
 		);
 		$this->load->view('template/wrapper', $data);
 	}

@@ -179,6 +179,10 @@ class Profil_siswa extends CI_Controller {
 
 		$get_riwayat = $this->db->query("select * from tb_riwayat_isi_rapor where id_siswa = '".$this->session->userdata('id_siswa')."' order by id_riwayat_isi_rapor DESC LIMIT 1");
 
+		$get_status_rapor = $this->db->get_where("tb_setting_fasilitas", array('nama_fasilitas' => 'nilai rapor'));
+
+		$rasionalisasi_terakhir = $this->db->query("select * from tb_status_pengisian_nilai where kategori = 'rapor' and id_siswa = '".$this->session->userdata('id_siswa')."' order by id_status_pengisian_nilai DESC LIMIT 1");
+
 		$data = array(
 			// 'page' => 'user/nilai_rapor/index',
 			'page' => 'user/nilai_rapor/isi_nilai_rapor',
@@ -187,7 +191,9 @@ class Profil_siswa extends CI_Controller {
 			'data' => $get_data,
 			'status' => $status,
 			'data_pendukung_rapor' => $cek_pendukung,
-			'data_riwayat' => $get_riwayat
+			'data_riwayat' => $get_riwayat,
+			'status_fasilitas_rapor' => $get_status_rapor,
+			'get_rasionalisasi_terakhir' => $rasionalisasi_terakhir
 			
 		);
 		$this->load->view('template/wrapper', $data);
@@ -386,7 +392,9 @@ class Profil_siswa extends CI_Controller {
 
 		$utbk = $this->db->get('tb_kategori_utbk');
 
-		
+		$get_status_utbk = $this->db->get_where("tb_setting_fasilitas", array('nama_fasilitas' => 'nilai utbk'));
+
+		$rasionalisasi_terakhir = $this->db->query("select * from tb_status_pengisian_nilai where kategori = 'utbk' and id_siswa = '".$this->session->userdata('id_siswa')."' order by id_status_pengisian_nilai DESC LIMIT 1");
 
 		$data = array(
 			// 'page' => 'user/nilai_utbk/index',
@@ -397,8 +405,8 @@ class Profil_siswa extends CI_Controller {
 			'status' => $status,
 			'data_pendukung_utbk' => $cek_pendukung,
 			'utbk' => $utbk,
-			
-			
+			'status_fasilitas_utbk' => $get_status_utbk,
+			'get_rasionalisasi_terakhir' => $rasionalisasi_terakhir
 		);
 		$this->load->view('template/wrapper', $data);
 	}
@@ -418,6 +426,11 @@ class Profil_siswa extends CI_Controller {
 		$cek_pendukung = $this->db->get_where('tb_pendukung_utbk', array('id_siswa' => $this->session->userdata('id_siswa')));
 
 		$utbk = $this->db->get_where('tb_kategori_utbk', array('id_kategori_utbk' => $this->input->post('id_kategori_utbk')));
+
+		$get_status_utbk = $this->db->get_where("tb_setting_fasilitas", array('nama_fasilitas' => 'nilai utbk'));
+
+		$rasionalisasi_terakhir = $this->db->query("select * from tb_status_pengisian_nilai where kategori = 'utbk' and id_siswa = '".$this->session->userdata('id_siswa')."' order by id_status_pengisian_nilai DESC LIMIT 1");
+
 		$data = array(
 			'page' => 'user/nilai_utbk/index',
 			// 'page' => 'user/nilai_utbk/pilih_jurusan',
@@ -427,8 +440,9 @@ class Profil_siswa extends CI_Controller {
 			'status' => $status,
 			'data_pendukung_utbk' => $cek_pendukung,
 			'utbk' => $utbk,
-			'riwayat' => $get_riwayat
-			
+			'riwayat' => $get_riwayat,
+			'status_fasilitas_utbk' => $get_status_utbk,
+			'get_rasionalisasi_terakhir' => $rasionalisasi_terakhir
 		);
 		$this->load->view('template/wrapper', $data);
 	}

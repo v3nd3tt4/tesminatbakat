@@ -40,11 +40,14 @@ class Minat_bakat extends CI_Controller {
 	{
 		$riwayat = $this->db->get_where('tb_riwayat_tes', array('id_siswa' => $this->session->userdata('id_siswa')));
 
+		$get_status_mb = $this->db->get_where("tb_setting_fasilitas", array('nama_fasilitas' => 'tes minat bakat'));
+
 		$data = array(
 			'page' => 'user/minat_bakat/riwayat',
 			'link' => 'minat_bakat',
 			'script' => 'user/minat_bakat/script',
-			'data_riwayat' => $riwayat
+			'data_riwayat' => $riwayat,
+			'status_fasilitas_mb' => $get_status_mb
 		);
 		$this->load->view('template/wrapper', $data);
 	}
@@ -112,6 +115,8 @@ class Minat_bakat extends CI_Controller {
 			}
 		}
 
+		$get_status_mb = $this->db->get_where("tb_setting_fasilitas", array('nama_fasilitas' => 'tes minat bakat'));
+
 		$data = array(
 			'page' => 'user/minat_bakat/tes',
 			'link' => 'minat_bakat',
@@ -119,7 +124,8 @@ class Minat_bakat extends CI_Controller {
 			'data_soal' => $query, 
 			'pages' => $pages, 
 			'hal' => $page,
-			'tot_hal' => $total
+			'tot_hal' => $total,
+			'status_fasilitas_mb' => $get_status_mb
 		);
 		$this->load->view('template/wrapper', $data);
 	}
@@ -144,12 +150,16 @@ class Minat_bakat extends CI_Controller {
 		// var_dump($exe->result()) ;
 		$hasil_1 = $exe->result()[0]->id_kategori_soal;
 		$hasil_2 = $exe->result()[1]->id_kategori_soal;
+		$hasil_terbawah_1 = $exe->result()[6]->id_kategori_soal;
+		$hasil_terbawah_2 = $exe->result()[7]->id_kategori_soal;
 		$data = array(
 			'id_siswa' => $this->session->userdata('id_siswa', true),
 			'tgl_selesai' => date('Y-m-d H:i:s'),
 			'status' => 'sudah', 
 			'hasil_1' => $hasil_1,
 			'hasil_2' => $hasil_2,
+			'hasil_terbawah_1' => $hasil_terbawah_1,
+			'hasil_terbawah_2' => $hasil_terbawah_2,
 			'total_skor' => $total_skor
 		);
 

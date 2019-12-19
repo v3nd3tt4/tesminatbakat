@@ -9,10 +9,15 @@
 	            <div class="card-header-action">
 	            	<!-- <a href="<?=base_url()?>minat_bakat/tes" class="btn btn-primary btn-tambah"><i class="fas fa-pencil-alt"></i> Lakukan Tes</a> 
 	            	-->
+	            	<?php if($status_fasilitas_mb->row()->status == 'enable'){?>
 	            	<button class="btn btn-primary btn-tambah"><i class="fas fa-pencil-alt"></i> Lakukan Tes</button>
+	            	<?php }?>
 	            </div>
 	          </div>
 	          <div class="card-body">
+	          	<?php if($status_fasilitas_mb->row()->status == 'disable'){?>
+	          	<div class="alert alert-warning">Maaf, fasilitas tes minat bakat ditutup oleh admin</div>
+	          	<?php }?>
 	          	<div class="table-responsive">
 		            <table class="table table-striped" >
 		            	<thead>
@@ -20,8 +25,8 @@
 		            			<th>No</th>
 		            			<th>Tanggal</th>
 		            			<th>Skor</th>
-		            			<th>Hasil 1</th>
-		            			<th>Hasil 2</th>
+		            			<th>Hasil </th>
+		            			<!-- <th>Hasil 2</th> -->
 		            		</tr>
 		            	</thead>
 		            	<tbody>
@@ -34,11 +39,11 @@
 		            			<?php 
 		            			echo $this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' => $row_riwayat->hasil_1))->row()->keterangan;
 		            			?></td>
-		            			<td>
+		            			<!-- <td>
 		            			<?php 
 		            			echo $this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' => $row_riwayat->hasil_2))->row()->keterangan;
 		            			?>
-		            			</td>
+		            			</td> -->
 		            		</tr>
 		            		<?php }?>
 		            	</tbody>

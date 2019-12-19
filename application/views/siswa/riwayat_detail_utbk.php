@@ -32,7 +32,7 @@
 	            				<?=$row_data->nama_mapel_utbk?>
 	            			</td>
 	            			<td>
-	            				<input type="number" name="mapel[<?=$row_data->id_mapel_utbk?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required>
+	            				<input type="number" readonly name="mapel[<?=$row_data->id_mapel_utbk?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required>
 	            			</td>
 	            		</tr>
 	            		<?php }?>
@@ -46,13 +46,13 @@
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Kampus</label>
-			            			<input type="text" name="kampus_1" value="<?=@$data_pendukung_utbk->row()->kampus_1?>" required class="form-control">
+			            			<input type="text" readonly name="kampus_1" value="<?=@$data_pendukung_utbk->row()->kampus_1?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Jurusan</label>
-			            			<input type="text" name="jur_1" value="<?=@$data_pendukung_utbk->row()->jur_1?>" required class="form-control">
+			            			<input type="text" readonly name="jur_1" value="<?=@$data_pendukung_utbk->row()->jur_1?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            	</tr>
@@ -60,13 +60,13 @@
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Kampus</label>
-			            			<input type="text" name="kampus_2" value="<?=@$data_pendukung_utbk->row()->kampus_2?>" required class="form-control">
+			            			<input type="text" readonly name="kampus_2" value="<?=@$data_pendukung_utbk->row()->kampus_2?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Jurusan</label>
-			            			<input type="text" name="jur_2" value="<?=@$data_pendukung_utbk->row()->jur_2?>" required class="form-control">
+			            			<input type="text" readonly name="jur_2" value="<?=@$data_pendukung_utbk->row()->jur_2?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            	</tr>
@@ -74,13 +74,13 @@
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Kampus</label>
-			            			<input type="text" name="kampus_3" value="<?=@$data_pendukung_utbk->row()->kampus_3?>" required class="form-control">
+			            			<input type="text" readonly name="kampus_3" value="<?=@$data_pendukung_utbk->row()->kampus_3?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Jurusan</label>
-			            			<input type="text" name="jur_3" value="<?=@$data_pendukung_utbk->row()->jur_3?>" required class="form-control">
+			            			<input type="text" readonly name="jur_3" value="<?=@$data_pendukung_utbk->row()->jur_3?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            	</tr>
@@ -94,13 +94,13 @@
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Mata pelajaran paling disukai</label>
-			            			<input type="text" name="good_mapel" value="<?=@$data_pendukung_utbk->row()->good_mapel?>" required class="form-control">
+			            			<input type="text" readonly name="good_mapel" value="<?=@$data_pendukung_utbk->row()->good_mapel?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            		<td>
 		            			<div class="form-group">
 		            				<label>Mata pelajaran paling tidak disukai</label>
-			            			<input type="text" name="bad_mapel" value="<?=@$data_pendukung_utbk->row()->bad_mapel?>" required class="form-control">
+			            			<input type="text" readonly name="bad_mapel" value="<?=@$data_pendukung_utbk->row()->bad_mapel?>" required class="form-control">
 			            		</div>
 		            		</td>
 		            	</tr>
@@ -108,6 +108,30 @@
 		        </div>
 		            <!-- <button style="float: right;" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button> -->
 	            <!-- </form> -->
+	            <br/><br/>
+	            <?php if($get_test_terakhir->num_rows() == 0){?>
+	            	<div class="alert alert-warning">Siswa belum melakukan test</div>
+	            <?php }else{?>
+	            <h6>Hasil Test Minat Bakat Terakhir</h6>
+	            <table class="table-striped table">
+	            	<tr>
+	            		<td>Hasil Teratas 1</td>
+	            		<td>: <?=$this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' =>$get_test_terakhir->row()->hasil_1))->row()->nama_kategori?></td>
+	            	</tr>
+	            	<tr>
+	            		<td>Hasil Teratas 2</td>
+	            		<td>: <?=$this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' =>$get_test_terakhir->row()->hasil_2))->row()->nama_kategori?></td>
+	            	</tr>
+	            	<tr>
+	            		<td>Hasil Terbawah 1</td>
+	            		<td>: <?=@$this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' =>$get_test_terakhir->row()->hasil_terbawah_1))->row()->nama_kategori?></td>
+	            	</tr>
+	            	<tr>
+	            		<td>Hasil Terbawah 2</td>
+	            		<td>:  <?=@$this->db->get_where('tb_kategori_pertanyaan', array('id_kategori_soal' =>$get_test_terakhir->row()->hasil_terbawah_2))->row()->nama_kategori?></td>
+	            	</tr>
+	            </table>
+	            <?php }?>
 	            <br/><br/>
 	            <form id="form-rasionalisasi-utbk">
 	            	<div class="form-group">
