@@ -75,7 +75,7 @@
 				        			<?php }?>
 				        		</select>
 				        	</div>
-				        	<div class="form-group">
+				        	<!-- <div class="form-group">
 				        		<label>Asal Sekolah</label>
 				        		<select class="form-control" required name="id_sekolah" id="id_sekolah">
 				        			<option value="">--pilih--</option>
@@ -83,6 +83,10 @@
 				        				<option value="<?=$row_sekolah->id_sekolah?>" <?=$data->row()->id_sekolah == $row_sekolah->id_sekolah? 'selected' : ''?>><?=$row_sekolah->nama_sekolah?></option>
 				        			<?php }?>
 				        		</select>
+				        	</div> -->
+				        	<div class="form-group">
+				        		<label>Sekolah</label>
+				        		<input type="text" required class="form-control" name="sekolah" id="sekolah" value="<?=@$data->row()->sekolah?>" >
 				        	</div>
 				        	<div class="form-group">
 				        		<label>Alamat</label>

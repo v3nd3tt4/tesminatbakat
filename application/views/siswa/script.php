@@ -121,7 +121,8 @@
 	    			$('#id_kategori_utbk').val(msg.id_kategori_utbk);
 	    			$('#id_jk').val(msg.id_jk);
 	    			$('#id_agama').val(msg.id_agama);
-	    			$('#id_sekolah').val(msg.id_sekolah);
+	    			// $('#id_sekolah').val(msg.id_sekolah);
+	    			$('#sekolahnya').val(msg.sekolah);
 	    		}
 	    	});
 	    });

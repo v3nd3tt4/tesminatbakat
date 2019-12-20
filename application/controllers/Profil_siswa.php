@@ -66,6 +66,7 @@ class Profil_siswa extends CI_Controller {
 			'no_hp'				=> $this->input->post('no_hp', true),
 			'id_kategori_sma'	=>  $this->input->post('id_kategori_sma', true),
 			'id_kategori_utbk'	=>  $this->input->post('id_kategori_utbk', true),
+			'sekolah' 			=> $this->input->post('sekolah', true),
 		);
 		$data2 = array(
 			'id_siswa' => $this->input->post('id_siswa', true),

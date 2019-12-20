@@ -68,27 +68,27 @@
 	      		<div class="col-md-6">
 	      			<div class="form-group">
 		        		<label>NISN</label>
-		        		<input type="text" required class="form-control" name="nisn">
+		        		<input type="text" required class="form-control" readonly name="nisn">
 		        	</div>
 		        	<div class="form-group">
 		        		<label>Nama Siswa</label>
-		        		<input type="text" required class="form-control" name="nama_siswa">
+		        		<input type="text" required class="form-control" readonly name="nama_siswa">
 		        	</div>
 		        	<div class="form-group">
 		        		<label>Tempat Lahir</label>
-		        		<input type="text" required class="form-control" name="tempat_lahir">
+		        		<input type="text" required class="form-control" readonly name="tempat_lahir">
 		        	</div>
 		        	<div class="form-group">
 		        		<label>Tanggal Lahir</label>
-		        		<input type="date" required class="form-control" name="tgl_lahir">
+		        		<input type="date" required class="form-control" readonly name="tgl_lahir">
 		        	</div>
 		        	<div class="form-group">
 		        		<label>Email</label>
-		        		<input type="email" required class="form-control" name="email">
+		        		<input type="email" required class="form-control" readonly name="email">
 		        	</div>
 		        	<div class="form-group">
 		        		<label>Jurusan Sekolah</label>
-		        		<select class="form-control" required name="id_kategori_sma">
+		        		<select class="form-control" required readonly name="id_kategori_sma">
 		        			<option value="">--pilih--</option>
 		        			<?php foreach($data_sma->result() as $row_sma){?>
 		        				<option value="<?=$row_sma->id_kategori_sma?>"><?=$row_sma->nama_kategori?></option>
@@ -97,7 +97,7 @@
 		        	</div>
 		        	<div class="form-group">
 		        		<label>UTBK</label>
-		        		<select class="form-control" required name="id_kategori_utbk">
+		        		<select class="form-control" required readonly name="id_kategori_utbk">
 		        			<option value="">--pilih--</option>
 		        			<?php foreach($data_utbk->result() as $row_utbk){?>
 		        				<option value="<?=$row_utbk->id_kategori_utbk?>"><?=$row_utbk->nama_kategori_utbk?></option>
@@ -108,11 +108,11 @@
 	      		<div class="col-md-6">
 	      			<div class="form-group">
 		        		<label>No. HP</label>
-		        		<input type="number" required class="form-control" name="no_hp">
+		        		<input type="number" required readonly class="form-control" name="no_hp">
 		        	</div>
 		        	<div class="form-group">
 		        		<label>Jenis Kelamin</label>
-		        		<select class="form-control" required name="id_jk">
+		        		<select class="form-control" readonly required name="id_jk">
 		        			<option value="">--pilih--</option>
 		        			<?php foreach($data_jk->result() as $row_jk){?>
 		        				<option value="<?=$row_jk->id_jk?>"><?=$row_jk->nama_jk?></option>
@@ -121,14 +121,14 @@
 		        	</div>
 		        	<div class="form-group">
 		        		<label>Agama</label>
-		        		<select class="form-control" required name="id_agama">
+		        		<select class="form-control" readonly required name="id_agama">
 		        			<option value="">--pilih--</option>
 		        			<?php foreach($data_agama->result() as $row_agama){?>
 		        				<option value="<?=$row_agama->id_agama?>"><?=$row_agama->nama_agama?></option>
 		        			<?php }?>
 		        		</select>
 		        	</div>
-		        	<div class="form-group">
+		        	<!-- <div class="form-group">
 		        		<label>Asal Sekolah</label>
 		        		<select class="form-control" required name="id_sekolah">
 		        			<option value="">--pilih--</option>
@@ -136,10 +136,14 @@
 		        				<option value="<?=$row_sekolah->id_sekolah?>"><?=$row_sekolah->nama_sekolah?></option>
 		        			<?php }?>
 		        		</select>
+		        	</div> -->
+		        	<div class="form-group">
+		        		<label>Sekolah</label>
+		        		<input type="text" readonly required class="form-control" name="sekolah" id="sekolah" >
 		        	</div>
 		        	<div class="form-group">
 		        		<label>Alamat</label>
-		        		<textarea required class="form-control" style="min-height: 150px" name="alamat"></textarea>
+		        		<textarea required readonly class="form-control" style="min-height: 150px" name="alamat"></textarea>
 		        	</div>
 	      		</div>
 	      	</div>
@@ -243,7 +247,7 @@
 			        			<?php }?>
 			        		</select>
 			        	</div>
-			        	<div class="form-group">
+			        	<!-- <div class="form-group">
 			        		<label>UTBK</label>
 			        		<select class="form-control" required name="id_kategori_utbk" id="id_kategori_utbk">
 			        			<option value="">--pilih--</option>
@@ -251,7 +255,7 @@
 			        				<option value="<?=$row_utbk->id_kategori_utbk?>"><?=$row_utbk->nama_kategori_utbk?></option>
 			        			<?php }?>
 			        		</select>
-			        	</div>
+			        	</div> -->
 		      		</div>
 		      		<div class="col-md-6">
 		      			<div class="form-group">
@@ -276,7 +280,7 @@
 			        			<?php }?>
 			        		</select>
 			        	</div>
-			        	<div class="form-group">
+			        	<!-- <div class="form-group">
 			        		<label>Asal Sekolah</label>
 			        		<select class="form-control" required name="id_sekolah" id="id_sekolah">
 			        			<option value="">--pilih--</option>
@@ -284,6 +288,10 @@
 			        				<option value="<?=$row_sekolah->id_sekolah?>"><?=$row_sekolah->nama_sekolah?></option>
 			        			<?php }?>
 			        		</select>
+			        	</div> -->
+			        	<div class="form-group">
+			        		<label>Sekolah</label>
+			        		<input type="text" required class="form-control" name="sekolah" id="sekolahnya"/ >
 			        	</div>
 			        	<div class="form-group">
 			        		<label>Alamat</label>

@@ -144,6 +144,7 @@ class Siswa extends CI_Controller {
 			'no_hp'				=> $this->input->post('no_hp', true),
 			'id_kategori_sma'	=>  $this->input->post('id_kategori_sma', true),
 			'id_kategori_utbk'	=>  $this->input->post('id_kategori_utbk', true),
+			'sekolah' => $this->input->post('sekolah', true),
 		);
 
 		$simpan = $this->db->update('tb_siswa', $data, array('id_siswa' => $this->input->post('id_siswa', true)));
