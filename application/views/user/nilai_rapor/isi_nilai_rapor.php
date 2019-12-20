@@ -17,8 +17,15 @@
 	          			<div class="alert alert-warning">Maaf, anda tidak bisa menggunakan fitur ini, karena admin belum memberikan saran rasionalisasi dari pengisian sebelumnya</div>
 	          		<?php }else{?>
 			          	<div class="alert alert-info">Isi sampai semester terakhir anda saja</div>
-			          	<?php if($data_riwayat->num_rows() != 0){?>
-			          	<div class="alert alert-warning">Karena terdapat riwayat pengisian nilai rapor, maka data riwayat terakhir ditampilkan dipengisian ini</div>
+			          	<?php 
+			          	if($data_riwayat->num_rows() != 0){
+			          		?>
+			          	<!-- <div class="alert alert-warning">Silakan lakukan tes minat bakat terlebih dahulu agar akurasi analisis dapat maksimal</div> -->
+			          	<?php 
+			          	}
+			          	?>
+			          	<?php if($data_riwayat_tes->num_rows() == 0){?>
+			          		<div class="alert alert-warning">Silakan lakukan tes minat bakat terlebih dahulu <a class="btn btn-primary btn-sm" href="<?=base_url()?>minat_bakat/riwayat">di sini</a> agar akurasi analisis dapat maksimal</div> 
 			          	<?php }?>
 			            <form id="form-rapor-new">
 			            	<?php 

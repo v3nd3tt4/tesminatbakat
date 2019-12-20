@@ -24,7 +24,10 @@
 			          	</table>
 			        </div>
 		          	<?php if($riwayat->num_rows() != 0){?>
-		          		<div class="alert alert-info">Karena terdapat riwayat pengisian nilai rapor, maka data riwayat terakhir ditampilkan dipengisian ini</div>
+		          		<!-- <div class="alert alert-info">Silakan lakukan tes minat bakat terlebih dahulu agar akurasi analisis dapat maksimal</div> -->
+		          	<?php }?>
+		          	<?php if($data_riwayat_tes->num_rows() == 0){?>
+		          		<div class="alert alert-warning">Silakan lakukan tes minat bakat terlebih dahulu <a class="btn btn-primary btn-sm" href="<?=base_url()?>minat_bakat/riwayat">di sini</a> agar akurasi analisis dapat maksimal</div> 
 		          	<?php }?>
 		            <form id="form-rapor">
 		            	<div class="table-responsive">

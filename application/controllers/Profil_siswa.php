@@ -183,6 +183,9 @@ class Profil_siswa extends CI_Controller {
 
 		$rasionalisasi_terakhir = $this->db->query("select * from tb_status_pengisian_nilai where kategori = 'rapor' and id_siswa = '".$this->session->userdata('id_siswa')."' order by id_status_pengisian_nilai DESC LIMIT 1");
 
+		$riwayat_tes = $this->db->query("select * from tb_riwayat_tes where id_siswa = '".$this->session->userdata('id_siswa')."' and status = 'sudah' order by id_riwayat_tes DESC LIMIT 1");
+
+
 		$data = array(
 			// 'page' => 'user/nilai_rapor/index',
 			'page' => 'user/nilai_rapor/isi_nilai_rapor',
@@ -193,7 +196,8 @@ class Profil_siswa extends CI_Controller {
 			'data_pendukung_rapor' => $cek_pendukung,
 			'data_riwayat' => $get_riwayat,
 			'status_fasilitas_rapor' => $get_status_rapor,
-			'get_rasionalisasi_terakhir' => $rasionalisasi_terakhir
+			'get_rasionalisasi_terakhir' => $rasionalisasi_terakhir,
+			'data_riwayat_tes' => $riwayat_tes
 			
 		);
 		$this->load->view('template/wrapper', $data);
@@ -431,6 +435,8 @@ class Profil_siswa extends CI_Controller {
 
 		$rasionalisasi_terakhir = $this->db->query("select * from tb_status_pengisian_nilai where kategori = 'utbk' and id_siswa = '".$this->session->userdata('id_siswa')."' order by id_status_pengisian_nilai DESC LIMIT 1");
 
+		$riwayat_tes = $this->db->query("select * from tb_riwayat_tes where id_siswa = '".$this->session->userdata('id_siswa')."' and status = 'sudah' order by id_riwayat_tes DESC LIMIT 1");
+
 		$data = array(
 			'page' => 'user/nilai_utbk/index',
 			// 'page' => 'user/nilai_utbk/pilih_jurusan',
@@ -442,7 +448,8 @@ class Profil_siswa extends CI_Controller {
 			'utbk' => $utbk,
 			'riwayat' => $get_riwayat,
 			'status_fasilitas_utbk' => $get_status_utbk,
-			'get_rasionalisasi_terakhir' => $rasionalisasi_terakhir
+			'get_rasionalisasi_terakhir' => $rasionalisasi_terakhir,
+			'data_riwayat_tes' => $riwayat_tes
 		);
 		$this->load->view('template/wrapper', $data);
 	}
