@@ -154,13 +154,12 @@ class Siswa_import extends CI_Controller {
 		}
 		
 		$target = basename($_FILES['filenya']['name']) ;
-		move_uploaded_file($_FILES['filenya']['tmp_name'], $target);
+		move_uploaded_file($_FILES['filenya']['tmp_name'], './assets/'.$target);
 
 		// beri permisi agar file xls dapat di baca
-		chmod($_FILES['filenya']['name'],0777);
-		 
+		chmod('./assets/'.$_FILES['filenya']['name'],0777);
 		// mengambil isi file xls
-		$data = new Spreadsheet_Excel_Reader($_FILES['filenya']['name'],false);
+		$data = new Spreadsheet_Excel_Reader('./assets/'.$_FILES['filenya']['name'],false);
 		// menghitung jumlah baris data yang ada
 		$jumlah_baris = $data->rowcount($sheet_index=0);
 		 
@@ -178,7 +177,7 @@ class Siswa_import extends CI_Controller {
 		}
 		
 		// hapus kembali file .xls yang di upload tadi
-		unlink($_FILES['filenya']['name']);
+		unlink('./assets/'.$_FILES['filenya']['name']);
 
 		$data = array(
 			'page' => 'siswa_import/preview',
