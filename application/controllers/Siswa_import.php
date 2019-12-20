@@ -143,6 +143,53 @@ class Siswa_import extends CI_Controller {
 	// }
 
 	public function preview(){
+		include './assets/excel_reader2.php';
+
+		$allowed = array('xls', 'xlsx');
+		$ext = pathinfo($_FILES['filenya']['name'], PATHINFO_EXTENSION);
+		if (!in_array($ext, $allowed)) {
+		   	echo '<script>alert("file tidak didukung, harus berformat xls");</script>';
+			echo '<script>location.href = "'.base_url().'siswa_import";</script>';
+			exit();
+		}
+		
+		$target = basename($_FILES['filenya']['name']) ;
+		move_uploaded_file($_FILES['filenya']['tmp_name'], $target);
+
+		// beri permisi agar file xls dapat di baca
+		chmod($_FILES['filenya']['name'],0777);
+		 
+		// mengambil isi file xls
+		$data = new Spreadsheet_Excel_Reader($_FILES['filenya']['name'],false);
+		// menghitung jumlah baris data yang ada
+		$jumlah_baris = $data->rowcount($sheet_index=0);
+		 
+		// jumlah default data yang berhasil di import
+		$berhasil = 0;
+		$isi=array();
+		for ($i=2; $i<=$jumlah_baris; $i++){
+		 
+			// menangkap data dan memasukkan ke variabel sesuai dengan kolumnya masing-masing
+			$isi[] = array(
+				'nama'    	=> $data->val($i, 1),
+				'email'  	=> $data->val($i, 2),
+			);
+			
+		}
+		
+		// hapus kembali file .xls yang di upload tadi
+		unlink($_FILES['filenya']['name']);
+
+		$data = array(
+			'page' => 'siswa_import/preview',
+			'link' => 'siswa_import',
+			'script' => 'siswa_import/script',
+			'data' => $isi
+		);
+		$this->load->view('template/wrapper', $data);
+	}
+
+	public function preview_old(){
 		$csvFile = $_FILES['filenya']['tmp_name'];
         $csv = $this->readCSV($csvFile);
         // var_dump($csv);exit();
@@ -239,19 +286,20 @@ class Siswa_import extends CI_Controller {
 		$data_to_save = $this->input->post('data_to_save', true);
 		$data = json_decode($data_to_save);
 		$cek = 0;
-
+		// var_dump($data[0]->nama);exit();
 		for($i=0;$i<count($data);$i++){
-			$cek_email = $this->db->get_where('tb_siswa', array('email' => $data[$i]['1']));
+			$cek_email = $this->db->get_where('tb_siswa', array('email' => trim($data[$i]->email)));
+			// var_dump($this->db->last_query());
 			if($cek_email->num_rows() != 0){
 				$cek++;
 			}
 
-    		if($i!=(count($data)-1)){
+    		// if($i!=(count($data)-1)){
     // 			$acak = str_shuffle($str);
 				// $potong = substr($acak, 0, 6);
 
     			$isi[] = array(
-    				'nama_siswa' 		=> $data[$i]['0'],
+    				'nama_siswa' 		=> $data[$i]->nama,
 					// 'tempat_lahir'		=> $data[$i]['2'],
 					// 'tgl_lahir'			=> date("Y-m-d", strtotime($data[$i]['3'])),
 					// 'id_jk'				=> $data[$i]['6'],
@@ -259,22 +307,23 @@ class Siswa_import extends CI_Controller {
 					// 'id_sekolah'		=> $data[$i]['8'],
 					// 'alamat'			=> $data[$i]['11'],
 					// 'nisn'				=> $data[$i]['0'],
-					'email'				=> trim($data[$i]['1']),
+					'email'				=> trim($data[$i]->email),
 					// 'no_hp'				=> $data[$i]['5'],
 					// 'id_kategori_sma'	=> $data[$i]['9'],
 					// 'id_kategori_utbk'	=> $data[$i]['10'],
     			);;
 
     			$isi2[] = array(
-    				'username' => trim($data[$i]['1']),
+    				'username' => trim($data[$i]->email),
     				'level' => 'siswa'
     			);
-    		}
+    		// }
     	}
+    	// var_dump($cek);exit();
     	if($cek > 0){
     		$return = array(
 				'status' => 'failed',
-				'text' => '<div class="alert alert-danger">Terdapat email yang sama</div>'
+				'text' => '<div class="alert alert-danger">Terdapat email yang sudah terdaftar, mohon periksa kembali</div>'
 			);
 			echo json_encode($return);
     	}else{

@@ -11,10 +11,10 @@
 	            </div> -->
 	          </div>
 	          <div class="card-body">
-	            <p>silahkan download template <a href="<?=base_url()?>assets/template_siswa_new.csv" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> di sini</a>, untuk mengimport siswa</p>
+	            <p>silahkan download template <a href="<?=base_url()?>assets/template_import_siswa.xls" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> di sini</a>, untuk mengimport siswa</p>
 	            <form method="POST" action="<?=base_url()?>siswa_import/preview" enctype="multipart/form-data">
 	            	<div class="form-group">
-	            		<label>File</label>
+	            		<label>File (format: xls)</label>
 	            		<input type="file" name="filenya" required class="form-control">
 	            	</div>
 	            	<button type="submit" class="btn btn-info"><i class="fas fa-sync"></i> Proses</button>

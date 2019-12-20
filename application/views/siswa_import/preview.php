@@ -11,7 +11,7 @@
 	            </div>
 	          </div>
 	          <div class="card-body">
-	          	<div class="alert alert-warning"><marquee>Fitur ini dalam proses pengembangan</marquee></div>
+	          	<!-- <div class="alert alert-warning"><marquee>Fitur ini dalam proses pengembangan</marquee></div> -->
 	          	<form id="form_import_siswa">
 	          		<input type="hidden" name="data_to_save" value='<?=json_encode($data)?>'>
 	            <div class="table-responsive">
@@ -37,11 +37,12 @@
 		            		<?php 
 		            			$no=1;
 				            	for($i=0;$i<count($data);$i++){
-				            		if($i!=(count($data)-1)){?>
+				            		// if($i!=(count($data)-1)){
+				            ?>
 				            <tr>
 		            			<td><?=$no++?></td>	
-		            			<td><?=$data[$i][0]?></td>
-		            			<td><?=$data[$i][1]?></td>	
+		            			<td><?=$data[$i]['nama']?></td>
+		            			<td><?=$data[$i]['email']?></td>	
 		            			<!-- <td><?=$data[$i][2]?></td>	
 		            			<td><?=$data[$i][3]?></td>	
 		            			<td><?=$data[$i][4]?></td>	
@@ -64,7 +65,7 @@
 		            			<td><?=$data[$i][11]?></td>	 -->
 		            		</tr>	
 				            <?php
-				        			}
+				        			// }
 				            	}	
 				            ?>
 		            		
