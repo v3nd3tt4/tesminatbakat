@@ -160,7 +160,7 @@ class Siswa_import extends CI_Controller {
 		chmod('./assets/'.$_FILES['filenya']['name'],0777);
 		// var_dump($target.'aa');exit();
 		// mengambil isi file xls
-		$data = new Spreadsheet_Excel_Reader($_FILES['filenya']['name'],false);
+		$data = new Spreadsheet_Excel_Reader('./assets/'.$_FILES['filenya']['name'],false);
 		// menghitung jumlah baris data yang ada
 		$jumlah_baris = $data->rowcount($sheet_index=0);
 		 
