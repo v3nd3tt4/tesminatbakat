@@ -14,6 +14,7 @@
 	          	<!-- <div class="alert alert-warning"><marquee>Fitur ini dalam proses pengembangan</marquee></div> -->
 	          	<form id="form_import_siswa">
 	          		<input type="hidden" name="data_to_save" value='<?=json_encode($data)?>'>
+	          		<?php //var_dump(json_decode(json_encode($data)));?>
 	            <div class="table-responsive">
 		            <table class="table table-striped">
 		            	<thead>
