@@ -35,6 +35,7 @@ class Siswa extends CI_Controller {
 		$this->db->join('tb_sekolah', 'tb_sekolah.id_sekolah = tb_siswa.id_sekolah', 'left');
 		$this->db->join('tb_user', 'tb_siswa.email = tb_user.username', 'left');
 		$this->db->order_by("id_siswa", "DESC");
+		
 		$get_data = $this->db->get();
 
 		$jk = $this->db->get('tb_jk');
