@@ -57,6 +57,38 @@ class Siswa extends CI_Controller {
 		$this->load->view('template/wrapper', $data);
 	}
 
+	function get_data_siswa()
+    {
+    	$this->load->model('M_data_siswa');
+        $list = $this->M_data_siswa->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $field) {
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $field->nama_siswa;
+            $row[] = $field->email;
+            $row[] = empty($field->password)?'<button class="btn btn-sm btn-danger">belum diset</button>':$field->password;
+ 			$row[] = '<button class="btn btn-danger btn-sm btn-hapus" id="'.$field->id_siswa.'"><i class="fas fa-trash"></i> Hapus</button>
+    				<button class="btn btn-info btn-sm btn-edit" id="'.$field->id_siswa.'"><i class="fas fa-eye"></i> Detail</button>
+    				<a href="'.base_url().'siswa/nilai_rapor_new/'.$field->id_siswa.'" class="btn btn-warning btn-sm" id="'.$field->id_siswa.'"><i class="fas fa-book"></i> Rapor</a>
+    				<a href="'.base_url().'siswa/nilai_utbk_new/'.$field->id_siswa.'" class="btn btn-success btn-sm" id="'.$field->id_siswa.'"><i class="fas fa-book-open"></i> UTBK</a>
+    				<!-- <a href="'.base_url().'siswa/riwayat_tes/'.$field->id_siswa.'" class="btn btn-primary btn-sm" id="'.$field->id_siswa.'"><i class="fas fa-pencil-alt"></i> Tes Minat Bakat</a> -->
+    				<button class="btn btn-light btn-sm btn-token" id="'.$field->id_siswa.'"><i class="fas fa-key"></i> Generate Password/Token</button>';
+            $data[] = $row;
+        }
+ 
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_data_siswa->count_all(),
+            "recordsFiltered" => $this->M_data_siswa->count_filtered(),
+            "data" => $data,
+        );
+        //output dalam format JSON
+        echo json_encode($output);
+    }
+
 	public function generate_token(){
 		// var_dump($_POST);exit();
 		$get_email=$this->db->get_where('tb_siswa', array('id_siswa' => $this->input->post('id', true)));
