@@ -11,7 +11,7 @@
 	            </div> -->
 	          </div>
 	          <div class="card-body">
-	            <p>silahkan download template <a href="<?=base_url()?>assets/template_import_siswa.xls" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> di sini</a>, untuk mengimport siswa</p>
+	            <p>silahkan download template <a href="<?=base_url()?>assets_stisla/template_import_siswa.xls" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> di sini</a>, untuk mengimport siswa</p>
 	            <form method="POST" action="<?=base_url()?>siswa_import/preview" enctype="multipart/form-data">
 	            	<div class="form-group">
 	            		<label>File (format: xls)</label>
