@@ -137,10 +137,10 @@ only screen and (max-width: 760px),
 	/*
 	Label the data
 	*/
-	td:nth-of-type(1):before { content: "First Name"; }
-	td:nth-of-type(2):before { content: "Last Name"; }
-	td:nth-of-type(3):before { content: "Job Title"; }
-	td:nth-of-type(4):before { content: "Favorite Color"; }
+	td:nth-of-type(1):before { content: "No"; }
+	td:nth-of-type(2):before { content: "Tanggal"; }
+	td:nth-of-type(3):before { content: "Skor"; }
+	td:nth-of-type(4):before { content: "Hasil"; }
 	td:nth-of-type(5):before { content: "Wars of Trek?"; }
 	td:nth-of-type(6):before { content: "Secret Alias"; }
 	td:nth-of-type(7):before { content: "Date of Birth"; }
