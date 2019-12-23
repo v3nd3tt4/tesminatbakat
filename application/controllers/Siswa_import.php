@@ -170,7 +170,7 @@ class Siswa_import extends CI_Controller {
 		 
 			// menangkap data dan memasukkan ke variabel sesuai dengan kolumnya masing-masing
 			$isi[] = array(
-				'nama'    	=> $data->val($i, 1),
+				'nama'    	=> str_replace("'", "", $data->val($i, 1)),
 				'email'  	=> $data->val($i, 2),
 			);
 			
