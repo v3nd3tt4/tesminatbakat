@@ -9,7 +9,7 @@
 	            <!-- <div class="card-header-action">
 	            	<button class="btn btn-primary btn-tambah" ><i class="fas fa-plus"></i> Tambah</button>
 	            </div> -->
-	            <a href="<?=base_url()?>siswa/lihat_semua" class="btn btn-success">Semua Data Siswa</a>
+	            <a href="<?=base_url()?>siswa/lihat_semua" class="btn btn-success">Download Semua Data Siswa</a>
 	          </div>
 	          <div class="card-body">
 	          	<div class="table-responsive">
