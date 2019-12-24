@@ -417,4 +417,17 @@ class Siswa extends CI_Controller {
 		);
 		$this->load->view('template/wrapper', $data);
 	}
+
+	public function lihat_semua(){
+		$this->db->from('tb_siswa');
+		$this->db->join('tb_jk', 'tb_jk.id_jk = tb_siswa.id_jk', 'left');
+		$this->db->join('tb_agama', 'tb_agama.id_agama = tb_siswa.id_agama', 'left');
+		$this->db->join('tb_kategori_sma', 'tb_kategori_sma.id_kategori_sma = tb_siswa.id_kategori_sma', 'left');
+		// $this->db->order_by("id_siswa", "DESC");
+		$data_siswa = $this->db->get();
+		$data = array(
+			'data_siswa' => $data_siswa
+		);
+		$this->load->view('siswa/lihat_semua', $data);
+	}
 }
