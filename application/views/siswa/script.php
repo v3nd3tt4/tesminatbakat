@@ -10,6 +10,33 @@
 	    	$('#modal-tambah').modal();
 	    });
 
+	    var table;
+		$(document).ready(function() {
+
+		    //datatables
+		    table = $('#tb_siswa').DataTable({ 
+
+		        "processing": true, 
+		        "serverSide": true, 
+		        "order": [], 
+		         
+		        "ajax": {
+		            "url": "<?php echo site_url('siswa/get_data_siswa')?>",
+		            "type": "POST"
+		        },
+
+		         
+		        "columnDefs": [
+		        { 
+		            "targets": [ 0 ], 
+		            "orderable": false, 
+		        },
+		        ],
+
+		    });
+
+		});
+
 	    $(document).on('submit', '#form-tambah-siswa', function(e){
 	    	e.preventDefault();
 	    	var data = $('#form-tambah-siswa').serialize();
