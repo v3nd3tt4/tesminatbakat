@@ -296,7 +296,7 @@ class Siswa_import extends CI_Controller {
     		// if($i!=(count($data)-1)){
     // 			$acak = str_shuffle($str);
 				// $potong = substr($acak, 0, 6);
-
+			if(trim($data[$i]->email) != ''){
     			$isi[] = array(
     				'nama_siswa' 		=> $data[$i]->nama,
 					// 'tempat_lahir'		=> $data[$i]['2'],
@@ -316,6 +316,7 @@ class Siswa_import extends CI_Controller {
     				'username' => trim($data[$i]->email),
     				'level' => 'siswa'
     			);
+    		}
     		// }
     	}
     	// var_dump($cek);exit();

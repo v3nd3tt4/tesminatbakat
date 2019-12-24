@@ -37,7 +37,7 @@
 		            		<?php 
 		            			$no=1;
 				            	for($i=0;$i<count($data);$i++){
-				            		// if($i!=(count($data)-1)){
+				            		if($data[$i]['email'] != ''){
 				            ?>
 				            <tr>
 		            			<td><?=$no++?></td>	
@@ -65,7 +65,7 @@
 		            			<td><?=$data[$i][11]?></td>	 -->
 		            		</tr>	
 				            <?php
-				        			// }
+				        			}
 				            	}	
 				            ?>
 		            		
