@@ -286,11 +286,15 @@ class Siswa_import extends CI_Controller {
 		$data = json_decode($data_to_save);
 		$cek = 0;
 		// var_dump($data[0]->nama);exit();
+		// $email_sudah_ada = array();
+		$email_bermasalah = '<ol>';
 		for($i=0;$i<count($data);$i++){
 			$cek_email = $this->db->get_where('tb_siswa', array('email' => trim($data[$i]->email)));
 			// var_dump($this->db->last_query());
 			if($cek_email->num_rows() != 0){
 				$cek++;
+				$email_bermasalah .= '<li>'.$cek_email->row()->email.'</li>';
+				// $email_sudah_ada[] = $cek_email->row()->email;
 			}
 
     		// if($i!=(count($data)-1)){
@@ -319,11 +323,12 @@ class Siswa_import extends CI_Controller {
     		}
     		// }
     	}
-    	// var_dump($cek);exit();
+    	$email_bermasalah .= '</ol>';
+    	// echo $email_bermasalah;exit();
     	if($cek > 0){
     		$return = array(
 				'status' => 'failed',
-				'text' => '<div class="alert alert-danger">Terdapat email yang sudah terdaftar, mohon periksa kembali</div>'
+				'text' => '<div class="alert alert-danger">Terdapat email yang sudah terdaftar, mohon periksa kembali '.$email_bermasalah.'</div>'
 			);
 			echo json_encode($return);
     	}else{
