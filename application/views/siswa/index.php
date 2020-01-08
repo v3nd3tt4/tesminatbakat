@@ -9,7 +9,8 @@
 	            <!-- <div class="card-header-action">
 	            	<button class="btn btn-primary btn-tambah" ><i class="fas fa-plus"></i> Tambah</button>
 	            </div> -->
-	            <a href="<?=base_url()?>siswa/lihat_semua" class="btn btn-success">Download Semua Data Siswa</a>
+	            <a href="<?=base_url()?>siswa/lihat_semua" class="btn btn-success">Download Semua Data</a>
+				<a href="<?=base_url()?>siswa/lihat_semua" class="btn btn-danger btn-hapus-semua-data">Hapus Semua Data</a>
 	          </div>
 	          <div class="card-body">
 	          	<div class="table-responsive">
@@ -286,6 +287,30 @@
 	      <div class="modal-footer bg-whitesmoke br">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
 	        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update</button>
+	      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-hapus-semua-data">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Generate Password/Token</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="form-hapus-semua-data">
+	      <div class="modal-body">
+				<div class="alert alert-warning">Dengan memasukkan password yang benar, berarti anda menyetujui untuk mengosongkan semua data</div>
+	        	<p>Untuk menghapus semua data silahkan masukkan password</p>
+				<input type="text" class="form-control" name="password" id="password" required/><br/><br/>
+	        	<div class="notif"></div>
+	      </div>
+	      <div class="modal-footer bg-whitesmoke br">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+	        <button type="submit" class="btn btn-primary"><!-- <i class="fas fa-trash"></i> --> Hapus</button>
 	      </div>
       </form>
     </div>

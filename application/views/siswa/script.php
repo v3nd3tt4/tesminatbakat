@@ -10,6 +10,31 @@
 	    	$('#modal-tambah').modal();
 	    });
 
+		$(document).on('click', '.btn-hapus-semua-data', function(e){
+			e.preventDefault();
+			$('#modal-hapus-semua-data').modal();
+			
+	    	$(document).on('submit', '#form-hapus-semua-data', function(e){
+	    		e.preventDefault();
+	    		$('.notif').html('Loading...');
+				var data = $('#form-hapus-semua-data').serialize();
+		    	$.ajax({
+		    		url: '<?=base_url()?>siswa/hapus_semua_data',
+		    		data: data,
+		    		type: 'POST',
+		    		dataType: 'JSON',
+		    		success: function(msg){
+		    			if(msg.status == 'success'){
+		    				$('.notif').html(msg.text);
+		    				location.reload();
+		    			}else{
+		    				$('.notif').html(msg.text);
+		    			}
+		    		}
+		    	});
+	    	});
+		});
+
 	    var table;
 		$(document).ready(function() {
 

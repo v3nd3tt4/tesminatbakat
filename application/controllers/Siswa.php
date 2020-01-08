@@ -430,4 +430,53 @@ class Siswa extends CI_Controller {
 		);
 		$this->load->view('siswa/lihat_semua', $data);
 	}
+
+	public function hapus_semua_data(){
+		$password = $this->input->post('password', true);
+		$cek=$this->db->get_where('tb_user', array('username' => $this->session->userdata('username')));
+		if($cek->row()->password != $password){
+			$return = array(
+				'status' => 'failed',
+				'text' => '<div class="alert alert-danger">Password tidak cocok</div>'
+			);
+			echo json_encode($return);
+		}else{
+			$this->db->trans_begin();
+
+			$this->db->truncate('tb_siswa');
+			$this->db->truncate('tb_user');
+			$this->db->truncate('tb_status_pengisian_nilai');
+			$this->db->truncate('tb_temporary_soal');
+			$this->db->truncate('tb_nilai_mapel');
+			$this->db->truncate('tb_nilai_mapel_utbk');
+			$this->db->truncate('tb_pendukung_rapor');
+			$this->db->truncate('tb_pendukung_utbk');
+			$this->db->truncate('tb_riwayat_isi_rapor');
+			$this->db->truncate('tb_riwayat_isi_utbk');
+			$this->db->truncate('tb_riwayat_tes');
+			$this->db->truncate('tb_status_kelengkapan');
+			$this->db->insert('tb_user', array('username' => 'admin@mail.com', 'password'=>'adminku', 'level' => 'admin'));
+
+			if ($this->db->trans_status() === FALSE)
+			{
+					$this->db->trans_rollback();
+					$return = array(
+						'status' => 'failed',
+						'text' => '<div class="alert alert-danger">Terjadi kesalahan</div>'
+					);
+					echo json_encode($return);
+			}
+			else
+			{
+					$this->db->trans_commit();
+					$return = array(
+						'status' => 'success',
+						'text' => '<div class="alert alert-success">Semua data berhasil dihapus</div>'
+					);
+					echo json_encode($return);
+			}
+
+			
+		}
+	}
 }
