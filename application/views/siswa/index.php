@@ -9,7 +9,11 @@
 	            <!-- <div class="card-header-action">
 	            	<button class="btn btn-primary btn-tambah" ><i class="fas fa-plus"></i> Tambah</button>
 	            </div> -->
-	            <a href="<?=base_url()?>siswa/lihat_semua" class="btn btn-success">Download Semua Data</a>
+	            <a href="<?=base_url()?>siswa/lihat_semua" class="btn btn-success">Download Data Pribadi Siswa</a>
+				<a href="<?=base_url()?>siswa/lihat_semua_rapor" class="btn btn-warning">Download Nilai Rapor</a>
+				<a href="<?=base_url()?>siswa/lihat_semua_utbk" class="btn btn-info">Download Nilai UTBK</a>
+				<a href="<?=base_url()?>siswa/lihat_semua_hasil_tes" class="btn btn-primary">Download Hasil Tes</a>
+
 				<a href="<?=base_url()?>siswa/lihat_semua" class="btn btn-danger btn-hapus-semua-data">Hapus Semua Data</a>
 	          </div>
 	          <div class="card-body">

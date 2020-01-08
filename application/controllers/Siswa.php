@@ -431,6 +431,41 @@ class Siswa extends CI_Controller {
 		$this->load->view('siswa/lihat_semua', $data);
 	}
 
+	public function lihat_semua_rapor(){
+		$this->db->from('tb_nilai_mapel');
+		$this->db->join('tb_mapel', 'tb_mapel.id_mapel = tb_nilai_mapel.id_mapel', 'left');
+		$this->db->join('tb_siswa', 'tb_siswa.id_siswa = tb_nilai_mapel.id_siswa', 'left');
+		// $this->db->order_by("id_siswa", "DESC");
+		$data_rapor = $this->db->get();
+		$data = array(
+			'data_rapor' => $data_rapor
+		);
+		$this->load->view('siswa/lihat_semua_rapor', $data);
+	}
+
+	public function lihat_semua_utbk(){
+		$this->db->from('tb_nilai_mapel_utbk');
+		$this->db->join('tb_mapel', 'tb_mapel.id_mapel = tb_nilai_mapel_utbk.id_mapel_utbk', 'left');
+		$this->db->join('tb_siswa', 'tb_siswa.id_siswa = tb_nilai_mapel_utbk.id_siswa', 'left');
+		// $this->db->order_by("id_siswa", "DESC");
+		$data_rapor = $this->db->get();
+		$data = array(
+			'data_rapor' => $data_rapor
+		);
+		$this->load->view('siswa/lihat_semua_utbk', $data);
+	}
+
+	public function lihat_semua_hasil_tes(){
+		$this->db->from('tb_riwayat_tes');
+		$this->db->join('tb_siswa', 'tb_siswa.id_siswa = tb_riwayat_tes.id_siswa', 'left');
+		// $this->db->order_by("id_siswa", "DESC");
+		$data_rapor = $this->db->get();
+		$data = array(
+			'data_rapor' => $data_rapor
+		);
+		$this->load->view('siswa/lihat_semua_hasil_tes', $data);
+	}
+
 	public function hapus_semua_data(){
 		$password = $this->input->post('password', true);
 		$cek=$this->db->get_where('tb_user', array('username' => $this->session->userdata('username')));
