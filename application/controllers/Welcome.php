@@ -54,5 +54,7 @@ class Welcome extends CI_Controller {
 		$this->load->view('template/wrapper', $data);
 	}
 
+	
+
 
 }

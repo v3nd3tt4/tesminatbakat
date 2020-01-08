@@ -92,6 +92,9 @@
         <a href="<?=base_url()?>login/logout" class="btn btn-primary btn-lg btn-block btn-icon-split">
           <i class="fas fa-sign-in-alt"></i> Logout
         </a>
+        <a href="<?=base_url()?>siswa/backupdb" class="btn btn-danger btn-lg btn-block btn-icon-split">
+          <i class="fas fa-database"></i> Backup Database
+        </a>
         <?php }?>
       </div>
   </aside>
