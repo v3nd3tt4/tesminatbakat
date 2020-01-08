@@ -307,7 +307,7 @@
       </div>
       <form id="form-hapus-semua-data">
 	      <div class="modal-body">
-				<div class="alert alert-warning">Dengan memasukkan password yang benar, berarti anda menyetujui untuk mengosongkan semua data</div>
+				<div class="alert alert-warning">Disarankan untuk membackup database terlebih dahulu <a href="<?=base_url()?>siswa/backupdb" class="btn btn-sm btn-danger">di sini</a>, Dengan memasukkan password yang benar, berarti anda menyetujui untuk mengosongkan semua data</div>
 	        	<p>Untuk menghapus semua data silahkan masukkan password</p>
 				<input type="text" class="form-control" name="password" id="password" required/><br/><br/>
 	        	<div class="notif"></div>
