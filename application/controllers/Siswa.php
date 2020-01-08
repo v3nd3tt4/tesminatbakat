@@ -251,11 +251,16 @@ class Siswa extends CI_Controller {
 	public function nilai_rapor_new($id_siswa){
 		$data_siswa = $this->db->get_where('tb_siswa', array('id_siswa' => $id_siswa));
 		$row_data = $this->db->order_by('tgl_isi', 'DESC')->get_where('tb_riwayat_isi_rapor', array('id_siswa' => $id_siswa));
+
+		$status_isi_nilai = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $id_siswa, 'kategori' => 'rapor'));
+		$status_tes = $this->db->get_where('tb_riwayat_tes', array('id_siswa' => $id_siswa, 'status' => 'sudah'));
 		$data = array(
 			'page' => 'siswa/nilai_rapor_new',
 			'link' => 'siswa',
 			'data_riwayat' => $row_data,
-			'data_siswa' => $data_siswa
+			'data_siswa' => $data_siswa,
+			'status_isi_nilai' => $status_isi_nilai,
+			'status_tes' => $status_tes,
 		);
 		$this->load->view('template/wrapper', $data);
 	}
@@ -263,11 +268,15 @@ class Siswa extends CI_Controller {
 	public function nilai_utbk_new($id_siswa){
 		$data_siswa = $this->db->get_where('tb_siswa', array('id_siswa' => $id_siswa));
 		$row_data = $this->db->order_by('tgl_isi', 'DESC')->get_where('tb_riwayat_isi_utbk', array('id_siswa' => $id_siswa));
+		$status_isi_nilai = $this->db->get_where('tb_status_pengisian_nilai', array('id_siswa' => $id_siswa, 'kategori' => 'utbk'));
+		$status_tes = $this->db->get_where('tb_riwayat_tes', array('id_siswa' => $id_siswa, 'status' => 'sudah'));
 		$data = array(
 			'page' => 'siswa/nilai_utbk_new',
 			'link' => 'siswa',
 			'data_riwayat' => $row_data,
-			'data_siswa' => $data_siswa
+			'data_siswa' => $data_siswa,
+			'status_isi_nilai' => $status_isi_nilai,
+			'status_tes' => $status_tes,
 		);
 		$this->load->view('template/wrapper', $data);
 	}
