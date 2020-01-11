@@ -25,6 +25,10 @@
 		            			<!-- <th>NISN</th> -->
 		            			<th>Nama Siswa</th>
 		            			<th>Email</th>
+		            			<th>Nilai Rapor</th>
+		            			<th>Rasionalisasi Rapor</th>
+		            			<th>Nilai UTBK</th>
+		            			<th>Rasionalisasi UTBK</th>
 		            			<!-- <th>Email</th> -->
 		            			<th>Password/Token</th>
 		            			<th>Aksi</th>

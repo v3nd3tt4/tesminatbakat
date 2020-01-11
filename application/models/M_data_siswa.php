@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_data_siswa extends CI_Model {
 
     var $table = 'tb_siswa'; //nama tabel dari database
-    var $column_order = array(null, 'nama_siswa','email','password', 'id_siswa'); //field yang ada di table user
-    var $column_search = array('nama_siswa','sekolah','password'); //field yang diizin untuk pencarian 
+    var $column_order = array(null, 'nama_siswa','email','password', 's_rapor', 's_rapor_rasi', 's_utbk', 's_utbk_rasi', 'id_siswa'); //field yang ada di table user
+    var $column_search = array('nama_siswa','password', 's_rapor', 's_rapor_rasi', 's_utbk', 's_utbk_rasi'); //field yang diizin untuk pencarian 
     var $order = array('id_siswa' => 'DESC'); // default order 
  
     public function __construct()
@@ -18,11 +18,11 @@ class M_data_siswa extends CI_Model {
     {
          
         // $this->db->from($this->table);
-        $this->db->from('tb_siswa');
-        $this->db->join('tb_jk', 'tb_jk.id_jk = tb_siswa.id_jk', 'left');
-        $this->db->join('tb_agama', 'tb_agama.id_agama = tb_siswa.id_agama', 'left');
-        $this->db->join('tb_sekolah', 'tb_sekolah.id_sekolah = tb_siswa.id_sekolah', 'left');
-        $this->db->join('tb_user', 'tb_siswa.email = tb_user.username', 'left');
+        $this->db->from('v_data_siswa');
+        // $this->db->join('tb_jk', 'tb_jk.id_jk = tb_siswa.id_jk', 'left');
+        // $this->db->join('tb_agama', 'tb_agama.id_agama = tb_siswa.id_agama', 'left');
+        // $this->db->join('tb_sekolah', 'tb_sekolah.id_sekolah = tb_siswa.id_sekolah', 'left');
+        // $this->db->join('tb_user', 'tb_siswa.email = tb_user.username', 'left');
         // $this->db->order_by("id_siswa", "DESC");
         
         // $get_data = $this->db->get();
@@ -79,11 +79,11 @@ class M_data_siswa extends CI_Model {
  
     public function count_all()
     {
-        $this->db->from('tb_siswa');
-        $this->db->join('tb_jk', 'tb_jk.id_jk = tb_siswa.id_jk', 'left');
-        $this->db->join('tb_agama', 'tb_agama.id_agama = tb_siswa.id_agama', 'left');
-        $this->db->join('tb_sekolah', 'tb_sekolah.id_sekolah = tb_siswa.id_sekolah', 'left');
-        $this->db->join('tb_user', 'tb_siswa.email = tb_user.username', 'left');
+        $this->db->from('v_data_siswa');
+        // $this->db->join('tb_jk', 'tb_jk.id_jk = tb_siswa.id_jk', 'left');
+        // $this->db->join('tb_agama', 'tb_agama.id_agama = tb_siswa.id_agama', 'left');
+        // $this->db->join('tb_sekolah', 'tb_sekolah.id_sekolah = tb_siswa.id_sekolah', 'left');
+        // $this->db->join('tb_user', 'tb_siswa.email = tb_user.username', 'left');
         return $this->db->count_all_results();
     }
  

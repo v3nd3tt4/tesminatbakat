@@ -64,11 +64,16 @@ class Siswa extends CI_Controller {
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $field) {
+        	
             $no++;
             $row = array();
             $row[] = $no;
             $row[] = $field->nama_siswa;
             $row[] = $field->email;
+            $row[] = $field->s_rapor;
+            $row[] = $field->s_rapor_rasi;
+            $row[] = $field->s_utbk;
+            $row[] = $field->s_utbk_rasi;
             $row[] = empty($field->password)?'<button class="btn btn-sm btn-danger">belum diset</button>':$field->password;
  			$row[] = '<button class="btn btn-danger btn-sm btn-hapus" id="'.$field->id_siswa.'"><i class="fas fa-trash"></i> Hapus</button>
     				<button class="btn btn-info btn-sm btn-edit" id="'.$field->id_siswa.'"><i class="fas fa-eye"></i> Detail</button>
