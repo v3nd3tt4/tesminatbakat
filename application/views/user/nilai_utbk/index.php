@@ -30,90 +30,66 @@
 		          		<div class="alert alert-warning">Silakan lakukan tes minat bakat terlebih dahulu <a class="btn btn-primary btn-sm" href="<?=base_url()?>minat_bakat/riwayat">di sini</a> agar akurasi analisis dapat maksimal</div> 
 		          	<?php }?>
 		            <form id="form-rapor">
-		            	<div class="table-responsive">
-			            	<table class="table table-striped">
-			            		<?php foreach($data->result() as $row_data){
-			            			@$nilai = $this->db->get_where('tb_nilai_mapel_utbk', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel_utbk' => $row_data->id_mapel_utbk, 'id_riwayat_isi_utbk'=> $riwayat->row()->id_riwayat_isi_utbk));
-			            		?>
-			            		<tr>
-			            			<td>
-			            				<?=$row_data->nama_mapel_utbk?>
-			            			</td>
-			            			<td>
-			            				<input type="number" name="mapel[<?=$row_data->id_mapel_utbk?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required>
-			            			</td>
-			            		</tr>
-			            		<?php }?>
-			            	</table>
-			            </div>
+						
+						<?php foreach($data->result() as $row_data){
+							@$nilai = $this->db->get_where('tb_nilai_mapel_utbk', array('id_siswa' => $this->session->userdata('id_siswa'), 'id_mapel_utbk' => $row_data->id_mapel_utbk, 'id_riwayat_isi_utbk'=> $riwayat->row()->id_riwayat_isi_utbk));
+						?>
+							<div class="form-group">
+								<label for=""><?=$row_data->nama_mapel_utbk?></label>
+								<input type="number" name="mapel[<?=$row_data->id_mapel_utbk?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required>
+							</div>
+						<?php }?>
 		            	<h6>Kampus dan jurusan yang akan dipilih</h6>
 			            <hr>
-			            <div class="table-responsive">
-				            <table class="table table-striped">
-				            	<tr>
-				            		<td>
-				            			<div class="form-group">
-				            				<label>Kampus</label>
-					            			<input type="text" name="kampus_1"  required class="form-control">
-					            		</div>
-				            		</td>
-				            		<td>
-				            			<div class="form-group">
-				            				<label>Jurusan</label>
-					            			<input type="text" name="jur_1" required class="form-control">
-					            		</div>
-				            		</td>
-				            	</tr>
-				            	<tr>
-				            		<td>
-				            			<div class="form-group">
-				            				<label>Kampus</label>
-					            			<input type="text" name="kampus_2" required class="form-control">
-					            		</div>
-				            		</td>
-				            		<td>
-				            			<div class="form-group">
-				            				<label>Jurusan</label>
-					            			<input type="text" name="jur_2" required class="form-control">
-					            		</div>
-				            		</td>
-				            	</tr>
-				            	<tr>
-				            		<td>
-				            			<div class="form-group">
-				            				<label>Kampus</label>
-					            			<input type="text" name="kampus_3" required class="form-control">
-					            		</div>
-				            		</td>
-				            		<td>
-				            			<div class="form-group">
-				            				<label>Jurusan</label>
-					            			<input type="text" name="jur_3" required class="form-control">
-					            		</div>
-				            		</td>
-				            	</tr>
-				            </table>
-				        </div>
-			            <h6>Mata Pelajaran disukai dan tidak disukai</h6>
-			            <hr>
-			            <div class="table-responsive">
-				            <table class="table table-striped">
-				            	<tr>
-				            		<td>
-				            			<div class="form-group">
-				            				<label>Mata pelajaran paling disukai</label>
-					            			<input type="text" name="good_mapel" required class="form-control">
-					            		</div>
-				            		</td>
-				            		<td>
-				            			<div class="form-group">
-				            				<label>Mata pelajaran paling tidak disukai</label>
-					            			<input type="text" name="bad_mapel" required class="form-control">
-					            		</div>
-				            		</td>
-				            	</tr>
-				            </table>
-				        </div>
+						<fieldset class="border p-2">
+							<legend class="w-auto">Pilihan 1</legend>
+							<div class="form-group">
+								<label>Kampus</label>
+								<input type="text" name="kampus_1"  required class="form-control">
+							</div>
+							<div class="form-group">
+								<label>Jurusan</label>
+								<input type="text" name="jur_1" required class="form-control">
+							</div>
+						</fieldset>
+			            <fieldset class="border p-2">
+							<legend class="w-auto">Pilihan 2</legend>
+							<div class="form-group">
+								<label>Kampus</label>
+								<input type="text" name="kampus_2" required class="form-control">
+							</div>
+							<div class="form-group">
+								<label>Jurusan</label>
+								<input type="text" name="jur_2" required class="form-control">
+							</div>
+						</fieldset>        			
+				        <fieldset class="border p-2">
+							<legend class="w-auto">Pilihan 3</legend>	
+							<div class="form-group">
+								<label>Kampus</label>
+								<input type="text" name="kampus_3" required class="form-control">
+							</div>
+							<div class="form-group">
+								<label>Jurusan</label>
+								<input type="text" name="jur_3" required class="form-control">
+							</div>
+						</fieldset>    
+						<br/><br/>  		
+				        <fieldset class="border p-2">
+							<legend class="w-auto">Mata Pelajaran disukai dan tidak disukai</legend>
+							<div class="form-group">
+								<label>Mata pelajaran paling disukai</label>
+								<input type="text" name="good_mapel" required class="form-control">
+							</div>
+							<div class="form-group">
+								<label>Mata pelajaran paling tidak disukai</label>
+								<input type="text" name="bad_mapel" required class="form-control">
+							</div>	
+						</fieldset>
+				        <br/><br/>	
+
+			            
+				            			
 			            <button style="float: right;" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
 		            </form>
 		            <br/><br/>

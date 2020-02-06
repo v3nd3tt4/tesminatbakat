@@ -38,12 +38,13 @@
 		            		?>
 		            		<tr>
 		            			<td>
-		            				<?=$row_data->nama_mapel?>
-		            			</td>
-		            			<td>
+									<div class="form-group">
+		            				<label><?=$row_data->nama_mapel?></label>
+		            			
 		            				<!-- <input type="number" name="mapel[<?=$row_data->id_mapel?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required> -->
 		            				<input type="number" readonly name="mapel[<?=$sem?>][<?=$row_data->id_mapel?>]" class="form-control" value="<?=@$nilai->row()->nilai?>">
 		            				<!-- <input type="hidden" name="semester[]" class="form-control" value="<?=$sem?>"> -->
+									</div>
 		            			</td>
 		            		</tr>
 	            		
@@ -57,71 +58,61 @@
 	            <h6>Kampus dan jurusan yang akan dipilih</h6>
 	            <hr>
 	            <div class="table-responsive">
-		            <table class="table table-striped">
-		            	<tr>
-		            		<td>
+					<fieldset class="border p-2">
+						<legend class="w-auto">Pilihan 1</legend>
+		            
 		            			<div class="form-group">
 		            				<label>Kampus</label>
 			            			<input type="text" readonly name="kampus_1" value="<?=@$data_pendukung_rapor->row()->kampus_1?>" required class="form-control">
 			            		</div>
-		            		</td>
-		            		<td>
+		            		
 		            			<div class="form-group">
 		            				<label>Jurusan</label>
 			            			<input type="text" readonly name="jur_1" value="<?=@$data_pendukung_rapor->row()->jur_1?>" required class="form-control">
 			            		</div>
-		            		</td>
-		            	</tr>
-		            	<tr>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Kampus</label>
-			            			<input type="text" readonly name="kampus_2" value="<?=@$data_pendukung_rapor->row()->kampus_2?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Jurusan</label>
-			            			<input type="text" readonly name="jur_2" value="<?=@$data_pendukung_rapor->row()->jur_2?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            	</tr>
-		            	<tr>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Kampus</label>
-			            			<input type="text" readonly name="kampus_3" value="<?=@$data_pendukung_rapor->row()->kampus_3?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Jurusan</label>
-			            			<input type="text" readonly name="jur_3" value="<?=@$data_pendukung_rapor->row()->jur_3?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            	</tr>
-		            </table>
+						</legend>
+					</fieldset>
+					<fieldset class="border p-2">
+						<legend class="w-auto">Pilihan 2</legend>
+							
+						<div class="form-group">
+							<label>Kampus</label>
+							<input type="text" readonly name="kampus_2" value="<?=@$data_pendukung_rapor->row()->kampus_2?>" required class="form-control">
+						</div>
+					
+						<div class="form-group">
+							<label>Jurusan</label>
+							<input type="text" readonly name="jur_2" value="<?=@$data_pendukung_rapor->row()->jur_2?>" required class="form-control">
+						</div>
+					</fieldset>
+					<fieldset class="border p-2">
+						<legend class="w-auto">Pilihan 3</legend>
+						<div class="form-group">
+							<label>Kampus</label>
+							<input type="text" readonly name="kampus_3" value="<?=@$data_pendukung_rapor->row()->kampus_3?>" required class="form-control">
+						</div>
+					
+						<div class="form-group">
+							<label>Jurusan</label>
+							<input type="text" readonly name="jur_3" value="<?=@$data_pendukung_rapor->row()->jur_3?>" required class="form-control">
+						</div>
+					</fieldset>
 		        </div>
-	            <h6>Mata Pelajaran disukai dan tidak disukai</h6>
-	            <hr>
-	            <div class="table-responsive">
-		            <table class="table table-striped">
-		            	<tr>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Mata pelajaran paling disukai</label>
-			            			<input type="text" readonly name="good_mapel" value="<?=@$data_pendukung_rapor->row()->good_mapel?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Mata pelajaran paling tidak disukai</label>
-			            			<input type="text" readonly name="bad_mapel" value="<?=@$data_pendukung_rapor->row()->bad_mapel?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            	</tr>
-		            </table>
-		        </div>
+				<br/><br/>
+				<fieldset class="border p-2">
+					<legend class="w-auto">Mata Pelajaran disukai dan tidak disukai</legend>
+				
+	            
+					<div class="form-group">
+						<label>Mata pelajaran paling disukai</label>
+						<input type="text" readonly name="good_mapel" value="<?=@$data_pendukung_rapor->row()->good_mapel?>" required class="form-control">
+					</div>
+				
+					<div class="form-group">
+						<label>Mata pelajaran paling tidak disukai</label>
+						<input type="text" readonly name="bad_mapel" value="<?=@$data_pendukung_rapor->row()->bad_mapel?>" required class="form-control">
+					</div>
+				</fieldset>
 	            <!-- <button style="float: right;" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button> -->
 	            </form>
 	            <br/><br>
@@ -188,3 +179,9 @@
     </div>
   </div>
 </div>
+<style>
+legend.scheduler-border {
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+}</style>

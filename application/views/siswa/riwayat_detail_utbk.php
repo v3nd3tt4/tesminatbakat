@@ -22,90 +22,66 @@
 		          	</table>
 		        </div>
 	            <!-- <form id="form-rapor"> -->
-	            <div class="table-responsive">
-	            	<table class="table table-striped">
+	            <fieldset class="border p-2">
+					<legend class="w-auto">Mata Pelajaran disukai dan tidak disukai</legend>
 	            		<?php foreach($data->result() as $row_data){
 	            			$nilai = $this->db->get_where('tb_nilai_mapel_utbk', array('id_siswa' => $id_siswa, 'id_mapel_utbk' => $row_data->id_mapel_utbk, 'id_riwayat_isi_utbk' => $row_data->id_riwayat_isi_utbk));
 	            		?>
-	            		<tr>
-	            			<td>
-	            				<?=$row_data->nama_mapel_utbk?>
-	            			</td>
-	            			<td>
-	            				<input type="number" readonly name="mapel[<?=$row_data->id_mapel_utbk?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required>
-	            			</td>
-	            		</tr>
+						<div class="form-group">
+							<label> <?=$row_data->nama_mapel_utbk?></label>
+							<input type="number" readonly name="mapel[<?=$row_data->id_mapel_utbk?>]" class="form-control" value="<?=@$nilai->row()->nilai?>" required>
+						</div>
 	            		<?php }?>
-	            	</table>
-	            </div>
-	            	<h6>Kampus dan jurusan yang akan dipilih</h6>
-		            <hr>
-		        <div class="table-responsive">
-		            <table class="table table-striped">
-		            	<tr>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Kampus</label>
-			            			<input type="text" readonly name="kampus_1" value="<?=@$data_pendukung_utbk->row()->kampus_1?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Jurusan</label>
-			            			<input type="text" readonly name="jur_1" value="<?=@$data_pendukung_utbk->row()->jur_1?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            	</tr>
-		            	<tr>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Kampus</label>
-			            			<input type="text" readonly name="kampus_2" value="<?=@$data_pendukung_utbk->row()->kampus_2?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Jurusan</label>
-			            			<input type="text" readonly name="jur_2" value="<?=@$data_pendukung_utbk->row()->jur_2?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            	</tr>
-		            	<tr>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Kampus</label>
-			            			<input type="text" readonly name="kampus_3" value="<?=@$data_pendukung_utbk->row()->kampus_3?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Jurusan</label>
-			            			<input type="text" readonly name="jur_3" value="<?=@$data_pendukung_utbk->row()->jur_3?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            	</tr>
-		            </table>
-		        </div>
-		            <h6>Mata Pelajaran disukai dan tidak disukai</h6>
-		            <hr>
-		        <div class="table-responsive">
-		            <table class="table table-striped">
-		            	<tr>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Mata pelajaran paling disukai</label>
-			            			<input type="text" readonly name="good_mapel" value="<?=@$data_pendukung_utbk->row()->good_mapel?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            		<td>
-		            			<div class="form-group">
-		            				<label>Mata pelajaran paling tidak disukai</label>
-			            			<input type="text" readonly name="bad_mapel" value="<?=@$data_pendukung_utbk->row()->bad_mapel?>" required class="form-control">
-			            		</div>
-		            		</td>
-		            	</tr>
-		            </table>
-		        </div>
+					</legend>
+				</fieldset>
+				<br><br>
+				<h3>Kampus dan jurusan yang akan dipilih</h3>
+				<fieldset class="border p-2">
+					<legend class="w-auto">Pilihan 1</legend>
+					<div class="form-group">
+						<label>Kampus</label>
+						<input type="text" readonly name="kampus_1" value="<?=@$data_pendukung_utbk->row()->kampus_1?>" required class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Jurusan</label>
+						<input type="text" readonly name="jur_1" value="<?=@$data_pendukung_utbk->row()->jur_1?>" required class="form-control">
+					</div>
+				</fieldset>	
+				<fieldset class="border p-2">
+					<legend class="w-auto">Pilihan 2</legend>
+					<div class="form-group">
+						<label>Kampus</label>
+						<input type="text" readonly name="kampus_2" value="<?=@$data_pendukung_utbk->row()->kampus_2?>" required class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Jurusan</label>
+						<input type="text" readonly name="jur_2" value="<?=@$data_pendukung_utbk->row()->jur_2?>" required class="form-control">
+					</div>
+				</fieldset>
+				<fieldset class="border p-2">
+					<legend class="w-auto">Pilihan 2</legend>
+					<div class="form-group">
+						<label>Kampus</label>
+						<input type="text" readonly name="kampus_3" value="<?=@$data_pendukung_utbk->row()->kampus_3?>" required class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Jurusan</label>
+						<input type="text" readonly name="jur_3" value="<?=@$data_pendukung_utbk->row()->jur_3?>" required class="form-control">
+					</div>
+				
+				</fieldset>
+				<br><br>
+				<fieldset class="border p-2">
+					<legend class="w-auto">Mata Pelajaran disukai dan tidak disukai</legend>
+					<div class="form-group">
+						<label>Mata pelajaran paling disukai</label>
+						<input type="text" readonly name="good_mapel" value="<?=@$data_pendukung_utbk->row()->good_mapel?>" required class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Mata pelajaran paling tidak disukai</label>
+						<input type="text" readonly name="bad_mapel" value="<?=@$data_pendukung_utbk->row()->bad_mapel?>" required class="form-control">
+					</div>
+				</fieldset>
 		            <!-- <button style="float: right;" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button> -->
 	            <!-- </form> -->
 	            <br/><br/>
